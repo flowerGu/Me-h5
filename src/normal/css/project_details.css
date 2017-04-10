@@ -1,0 +1,149 @@
+/**/
+html {
+  font-size: 10px;
+}
+html,
+body {
+  height: 100%;
+  min-height: 100%;
+}
+body {
+  position: relative;
+}
+
+/*弹框验证码*/
+.bg-sendcode {
+  background-color: #666;
+  position: fixed;
+  z-index: 9998;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  display: none;
+}
+
+.sendcode-wrap {
+  position: fixed;
+  width: 85%;
+  left: 7.5%;
+  top: 22%;
+  z-index: 9999;
+  background: #fff;
+  border-radius: 15px;
+  display: none;
+  text-align: center;
+  padding: .5em 5% 1.3em;
+}
+
+.sendcode-wrap img {
+  margin: 1em auto;
+}
+
+.sendcode-wrap p {
+  color: #5f5f5f;
+}
+
+.msgp {
+  font-size: 1.5em;
+  margin-bottom: 1.4em;
+}
+
+.sendcode-wrap .tipp {
+  font-size: 1.3em;
+  text-align: left;
+  margin-bottom: 1em;
+}
+
+.codewrap {
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 10px;
+  border: 1px solid #dbdbdb
+}
+
+.codewrap input[type='text'] {
+  float: left;
+  width: 45%;
+  height: 100%;
+  font-size: 1.4em;
+  padding-left: .5em;
+  background: transparent
+}
+
+.codewrap input[type='button'] {
+  float: right;
+}
+
+.sendcodebtn {
+  background-color: #fe3652;
+  color: #fff;
+  padding: .4em 1em;
+  margin-top: .5em;
+  margin-right: .5em;
+  border-radius: 5px;
+}
+
+.sendcode-wrap>input[type="button"] {
+  width: 35%;
+  padding: .6em 1.1em;
+  border-radius: 8px;
+  margin-top: .98em;
+}
+
+.sendcancel {
+  background-color: #dcdcdc;
+  margin-right: 4%;
+  color: #5e5e5e
+}
+
+.sendconfirm {
+  background-color: #fe3652;
+  color: #fff;
+}
+
+
+/**/
+
+.btm {
+  padding-bottom: .5em;
+}
+
+.menu {
+  text-align: center;
+  padding-top: 6rem;
+}
+
+.menu.one {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  margin-top: -70px;
+  padding-top: 0;
+}
+
+.menu>li {
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+.menu>li img {
+  display: block;
+  width: 120px;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.menu>li a {
+  color: #9D9D9D;
+}
+
+.menu>li p {
+  padding-top: 1rem;
+  font-size: 1.8rem;
+  line-height: 2rem;
+}

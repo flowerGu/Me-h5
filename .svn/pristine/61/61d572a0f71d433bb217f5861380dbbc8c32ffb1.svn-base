@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	    <meta name="apple-mobile-web-app-capable" content="yes" />
+	    <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+	    <meta name="format-detection" content="telephone=no"/>
+	    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	    <title>功能说明</title>
+	    <link href="css/base.css" type="text/css" rel="stylesheet" />
+	    <link href="css/privilege.css" type="text/css" rel="stylesheet" />
+	    <script type="text/javascript" src="js/jquery-1.7.0.min.js"></script>
+	    <script type="text/javascript" src="js/functions.js"></script>
+	    <script type="text/javascript" src="js/config.js"></script>
+	    <style type="text/css">
+	    .readme{
+	    	padding:0 15px;
+	    	font-size: 15px;
+	    	text-indent: 2em
+	    }
+	    </style>
+	</head>
+	<body>
+		<div class="header whitebg mgt2 deleteHeader">
+			功能说明
+			<a href="javascript:history.back(-1);" class="back"></a>
+		</div>
+		<p class="readme">
+			Me金融是民信公司旗下独立品牌，于2016年2月上线，隶属于中融民信资本管理有限公司。自上线以来，以打造专业的网络借贷信息中介服务平台为己任，致力于满足用户的个性化互联网金融需求。
+		</p>
+		<p class="readme">	
+			民信公司于2012年在北京成立，公司自成立以来坚持金融服务与信息技术创新，秉承“深耕于民、植根于信”的核心理念，充分运用大数据、云计算等最新技术，致力于打造诚信、透明、公平、高效的服务平台，引领行业发展，践行企业社会责任，为广大客户提供更优质的网络借贷信息中介服务。
+		</p>
+	</body>
+	 <script>
+	 		var istitle = getQueryString('istitle');
+	 		if(istitle=='0')
+	 		{
+	 			$('.header').hide();
+	 		}
+	    </script> 
+</html>

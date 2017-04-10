@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	    <meta name="apple-mobile-web-app-capable" content="yes" />
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	    <meta name="format-detection" content="telephone=no"/>
+	    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	    <title>安全认证</title>
+		<link rel="stylesheet" type="text/css" href="./css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="./css/base.css"/>
+		<script type="text/javascript" src='./js/jquery-1.9.0.min.js'></script>
+		<script type="text/javascript" src="./js/functions.js"></script>
+		<script src="./js/jquery.toggle-password.js"></script>
+		<script type="text/javascript">
+		$(function(){
+			$('#password').togglePassword({
+				el: '#togglePassword'
+			});
+		});
+		</script>
+	</head>
+	<body style="background-color: rgb(238,238,238);">
+		<div class="header whitebg deleteHeader" style="height: 55px;">
+			安全认证
+			<a href="javascript:history.back(-1);" class="back" ></a>
+		</div>
+		<div id="main">	
+			<div id="xiahuaxian" style="border-bottom: 1px solid rgb(220,220,220);">
+				<ul>
+					<li >实名认证</li>
+					<li class="li_xiahuaxian">银行卡管理</li>		
+					<li>密码管理</li>		
+				</ul>
+			</div>
+			<div class="add_card">
+				<a href="idVerifi.html"><div class="add_card_img"></div></a>	
+			</div>
+			
+		</div>
+	</body>
+</html>

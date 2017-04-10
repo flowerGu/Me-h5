@@ -1,0 +1,153 @@
+.header{padding-bottom:.4rem;margin-bottom:.5rem;}
+#main{
+  padding-left:5%;
+  margin-bottom:2rem;
+  background-color:#fff;
+  input,textarea{
+    color:#5f5f5f;
+  }
+  .u_form_single{
+    height:4.2rem;
+    line-height: 4.2rem;
+    >.arrow_right{
+      width: 10px;
+      height:20px;
+      background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAmCAYAAADEO7urAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAABTklEQVRIx7XWL0tEQRQF8PN2xeAMyIAXbjBdtmrVvNbVYFybLAZNuxhEQbEZBIsa/CaiNoOfwWAQxFXDCz4m+a9MWFDYZec4bcqPe2bm3XdhKqemIiCtGoA9AIemoiwUpjJlKhemMstGT0ylwUQnTeU8B60PbsoqfgbvLgHsBO+eyyq+ZoEJ/Qre3QDYDt71yyq+ZIEJ/Q7eXQHoBu/eyyo+ZYEJRaq0E7z7KKv4OO65/lqmsm8qTRqY0K6ptMaO/McR3AXvWsG7mbKK98xKO6bSZsdfN5U1Nto2lQ02umoqm2x0xVR6bHTJVHYBoCCiTQCLNWqp/xGZgfEuJT2bLRbGe9jUT4/aHFJPXGZiQxvsqNjIv4BiCFQAOABw/dB/u82tqjCVI1NZYESsm8qxqcwzsImEzTGw7GFpEOONc9SB01SmU0zOSGwqZ8yh/Qc8mGCwTeJ7sgAAAABJRU5ErkJggg==) no-repeat;
+      background-size: 100% 100%;
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      margin-top: -10px;
+    }
+  }
+  .u_form_single:last-child{
+    height:5rem;
+    border:none;
+  }
+  textarea{
+    position: absolute;
+    left: 0;
+    top: 1rem;
+    width: 100%;
+    padding-left:80px;
+    padding-right:1rem;
+    height: 4rem;
+    background: transparent;
+    border:none;
+    outline:none;
+    color: #5f5f5f;
+    font-family: STHeitiSC Light, "微软雅黑";
+  }
+}
+.u_btn_bottom{width:90%;margin:0 auto;border:none;outline:none;border-radius:3px;background-color:#fc4e51;}
+.setEmailWrap{
+  padding:.8rem 5%;
+  background-color:#fff;
+  .u_form_single{
+    padding-left:1rem;
+    border:none;
+    height: 4.2rem;
+    line-height: 4.2rem;
+    .u_input_per{
+      padding-left:5rem;
+    }
+  }
+}
+.tip-me{
+  padding:1rem 8% 2rem;
+  font-size:12px;
+}
+/*针对江西大额提现样式*/ 
+.query_bank_branch{
+  input{
+    text-align: right;
+  };
+  .pd_16{
+    padding-right:16px;
+  };
+  .pd_40{
+    padding-right:40px;
+  };
+}
+.wrap-dialog {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  z-index: 1;
+}
+.active{
+  display:block
+}
+.btn-sraerch-area {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+  #reset_btn {
+    float: left;
+    width: 50%;
+    height: 4rem;
+    background: #E9E9E9;
+    font-size: 1.9rem;
+    text-align: center;
+    line-height: 4rem;
+  }
+  #search_submit {
+    float: left;
+    width: 50%;
+    height: 4rem;
+    background: #ff4c4c;
+    color: #fff;
+    font-size: 1.9rem;
+    text-align: center;
+    line-height: 4rem;
+  }
+}
+.query_result{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: #fff;
+    z-index: 1;
+    .border_none{
+      border:0 !important;
+    };
+    .query_warn_result{
+      display: none;
+      img{
+        margin-bottom:10% !important;
+      }
+      .query_warn_title{
+        text-align: center;
+        color:#5f5f5f;
+        font-size:18px;
+      }
+      .query_warn_txt{
+        text-align: center;
+        color:#5f5f5f;
+        font-size:14px;
+        margin:10px 0;
+      }
+    }
+    ul{
+      width:90%;
+      margin:0px auto;
+      li{
+        border-bottom:1px solid #dddcdd;
+        padding:15px 0px;
+        font-size: 14px;
+        color:#5f5f5f;
+      }
+    }
+}
+div.query_result:target{
+  display: block !important;
+}

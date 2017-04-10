@@ -1,0 +1,37 @@
+// 下拉显示 Me金融服务由民信技术中心提供 什么的
+
+.y-dropload-message{
+  position:absolute; 
+  left:0;
+  width:100%;
+  text-align: center;
+  color: #d2d2d2;
+  visibility: hidden;
+  &.active{
+    visibility: visible;
+  }
+}
+.y-dropload-message-title{
+  margin: 30/75rem 0;
+}
+.y-message-time{
+   position: relative;
+  display: inline-block;
+}
+.y-message-content{
+ font-size: 14px;
+}
+.y-dropload-message-logo{
+    width: 50/75rem;
+    height: auto;
+    position: absolute;
+    left: -50/75rem;
+    top: 50%;
+    margin-top: -25/75rem;
+}
+[data-dpr="2"] .y-message-content{
+ font-size: 26px;
+}
+[data-dpr="3"] .y-message-content{
+ font-size: 50px;
+}

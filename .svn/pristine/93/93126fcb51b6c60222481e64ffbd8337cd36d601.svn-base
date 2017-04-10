@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	    <meta name="apple-mobile-web-app-capable" content="yes" />
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	    <meta name="format-detection" content="telephone=no"/>
+		<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+		<title>历史业绩查询</title>
+		<link rel="stylesheet" type="text/css" href="./css/base.css"/>
+		<link rel="stylesheet" type="text/css" href="./css/style.css"/>
+		<link href="css/relate_card.css" type="text/css" rel="stylesheet" />
+		<script type="text/javascript" src='./js/jquery-1.7.0.min.js'></script>
+		<script type="text/javascript" src='./js/functions.js'></script>
+		<script type="text/javascript" src="./js/config.js"></script>
+		<script type="text/javascript" src='./js/mustache.js'></script>
+		<script type="text/javascript" src='./js/functions.js'></script>
+	</head>
+	<body style='background-color:#e9e9e9;position:relative;' >
+		<div class="header whitebg deleteHeader">
+			历史业绩查询
+			<a href="javascript:history.back(-1);" class="back" ></a>
+		</div>
+		<div id="main">
+			<div class='top_red'>
+				<ul class="clearfix">
+					<li>
+						<img src="images/total.png" />
+						<p>业绩总额度</p>
+						<p class='ss_1'></p>
+					</li>
+					<li>
+						<img src="images/history.png" />
+						<p>理财次数</p>
+						<p class='ss_3'></p>
+					</li>
+				</ul>
+			</div>
+			<div class='div_history border_tb'style="background-color:#fff;padding:2px 0 2px 4%">
+			</div>
+		</div>
+		<script>
+
+			$(function(){
+					$('.ss_1').html('')
+					$('.ss_3').html('')
+					var d = new Date();
+					var month=d.getMonth()+1;
+					if((month-1)>0)//
+					{
+						if(month>=10)
+						{
+							var endmonth = d.getFullYear()+"-"+(month-1);
+							var startmonth = (d.getFullYear()-1)+"-"+(month-1);
+						}
+						else
+						{
+							var endmonth = d.getFullYear()+"-0"+(month-1);
+							var startmonth = (d.getFullYear()-1)+"-0"+(month-1);
+						}
+					}
+					else if((month-1)==0)
+					{
+						var endmonth =(d.getFullYear()-1)+"-12";
+						var startmonth = (d.getFullYear()-2)+"-12";
+					}
+
+					var tokenid=getCookie("tokenid");
+					$.ajax({
+					   url: PERFORMANCES_JSON_URL,
+						type:'post',
+					   data: {
+					   	version:app_data.version,
+					   	tokenid:tokenid,
+					   	current:"1",
+					   	startmonth:startmonth,
+					   	endmonth:endmonth
+					   },
+					   success: function(data){
+					   	if(data.code=='000')
+					   	{
+						   		$('.ss_1').html(data.invest_money_total+"<span class='\ss_2\'>万</span>")//历史总投资额
+							  	$('.ss_3').html(data.invest_money_num+'次')//历史总投资次数
+                  $.get('./templates/history_search.tpl',{"time":new Date().getTime()}, function(template){
+                    var result = Mustache.render(template, data);
+                    $('.div_history').append(result);
+                    $('.div_history table').find('tr:last').find("td").css({"border":"none"})
+                });
+					   	}
+
+					   },
+					   error:function(data){
+					   }
+					});
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>订单列表</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <link href="css/base.css" type="text/css" rel="stylesheet" />
+  <link href="css/order_creditor_list.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+  <script type="text/javascript" src="js/functions.js"></script>
+  <script type="text/javascript" src='js/config.js'></script>
+  <script type="text/javascript" src='js/mustache.js'></script>
+  <style>
+    .header {
+      margin-bottom: 20px;
+    }
+  </style>
+  <script>
+    // checkLogin();
+    var id = getQueryString("id");
+    var noSend = getQueryString('noSend'); //不让发送？
+    var over5 = getQueryString('over5');
+    var childFinanceNumber = getQueryString('childFinanceNumber');
+    var investorsId = getQueryString('investorsId');
+    var telephone = getQueryString('tel_no') || getCookie('tel_no');
+    var idNumber = getQueryString('id_number') || getCookie('id_number');
+    var tokenid = getQueryString('tokenid') || getCookie('tokenid');
+    //'sendEmail.html?id='+id+'&noSend='+noSend
+
+    function initPage() {
+      $.post(GET_LIST_ORDER, {
+        mobilePhone: telephone, //telephone,
+        idNumber: idNumber,
+        childFinanceNumber: childFinanceNumber ,//childFinanceNumber
+        tokenid:getQueryString('tokenid') || getCookie('tokenid')
+      }).then(function(data) {
+        if(typeof data==='string' ){
+          if( data===''){
+            tip_window('服务器无返回数据！', '确定');
+            return;
+          }
+         else{
+           data = JSON.parse(data);
+         }
+        }
+
+        if (data.code !== '000') {
+          tip_window(data.msg, '确定');
+          return;
+        }
+        for (var i = 0, len = data.list.length; i < len; i++) {
+          data.list[i].first = data.list[i].childFinanceNumber.length > 14 ? 0 : 1;
+        }
+        data.tokenid = tokenid;
+        var tpl = document.getElementById('tpl').innerHTML;
+        $("#main").append(Mustache.render(tpl, data));
+
+      }, function(data) {
+        $('.loading').fadeOut();
+        tip_window('网络错误，请重试', '确定');
+      });
+
+    };
+    $(function() {
+      if (!isWeiXin()) {
+        $('.header').remove()
+      }
+      initPage();
+    });
+  </script>
+</head>
+
+<body>
+  <div class="loading"></div>
+  <div class="header btm deleteHeader">
+    <span>订单详细功能</span>
+    <a href="javascript:history.back(-1);" class="back"></a>
+  </div>
+  <script type="text/ng-template" id="tpl">
+    <table class="table table-bordered table-bg" style="width:500px;">
+      <thead>
+        <tr>
+          <th>操作</th>
+          <th>出借金额</th>
+          <th>出借日期</th>
+          <th>到期日</th>
+          <th>账单日</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#list}}
+        <tr>
+          <td><a href="order_creditor_list.html?investorsId={{investorsId}}&first={{first}}&cusId={{cusId}}&tokenid={{tokenid}}" class="table-a">查询详细</a></td>
+          <td>{{loanAmount}}</td>
+          <td>{{expectedLendDate}}</td>
+          <td>{{expectedDueDate}}</td>
+          <td>{{statementDate}}</td>
+        </tr>
+        {{/list}}
+      </tbody>
+    </table>
+  </script>
+  <div class="container wrap-long" id="main">
+  </div>
+</body>
+
+</html>

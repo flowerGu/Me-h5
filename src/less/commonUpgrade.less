@@ -1,0 +1,54 @@
+/*样式重置，公共UI样式*/
+@import './bootstrap/public';
+
+//
+@import 'base/me_variables';
+@import 'base/unit';
+@import 'base/reset';
+@import 'base/module';
+
+@import 'core/nav';
+.restDialogWrap{
+    width:100%;
+    height:100%;
+    >.restDialogBg{
+        width:100%;
+        height:100%;
+        position:fixed;
+        left:0;
+        top:0;
+        background-color:rgba(0,0,0,.4);
+        z-index:998;
+    }
+    >.restDialogContainer{
+        width:70%;
+        padding:3%;
+        position:fixed;
+        left:50%;
+        top:50%;
+        transform:translate(-50%,-50%);
+        text-align:center;
+        color:#8e8e8e;
+        background-color:#fff;
+        border-radius:10px;
+        max-height:155px;
+        >img{
+            width:15%;
+            margin:10px auto;
+        }
+        z-index:999;
+        >p{
+            line-height: 20px;
+        }
+    }
+    >img{
+        width:7%;
+        position:fixed;
+        left:50%;
+        top:50%;
+        margin-left:-3.5%;
+        margin-top:calc(-3.5% + 25px);
+        z-index:999;
+
+    }
+}

@@ -1,0 +1,258 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <title>提现</title>
+    <link rel="stylesheet" type="text/css" href="./css/base.css" />
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    <link href="css/relate_card.css" type="text/css" rel="stylesheet" />
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none !important;
+            margin: 0;
+        }
+    </style>
+    <script type="text/javascript" src='./js/jquery-1.9.0.min.js'></script>
+    <script type="text/javascript" src='./js/config.js'></script>
+    <script type="text/javascript" src="js/functions.js"></script>
+    <script type="text/javascript">
+        var ti_low='';//最低可担
+        var ti_cost='';//提现手续费
+        var isBandData = JSON.parse(localStorage.getItem("isBandData"));
+        var balance = parseFloat(getCookie('balance')); //余额
+        var withdraw_low, withdraw_high, withdraw_hand_cost;
+        withdraw_low=JSON.parse(window.localStorage.getItem('zj-assets')).balance;
+        // 添加中金卡    
+        function addCardZJ() {
+            $.post(CPCNBINDBANK_JSON_URL, {
+                version: app_data.version,
+                tokenid: tokenid
+            }).then(function (data) {
+                if (data.code != '000') {
+                    tip_window(data.msg, '确定');
+                    return false;
+                }
+                post_yb(data.url, { message: data.message, signature: data.signature });
+            }, function (data) {
+                tip_window('网络错误，请重试', '确定');
+            });
+        }    
+        $(function() {
+            var dd = $(document).height();
+            $('body').css("minHeight", dd); //设置body的高度
+            $.post(JD_GETAMTLIMIT_URL, {
+                version: app_data.version,
+                tokenid: getCookie('tokenid'),
+                pay_channel: 2,
+                way: 2
+            }).then(function(data1) {
+                if (data1.code == '000') {
+                    ti_cost=data1.list[0].withdraw_hand_cost;
+                    ti_low = data1.list[0].withdraw_low;
+                    withdraw_high = data1.list[0].withdraw_high;
+                    $('#ti_low').text(parseFloat(ti_low).toFixed(2)); //最低可提
+                    $('#tip-span').text(withdraw_low>data1.list[0].withdraw_high?parseFloat(data1.list[0].withdraw_high).toFixed(2):withdraw_low)
+                    $('#myDate').text(data1.list[0].payment_date);
+                    setCookie('withdraw_hand_cost', ti_cost)
+                } else {
+                    tip_window(data1.msg, '确定');
+                }
+            }, function(data1) {
+
+            })
+
+            $('#ti_cost').text('0.00');
+            $('#infact_ti').text('0.00');
+        });
+        function ti_actual() { //即时输入页面显示金额
+            var type_blance = parseFloat($('#invitation').val());
+            var isBandData = JSON.parse(localStorage.getItem("isBandData"));
+            var infact = type_blance - ti_cost;
+            $('#withdrawal_amount').html(type_blance);
+            if (parseFloat($('#invitation').val()) >= 2) {
+                infact = infact.toFixed(3);
+                infact = infact.substring(0, infact.lastIndexOf('.') + 3) // 123456.78
+                $('#infact_ti').text(infact);
+                $('#ti_cost').text(parseFloat(ti_cost).toFixed(2));
+            } else {
+                $('#ti_cost').text('0.00');
+                $('#infact_ti').text('0.00');
+                $('#withdrawal_amount').text('0.00');
+            }
+        }
+        function tixian() {
+            if ($('#invitation').val() == '') {
+                tip_window('您输入的金额小于最低提现金额', '确定');
+                $('#invitation').val('');
+                return false;
+            }
+            var type_blance = parseFloat($('#invitation').val());
+            var infact = type_blance - ti_cost;
+            if (type_blance > balance) {
+                tip_window('您输入的金额大于可用余额，请重新输入。', '确定');
+                $('#invitation').val('');
+                $('#withdrawal_amount').html('0.00');
+                return false;
+            }
+            if (type_blance < ti_low) {
+                tip_window('您输入的金额小于最低提现金额', '确定');
+                $('#invitation').val('');
+                return false;
+            }
+            if (type_blance > withdraw_high) {
+                tip_window('您输入的金额大于最高提现金额，请输入小于5000万的金额', '确定');
+                $('#invitation').val('');
+                return false;
+            }
+            if (!userdirect()) {
+                return false;
+            }
+            tip_window_zj('提现金额：' + type_blance + '元<br>手续费：' + ti_cost + '元<br>实际到账：' + infact + '元', '确定', '取消');
+        }
+
+        function ne_zj() {
+            var type_blance = parseFloat($('#invitation').val());
+            var version = app_data.version;
+            var tokenid = getCookie("tokenid");
+            var withdraw_amt = parseFloat($('.input_tixian').val());
+            var tixianData = {
+                    version: app_data.version,
+                    tokenid: tokenid,
+                    withdraw_amt: type_blance
+                }
+                // 存储 userData 数据 
+            localStorage.setItem("tixianData", JSON.stringify(tixianData));
+            // window.location.href='trade_pwd.html?type=ti';
+            $.ajax({
+                url: CPCNWITHDRAW_JSON_URL,
+                type: 'post',
+                data: {
+                    version: app_data.version,
+                    tokenid: tokenid,
+                    Amount: withdraw_amt
+                },
+                dataType: 'json',
+                success: function(data) {
+                    if (data.code == '000' && data.message != null) {
+                        $.post(ZJSAFEAUTO_JSON_URL, {
+                            version: app_data.version,
+                            tokenid: getCookie('tokenid')
+                        })
+                        .then(function(data1) {
+                            if (data1.zj_user_level != '3' && data1.zj_user_level != '2') {
+                                $('.tip_window').remove();
+                                $('#backg').remove();
+                                tip_windows_conform('为执行2015年12月人民银行发布了《非银行支付机构网络支付业务管理办法，您需要达到二类以上客户标准，需要完成至少两家银行的银行卡绑定', '去绑卡', '再想想', '', '', 'add_card()')
+                                $('.tip_window').css({
+                                    'height': "230px"
+                                });
+                                return false;
+                            } else {
+                                post_yb(data.url, {
+                                    message: data.message,
+                                    signature: data.signature
+                                });
+                            }
+                        }, function(data1) {
+                                tip_window('网络超时，稍后请重试', '确定');
+                       });
+                    } else if (data.code == 'PY002') { //没有实名认证
+                            tip_window(data.msg, '确定', 'idVerifi.html?zj=1');
+                    } else if (data.code == 'PY003') { //没有绑卡
+                        tip_windows_conform(data.msg, '取消', '继续', '', '', '', 'window.addCardZJ()');
+                    } else if (data.code == 'PY007') { //没有认证
+                            tip_window(data.msg, '确定', 'my_setting.html');
+                    }
+                },
+                error: function(data) {
+
+                }
+            });
+        }
+
+        function tip_window_zj(text, btn_value1, btn_value2, url) {
+            $("body").append("<div class=\"tip_window\" ><div><SPAN style=\"display:block;width:100%;text-align:center;position:absolute;left:0;top:15px;\">提现确认</SPAN></br><SPAN>" + text + "</SPAN><br/><br/><input type=\"button\" value=" + btn_value1 + " onclick=\"ne_zj()\" style=\"width: 60px;height: 35px;margin-right:10px\" /><input type=\"button\" value=" + btn_value2 + " onclick=\"close_window('" + url + "')\" style=\"width: 60px;height: 35px;\" /></div></div><div id=\"backg\"></div>");
+            $("#backg").css("display", "block");
+            $(".tip_window").css("display", "block");
+        }
+
+        $(function() {
+            $('#invitation').on('input', function() {
+                judge_decimal('#invitation');
+                ti_actual();
+            });
+        });
+    </script>
+</head>
+
+<body style='position:relative;'>
+    <div class="header whitebg deleteHeader">
+        提现
+        <a href="javascript:history.back(-1);" class="back"></a>
+    </div>
+    <div class="rela_tip clearfix" style="font-size:1.2em;">
+        <img src="images/broad.png" style="float:left;" />
+        <marquee style="float:right;" class="marq" direction="left" behavior="scroll" scrollamount="3" scrolldelay="0">交易密码将在充值、提现、出借等操作使用，请妥善保管</marquee>
+    </div>
+    <div id="main" class="tx-main">
+        <div class="tip-tx">
+            <label class='lab-input'>提现金额</label>
+            <span>本次最多转出<span id="tip-span"></span>元</span>
+        </div>
+        <div class="tx-input">
+            <span>￥</span>
+            <input type="text" name="invitation" id="invitation" class='input_invitation input_tixian' />
+        </div>
+        <div class="tip-tx clearfix">
+            <label>提现金额:
+							<span id='withdrawal_amount' style="margin-left:.2em">0.00</span>元
+						</label>
+            <span class="ft-span">(<span id='ti_low'>0.00</span>元起提)</span>
+        </div>
+        <div class="chong_wrap tip-tx clearfix">
+            <div class='tx-l'>
+                <span>手续费</span>
+                <span id='ti_cost'></span>
+                <span>元</span>
+            </div>
+            <div class='tx-r'>
+                <span>实际到账</span>
+                <span id='infact_ti'>0.00</span>
+                <span>元</span>
+            </div>
+        </div>
+        <div id='myDate'></div>
+        <button class="button blue fixed-btn" onclick="tixian()" style='height:52px;'>下一步</button>
+    </div>
+    <div style="width:100%;height:15px;"></div>
+    <script type="text/javascript">
+        function close_tab() {
+            $("#zhezhao").css("display", "none");
+            $(".reg_success").css("display", "none");
+            self.location = 'index_login.html';
+        }
+
+        function cheackmobile() {
+            var tel = $('input[name=tel]').val().trim();
+            var ident = $('input[name=ident]').val().trim();
+            if (tel.trim() == '') {
+                tip_window('手机号不能为空', '取消')
+                return false;
+            }
+            var re = /^[1][3-8][0-9]{9}$/;
+            if (!re.test(tel.trim())) {
+                tip_window('手机号格式不正确', '取消')
+                return false;
+            }
+        }
+    </script>
+</body>
+
+</html>

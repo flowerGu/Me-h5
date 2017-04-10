@@ -1,0 +1,74 @@
+body{background:#f6f6f6;}
+.tab{width:50%;margin:0 auto;border:1px solid #fff;border-radius:5px;}
+.tab li{float:left;text-align: center;width:50%;color:#fff;font-size:.9em;padding:.2em 0;}
+.tab li.current{background:#fff;color:#ff4c4c}
+.bid-main{display: none;}
+.bid-main .whitebg{padding:.2em 0 0;margin-bottom:.8em;}
+.bid-main .whitebg i,.bid-main .bid-part2 i{
+	font-family: "meiconnormal";
+	font-style:normal;
+	padding-right:8px;
+}
+#bid2 ul{background:#fff}
+.bid-main li,.bid-main a{margin-left:5%;padding:.8rem 0;font-size:1.2rem;color:#5f5f5f;}
+.bid-main .whitebg li:nth-child(1),.bid-main a{padding:.8rem 0;color:#5f5f5f;font-size:1.5rem;}
+.bid-main li>span{float:left;}
+.bid-main li>span .assess{width:15px;height:15px;margin-left:5px;}
+.bid-main .bid-part1 li data{float:right;color:#959595;margin-right:5%;}
+.bid-main .bid-part1 li:nth-child(1) img,.bid-main .bid-part2 li:nth-child(1) img{vertical-align: middle;width:30px;height:30px;margin-right:.5em;}
+.bid-main .bid-part2 li span,.bid-main .bid-part2 li data{display:inline-block;}
+.bid-main .bid-part2 li data{width:45%;float:right;margin-right:4%;color:#8e8e8e;text-align:left;}
+.tip-join{background:#ff4c4c;color:#fff;text-align: center;padding-bottom:.8em}
+.num-join{font-size:2em;font-weight: bold;}
+table{width:100%;color:#5e5e5e;border-bottom: 1px solid #ddd;}
+table td{width:50%;height:2.5rem;line-height:2.5rem;}
+table tr td.big-td{font-size:1.4em;}
+table tr td:nth-child(1){text-align: left;}
+table tr td:nth-child(2){text-align: right;padding-right:4%;}
+#bid2 p,#rtnbox p{text-align: center;font-size:1.4em;color:#959595;}
+.details_wrap i{position: absolute;
+	right:4%;
+	top:18px;
+	display: inline-block;
+	width: 14px;
+	height: 20px;
+}
+a#buynow{
+	position:fixed;
+	left:0;
+	bottom:0;
+	width:100%;
+	-webkit-appearance: none;
+	display: inline-block;
+	outline:none;
+	border:none;
+	height: 40px;
+	line-height:40px;
+	font-size: 1.5rem;
+	color: #fff;
+	text-align:center;
+	background-color:#ff4c4c;
+	}
+ul p{margin-bottom:5px;}
+.gain_color{color:#ff4c4c}
+.gain_list{padding-left:4%;margin-bottom:10px;}
+.gain_list label{color:#5f5f5f;font-weight:500;}
+.list_con{padding:15px 0;font-size:1.7em}
+.list_con a{float:right;color:#b9b9b9;padding-right:4%;}
+.list_con a.c74{color:#dddcdd}
+.list_con a i{display:inline-block;width:14px;height:20px;vertical-align:middle;margin-left:20px;background-position:-81px -160px;}
+.time_m{font-style: normal;}
+.bid-part1 .u_arr_right{float:right;margin-right:2%;margin-top:1%;}
+/*收入证明*/
+.certificateWrap{
+	padding:2rem 12%;
+	color:#5f5f5f;
+	font-size:1.4rem;
+}
+
+.certificateWrap img{width:100%;}
+.icon-question{
+	display:inline-block;
+	width:10px;
+	height:10px;
+}

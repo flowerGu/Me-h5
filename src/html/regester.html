@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"
+	/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no" />
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<title>首页-注册</title>
+	<link rel="stylesheet" type="text/css" href="./css/base.css" />
+	<link rel="stylesheet" type="text/css" href="./css/commonUpgrade.css" />
+	<link rel="stylesheet" type="text/css" href="./css/register.css" />
+</head>
+<body>
+	<!--顶部返回按钮-->
+	<div class="login_back register_back clearfix">
+		<a class="go_login" href="login.html">登录</a>
+	</div>
+	<!--logo-->
+	<img src="images/login_image.jpg" class="register_image" />
+	<!--主表单-->
+	<div id="main" class="registerWrap">
+		<ul>
+			<li class="u_form_single">
+				<label class="u_label_prompt">手机号</label>
+				<input type="text" id="tel" name="tel" maxlength='11' class='input_tel u_input_per' placeholder="请输入中国大陆手机号" />
+			</li>
+			<li class="u_form_single">
+				<label class="u_label_prompt">登录密码</label>
+				<input type="password" name="password" id='password' maxlength='16' minlength='6' value='' class='input_pass u_input_per'
+					placeholder="6-16位数字、字母、符号组合" />
+			</li>
+			<li class="u_form_single">
+				<label class="u_label_prompt">重复密码</label>
+				<input type="password" name="repassword" id='repassword' maxlength='16' minlength='6' value='' class='input_pass u_input_per'
+					placeholder="6-16位数字、字母、符号组合" />
+			</li>
+			<div class='reg reg1 clearfix'>
+				<div class="slide_bg">
+					<span class="drag_text">请进行滑动验证</span>
+					<div class="slide_block"></div>
+				</div>
+				<div class="slide_isPass">
+					<img src="./images/passLock_03.jpg" alt="" width=19 id="J_slideIsPass">
+				</div>
+			</div>
+			<li class="u_form_single">
+				<label class="u_label_prompt">验证码</label>
+				<input type="text" name="ident" class='input_ident u_input_per' placeholder="手机验证码" maxlength='4' onkeyup="" />
+				<input type='button' class='send_code u_form_send' value='免费获取' id='send_code' />
+			</li>
+			<li class="u_form_single">
+				<label class="u_label_prompt">邀请码</label>
+				<input type="text" name="invitation" class='input_invitation u_input_per' placeholder="请输入邀请码（非必填）" />
+			</li>
+		</ul>
+		<input type="button" class="u_btn_form_default warp_login" onclick="submit()" id="submit" value="注册" disabled style="background-color:#dddcdd"/>
+		<div class='xieyi'>
+			<label><span class="checkboxWrap ">
+						<input type="checkbox" id="isCheck">
+					</span>我已阅读并同意</label>
+			<a href="xieyi.html">《Me金融使用协议》</a>
+			<a href="yinsixieyi.html">《Me金融隐私协议》</a>
+		</div>
+	</div>
+	<div style="width:100%;height:15px;"></div>
+	<div class='login_warn'>
+		<span>市场有风险 出借须谨慎</span>
+	</div>
+	<div class='contant'>
+		<a href="tel:4000443888"><img src="./images/tel.png" class='contant_img' /><span class="contant_us_num">400-044-3888</span></a>
+	</div>
+	<div class="puzz_picture_box">
+		<h3 class="puzz_title">滑动验证</h3>
+		<div class="question_container clearfix">
+			<div class="question_pic">
+				<img src="" alt="" id="J_slideQuestion" width=180>
+			</div>
+			<span class="change_puzz">换一题</span>
+		</div>
+		<p class="puzz_intro">按住左边滑块，拖动选择出正确的答案</p>
+		<div class="answer_puzz">
+			<img src="" alt="" id="J_slideAnswer" width=216>
+			<ul>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+		<div class="arrow_container">
+			<div class="puzz_arrow"></div>
+		</div>
+	</div>
+	<script type="text/javascript" src='./js/jquery-1.9.0.min.js'></script>
+	<script type="text/javascript" src='./js/functions.js'></script>
+	<script type="text/javascript" src='./js/config.js'></script>
+	<script type="text/javascript" src="./js/md5.js"></script>
+	<script src="./js/sendCodeDialog/sendCode.js"></script>
+	<script type="text/javascript" src="./js/register.js"></script>
+</body>
+</html>

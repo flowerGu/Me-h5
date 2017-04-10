@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>常见问题</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	    <meta name="apple-mobile-web-app-capable" content="yes" />
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	    <meta name="format-detection" content="telephone=no"/>
+	     <meta http-equiv="Cache-Control" content="no-store" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+	    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	    <link href="css/base.css" type="text/css" rel="stylesheet" />
+		<link href="css/more.css" type="text/css" rel="stylesheet" />      
+	</head>
+	<body>
+		<div class="sas_list">
+		</div>
+		<script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+	    <script type="text/javascript" src="js/functions.js"></script>
+	    <script type="text/javascript" src="js/config.js"></script>
+	    <script>
+	    $(function(){
+	    	var istitle = getQueryString('istitle');
+	 		if(istitle=='0')
+	 		{
+	 			$('.header').hide();
+	 		}
+	    })
+			var obj ={
+				version:app_data.version,
+				channel:'h5',
+				basicId:getQueryString('basicId')
+			}
+	    	$.post(host1+'queryProblemDetail.do',
+	    		obj).then(function(data){
+					$('body .sas_list').append(data.list[0].content)
+	    		},function(data){
+
+	    		})
+	    </script>
+	</body>
+</html>

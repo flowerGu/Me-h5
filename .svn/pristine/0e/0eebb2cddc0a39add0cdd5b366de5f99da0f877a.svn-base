@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="white" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="full-screen" content="yes">
+	<meta name="x5-fullscreen" content="true">
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<title>红包</title>
+	<link href="css/base.css" type="text/css" rel="stylesheet" />
+	<link href="css/privilege.css" type="text/css" rel="stylesheet" />
+	<script src="js/jquery-1.9.0.min.js"></script>
+	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="js/config.js"></script>
+	<script type="text/javascript" src="js/mustache.js"></script>
+	<script type="text/javascript" src="js/dropload.js"></script>
+</head>
+<body>
+	<div class="header whitebg" style="border:none">
+		<a href="myWealth.html" class="back"></a>
+		<ul class="tab clearfix">
+			<li class="current">红 包</li>
+			<a href="privilege.html">
+				<li>体验金</li>
+			</a>
+		</ul>
+	</div>
+	<div class="caution clearfix mgt2" style="margin-bottom:.5em;padding:.4em 4%">
+		<img src="images/broad.png" /><span>您有<span id="number" class="cautions"></span>个红包未使用</span>
+		<a href="javascript:;" class="readme" id="J_exchange">
+			<sm>兑换</sm>
+		</a>
+	</div>
+	<div id="content">
+		<div id="list"></div>
+	</div>
+	<script type="text/ng-template" id="tpl">
+		{{#redlist}}
+		<div class="priWrap">
+			<div class="topImage"></div>
+			<div class="red_package whitebg clearfix btm mgt2{{#red_used}} used {{/red_used}}{{#red_unused}} unused{{/red_unused}}{{#red_out}} out{{/red_out}}" >
+        <p>
+          <span class="red_icon">¥</span>
+          <span class="red_number">{{amount}}</span>
+					<span class="red_status">{{red_source}}{{red_status}}</span>
+        </p>
+				<p class="red_content clearfix">
+					<span class="red_type">{{red_type}}</span>
+					<span class="red_text">{{red_detail}}</span>
+				</p>
+				<ul class="red_date clearfix">
+					<li>
+					获得时间:{{red_createtime}}
+					</li>
+					<li >
+					生效时间:{{red_effect}}
+					</li>
+				</ul>
+				</div>
+			</div>
+		</div>
+		{{/redlist}}
+	</script>
+	<div class="exchange_red exchange_hide">
+		<!--<img src="images/exchange_bg.png" width="100%" class="exchage_bg">-->
+		<div class="exchange_show exchange_content">
+			<div class="exchage_bg exchange_title">输入兑换码，兑换红包！</div>
+			<p class="exchange_input">
+				<input type="text" placeholder="请输入兑换码" id="J_exchangeCode">
+			</p>
+			<p class="exchange_input exchange_check">
+				<input type="text" placeholder="请输入验证码" id="J_checkCode">
+				<img src="images/yanzhengma.png" alt="" width="40%" id="J_imageCode">
+				<span id="J_refresh">看不清？换张图</span>
+			</p>
+			<p class="exchange_button clearfix">
+				<input type="button" class="btn btn_disable J_cancal" value="取消">
+				<input type="button" class="btn btn-danger" value="确认" id="J_ok">
+			</p>
+		</div>
+		<div class="exchange_hide exchange_success">
+			<div class="exchage_bg success_title">兑换成功</div>
+			<p class="success_content">
+				恭喜您获得一份红包[<b id="J_redTypeIs"></b>]<br> 红包生效期<b class="J_effectTime" id="J_effectTime"></b>
+			</p>
+			<p class="success_btn">
+				<input type="button" class="btn btn-danger" value="查看红包" id="see_red">
+			</p>
+		</div>
+		<div class="exchange_hide exchange_fail">
+			<div class="exchage_bg fail_title">验证失败</div>
+			<p class="fail_content">
+				对不起，验证码错误
+			</p>
+			<p class="fail_btn clearfix">
+				<input type="button" class="btn btn_disable J_cancal" value="取消">
+				<input type="button" class="btn btn-danger" value="重试" id="J_twice">
+			</p>
+		</div>
+	</div>
+	<div id="J_mask" class="exchange_hide"></div>
+	<script>
+			var tokenid,init=false,
+		  dropDownPageOpts = {
+				page: 1,
+				enable: true
+			};
+			//app调用
+			if(getQueryString('source')==='app'){
+				tokenid=getQueryString('tokenid');
+				$(".header").hide();
+			}
+			else{
+				tokenid=getCookie('tokenid');
+			}
+			if(tokenid == null || tokenid==''){
+				tip_windows('您还未登录！','登录','取消','index_no_login.html');
+				//return;
+			}
+	    addlist(dropDownPageOpts.page++,'true');
+			// 下拉加载
+			function initDropload(){
+				if(init){
+					return;
+				}
+				init=true;
+					$('#content').dropload({
+					 threshold : 50,
+					 domDown : {
+								domClass   : 'dropload-down',
+								domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+								domUpdate  : '<div class="dropload-update">↓释放加载</div>',
+								domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+								domNoData  : '<div class="dropload-noData"></div>'
+						},
+						scrollArea : window,
+						loadDownFn : function(me){
+							var current;
+							me.lock();
+								addlist(dropDownPageOpts.page++,function(){
+									me.resetload();
+									me.unlock();
+									me.noData(false);
+								},function(){
+									me.lock();
+									me.noData();
+									me.resetload();
+								});
+							}
+						});
+			}
+			// 获取红包页面数据
+    	function addlist(current,successFun,errorFun){
+	    	 $.ajax({
+	    	 	url:RED_LIST_URL,
+					type: "post",
+			    data: {
+				   	version:app_data.version,
+				   	tokenid:tokenid,
+				   	current:current
+				   },
+					dataType:'json',
+					success:function(data){
+						if(data.code=="000"){
+							if(data.hasnextpage==='false'){
+								dropDownPageOpts.enable=false;
+								if(current == '1' && data.redlist.length == 0){
+									addNoData($('#list'));
+								}
+							}
+							var numbers=data.unused_count;
+							$('#number').text(numbers);//未使用券数
+							if(data.redlist.length != 0){
+								$.each(data.redlist,function(i,item){
+										if(item.red_status_code=='0'){
+											item['red_unused']=true;
+										}else if(item.red_status_code=='1'){
+											item['red_used']=true;
+										}else{
+											item['red_out']=true;
+										}
+										item.red_effect=item.red_effect.split(" ")[0];
+										item.red_createtime=item.red_createtime.split(" ")[0];
+								 })
+                  var result = Mustache.render($('#tpl').html(),data);
+                  $('#list').append(result);
+                  initDropload();
+							}
+							else{
+								// $('#content').append("<div style='padding-top:30px;margin:0 auto; width:170px;font-size: 20px;text-align:center'>您暂无红包</div>");
+							}
+							if(data.hasnextpage==='false'){
+								if($.isFunction(errorFun)){
+									errorFun();
+								};
+							}
+							else if($.isFunction(successFun)){
+								successFun();
+							}
+
+						}
+						else{
+							dropDownPageOpts.page--;
+							tip_window(data.msg,'确定');
+						}
+					}
+	    	 })
+	    }
+			
+			//生成图形验证码
+			function getRegisterImgCode() {
+				$("#J_imageCode").attr("data-number", function () {
+					var number = "";
+					for (var i = 0; i < 10; i++) {
+						number += Math.floor(Math.random() * 10);
+					}
+					return number;
+				})
+				$.ajax({
+					url: RED_PICTUREINIT_URL,
+					data: { check_code_key: $('#J_imageCode').attr("data-number") },
+					success: function (data) {
+						if (data.code == "000"){
+							$('#J_imageCode').attr("src",RED_PICTURE_URL+'?check_code_key=' + $('#J_imageCode').attr("data-number"));
+						}
+					}
+				})
+			}
+			getRegisterImgCode();
+			// 点击刷新图片验证码
+			$("#J_refresh").click(function(){
+				getRegisterImgCode();
+			})
+			// 点击兑换弹窗
+			$("#J_exchange").click(function(){
+				$(".exchange_red,#J_mask").removeClass("exchange_hide");
+				$(".exchange_fail").removeClass("exchange_show").addClass("exchange_hide");
+				$(".exchange_content").removeClass("exchange_hide").addClass("exchange_show");
+			});
+			// 点击取消关闭弹窗
+			$(".J_cancal").click(function(){
+				$("#J_exchangeCode").val('');
+				$('#J_checkCode').val('');
+				$(".exchange_red,#J_mask").removeClass("exchange_show").addClass("exchange_hide");
+				$(window).scrollTop(0);//IOS 键盘弹出来，会导致页面滚动
+			});
+			// 点击确定兑换红包
+			$("#J_ok").click(function(){
+				var exchangeCode = $("#J_exchangeCode").val();
+				var checkCode = $("#J_checkCode").val();
+				if(exchangeCode == ""){tip_window('请输入兑换码！', '取消'); return}
+				if(checkCode == ""){tip_window('请输入图形验证码！', '取消'); return}
+				$("#J_ok").attr("disabled","disabled");
+				$.ajax({
+					url:RED_EXCHARGE_URL,
+					type:"post",
+					data:{
+						tokenid:tokenid,
+						red_code:exchangeCode,
+						img_code:checkCode,
+						check_code_key : $('#J_imageCode').attr("data-number")
+					},
+					success:function(data){
+						$("#J_ok").removeAttr("disabled");
+						if(data.code == "001"){
+							$(".exchange_red,#J_mask").addClass("exchange_hide");
+							deleteCookie("tokenid");
+							tip_windows(data.msg, '登录', '取消', 'index_no_login.html');
+						}
+						if(data.code == "000" && data.msg == "success"){
+							$(".exchange_content").addClass("exchange_hide");
+							$(".exchange_success").removeClass("exchange_hide");
+							$('#J_redTypeIs').html('[' + data.red_type + '-' + {'1':'中金托管','2':'江西存管','3':'Me账户'}[data.sendChannels]+']');
+							$("#J_effectTime").html(data.red_effect_time.split(" ")[0]);
+							$(window).scrollTop(0);//IOS 键盘弹出来，会导致页面滚动
+						}else{
+							$(".exchange_fail").removeClass("exchange_hide").addClass("exchange_show");
+							$(".exchange_content").removeClass("exchange_show").addClass("exchange_hide");
+							$(".fail_content").html(data.msg);
+							$(window).scrollTop(0);//IOS 键盘弹出来，会导致页面滚动
+						}
+					}
+				}) 
+			});
+			// 点击重试
+			$("#J_twice").click(function(){
+				getRegisterImgCode();
+				$(".exchange_fail").removeClass("exchange_show").addClass("exchange_hide");
+				$(".exchange_content").removeClass("exchange_hide").addClass("exchange_show");
+			})
+			// 查看红包
+			$("#see_red").click(function(){
+				window.location.reload();
+			})
+		</script>
+</body>
+</html>

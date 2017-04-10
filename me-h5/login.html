@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"
+	/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no" />
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<title>首页-登录</title>
+	<link rel="stylesheet" type="text/css" href="./css/base.css" />
+	<link href="css/commonUpgrade.css" type="text/css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="./css/register.css" />
+</head>
+<body>
+	<!--logo-->
+	<div class="logo_warp">
+		<img src="images/login_image.jpg" class="login_image"/>
+	</div>
+	<!--主体表单-->
+	<div id="main" class="loginWrap">
+		<ul>
+			<li class="u_form_single">
+				<input type="tel" tabIndex="1" name="tel" id="tel" class='input_tel u_input_full' placeholder="请输入手机号" value='' maxlength='13'
+				/>
+			</li>
+		</ul>
+		<ul>
+			<li class="u_form_single">
+				<input type="password" name="password" class='input_pass u_input_full' maxlength='16' placeholder="请输入登录密码" value='' />
+			</li>
+		</ul>
+		<a href="javascript:;" class="u_btn_form_default warp_login" onclick="submit()" id="submit">登录</a>
+		<div class="login clearfix">
+			<a href="regester.html" class="">注册</a>
+			<a href="findPwd.html" class='forget_a'>忘记密码？</a>
+		</div>
+	</div>
+	<!--底部提示-->
+	<div class='login_warn'>
+		<span>市场有风险  出借须谨慎</span>
+	</div>
+	<div class='contant'>
+		<a href="tel:400443888"><img src="./images/tel.png" class='contant_img' /><span class="contant_us_num">400-044-3888</span></a>
+	</div>
+</body>
+<script type="text/javascript" src='./js/jquery-1.9.0.min.js'></script>
+<script type="text/javascript" src='./js/functions.js'></script>
+<script type="text/javascript" src='./js/config.js'></script>
+<script type="text/javascript" src="./js/md5.js"></script>
+<script src="js/login.js"></script>
+</html>

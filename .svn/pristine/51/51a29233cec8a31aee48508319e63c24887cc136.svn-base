@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	    <meta name="apple-mobile-web-app-capable" content="yes" />
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	    <meta name="format-detection" content="telephone=no"/>
+		<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+		<title>历史业绩查询</title>
+		<link rel="stylesheet" type="text/css" href="./css/base.css"/>
+		<link rel="stylesheet" type="text/css" href="./css/style.css"/>
+		<link href="css/relate_card.css" type="text/css" rel="stylesheet" />
+		<script type="text/javascript" src="./js/jquery.min.js"></script>
+		<script type="text/javascript" src='./js/config.js'></script>
+		<script type="text/javascript" src="./js/jquery.easyui.min.js"></script>
+		<style type="text/css">
+
+		/**top100**/
+		.datagrid-body tr{
+			background-color: rgb(255,255,255);
+			color: #000;
+			height: 50px;
+		    margin-left: 10px;
+		    padding-left: 10px;
+		}
+		.datagrid-body tr td{
+			font-size: 1.7em;
+		    width: 10%;
+		    border-bottom: 1px #ddd solid;
+		}
+		.datagrid-view1{
+			height: 0px;
+		}
+		.datagrid-header{
+			display: none;
+			height: 0px;
+		}
+		</style>
+	</head>
+	<body style='background-color: rgb(240,241,241);position:relative;' >
+		<div class="header whitebg deleteHeader">
+			历史业绩查询
+			<a href="javascript:history.back(-1);" class="back" ></a>
+		</div>
+		<div id="main">
+			<div class='top_red'>
+				<p class='ss_1'>1,987,981,32<span class='ss_2'>元</span></p>
+				<p class='ss_3'>64次理财</p>
+			</div>
+			<table id='dg' ></table>
+			<div class='div_history border_tb'style="background-color:#fff;padding:2px 0 2px 4%">
+			
+					<table cellspacing='0' cellpadding='0' border='0'>
+							<tr onclick=location.href="last_month_s.html">
+									<td class='mingci chaxun_riqi'>2015-02</td>
+									<td>业绩查询</td>
+									<td class='jine'>700,222,333</td>
+									<td><i></i></td>
+								</tr>
+								
+					</table>			
+		</div>
+		</div>
+		<script type="text/javascript">
+		function cellStyler(value,row,index){
+			if (index > 10){
+				return 'background-color: rgb(255,255,255);color: #000;';
+			}
+		}
+		function cellname(value,row,index){
+			if (index > 10){
+				return 'background-color: rgb(255,255,255);color: rgb(200,200,200);';
+			}
+		}
+		function celljine(value,row,index){
+
+			   if (index > 10){
+				return 'background-color: rgb(255,255,255); color: rgb(154,154,154);';
+			}
+		}
+	</script>
+			<script type="text/javascript">
+		$('#dg').datagrid({   
+		  	url: PERFORMANCES_JSON_URL, 
+		    columns:[[   
+		        {field:'years_income',width:100,styler:cellStyler ,align:'center'},   
+		        {field:'name'   ,width:100,styler:cellStyler                },   
+		        {field:'product_name'  ,width:100,styler:cellname  ,align:'right'  },   
+		        {field:'invest_money'  ,width:100,styler:celljine  ,align:'center' }     
+		    ]],
+		    loadFilter: function(data){
+				data.rows=data.list;
+				data.total=data.current;
+				return data;
+			},
+
+		});  
+	</script>
+	</body>
+</html>

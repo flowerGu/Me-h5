@@ -1,0 +1,212 @@
+//
+@import 'bootstrap/public';
+@import 'base/variables';
+@import 'plugs/openJXdialog';
+@import 'core/dialog';
+
+body{
+  background-color: #f6f6f6;
+}
+//头部
+header{
+  background-color: #ff4c4c;
+  padding: 30/75rem 30/75rem 0;
+  color: #fff;
+  text-align: center;
+}
+.wrap-face{
+  display: inline-block;
+}
+.user-face{
+  width: 140/75rem;
+  height: 140/75rem;
+  border-radius: 50%;
+}
+//设置图标
+.link-setting{
+  position: absolute;
+  right: 30/75rem;
+  top: 30/75rem;
+  height: 60/75rem;
+  width: 80/75rem;
+  font-size:14px;
+}
+[data-dpr="2"] .link-setting{
+  font-size:14*2px;
+}
+[data-dpr="3"] .link-setting{
+  font-size:14*3px;
+}
+.js-user-name{
+  padding: 15/75rem 0;
+  font-size: 14px;
+}
+[data-dpr="2"] .js-user-name{
+  font-size: 26px;
+}
+[data-dpr="3"] .js-user-name{
+  font-size: 26*1.5px;
+}
+// 认证
+.user-auth{
+  position: relative;
+  padding-left:30/75rem;
+  &:first-child{
+    margin-right: 30/75rem;
+  }
+  >.icon{
+    position: absolute;
+    left: -1/75rem;
+    top: 50%;
+    margin-top: -12/75rem;
+  }
+}
+//资产信息
+
+.wrap-header-money{
+  position: relative;
+  margin: 20/75rem -30/75rem 0;
+  &:before{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    content: ' ';
+    display: block;
+    background-color: rgba(112, 112, 112, .15);
+    z-index: 99;
+  }
+}
+.header-money{
+  padding: 25/75rem 30/75rem;
+  font-size:14px;
+  .clearfix;
+  >li{
+    float: left;
+    width: 33%;
+    border-right: 1px solid #fff;
+
+    &:last-child{
+      border-right:none;
+    }
+  }
+}
+[data-dpr="2"] .header-money{
+  font-size:24px;
+}
+[data-dpr="3"] .header-money{
+  font-size:36px;
+}
+.wrap-btn{
+  position: relative;
+}
+
+// 中间的昨日收益+按钮
+.container{
+  margin-top: 15/75rem;
+  padding: 30/75rem;
+  .clearfix;
+}
+.middle-content{
+  background-color: #fff;
+}
+.middle-content-left,
+{
+  float: left;
+  width: 49%;
+}
+.label-previous-earning{
+  float:left;
+  color: @gray1;
+  font-size: 14px;
+}
+[data-dpr="2"] .label-previous-earning{
+  font-size: 30px;
+}
+[data-dpr="3"] .label-previous-earning{
+  font-size: 44px;
+}
+.middle-content .fr span{
+  vertical-align: middle;
+}
+.btn-small{
+  border: 1px solid #ff4c4c;
+  border-radius: 10/75rem;
+  font-size: 10px;
+  padding: 0 4/75rem;
+  color:#ff4c4c;
+  margin-bottom:10px;
+}
+[data-dpr="2"] .btn-small{
+  font-size: 16px;
+  padding: 0 8/75rem;
+  margin-top: 10px;
+}
+[data-dpr="3"] .btn-small{
+  font-size: 30px;
+  padding: 0 12/75rem;
+}
+.previous-earning{
+  color: #ff5858;
+  font-weight: 500;
+  font-size: 36/2px;
+}
+[data-dpr="2"] .previous-earning{
+  font-size: 36px;
+}
+[data-dpr="3"] .previous-earning{
+  font-size: 18*3px;
+}
+
+.link-charge{
+  float: right;
+  margin-top: 15/75rem;
+}
+
+//菜单
+.list-menu{
+  border-top:15/75rem solid #f6f6f6;
+  padding-left: 35/75rem;
+  line-height: 35/75rem;
+  font-size: 14px;
+  background-color: #fff;
+  >li{
+    border-bottom: 2/75rem solid #e5e5e5;
+    padding-top: 30/75rem;
+    padding-bottom: 30/75rem;
+    &:last-child{
+      border-bottom: none;
+    }
+    >a{
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      color: @gray1;
+      padding-left: 55/75rem;
+      >.icon-middle:first-child{
+        position: absolute;
+        left: 0/75rem;
+        top:-3/75rem;
+      }
+      >.icon-array-right{
+        position: absolute;
+        right: 30/75rem;
+        top: 50%;
+        margin-top: -20/75rem;
+      }
+    }
+  }
+}
+[data-dpr="2"] .list-menu{
+  font-size: 28px;
+}
+[data-dpr="3"] .list-menu{
+  font-size: 14*3px;
+}
+
+.invite-code{
+  float: right;
+  margin-right: 70/75rem;
+}

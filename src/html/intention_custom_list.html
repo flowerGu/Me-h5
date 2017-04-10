@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	    <meta name="apple-mobile-web-app-capable" content="yes" />
+	    <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+	    <meta name="format-detection" content="telephone=no"/>
+	    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	    <title>意向客户列表</title>
+	    <link href="css/base.css" type="text/css" rel="stylesheet" />
+	    <link href="css/intention_custom.css" type="text/css" rel="stylesheet" />
+       
+         <script src="./js/zepto.min.js"></script>
+  		<script src="./js/dropload.min.js"></script>
+  		 <script type="text/javascript" src="js/config.js"></script>
+	    <script type="text/javascript" src="./js/functions.js"></script>
+		<script type="text/javascript" src='./js/mustache.js'></script>
+	    <script type="text/javascript">
+	    $(function(){
+			window.onload = function()
+			{
+				var tokenid=getCookie("tokenid"); 
+			
+				if(tokenid == null){
+				 	tip_windows('您还未登录！','登录','取消','index.html');
+				// test_tokenid(); 
+				return false;
+					
+				 }
+				addlist(1,'true','');
+			}
+				
+		});
+	    function search(){
+	    	$('#div_table_list').html('');
+	    	var seachname =$('.intent_input').val();
+			var	current=1;
+			var hasnextpage="true";
+	    	addlist(current,hasnextpage,seachname);
+	    }
+	    function addlist(current,hasnextpage,seachname)
+			{
+				var tokenid=getCookie("tokenid");
+				if(hasnextpage=='true')
+				{
+					$.ajax({
+					   type: "post",
+					   url: QUERYINTENTCUST_JSON_URL,
+					   data: {
+					   	version:app_data.version,
+					   	tokenid:tokenid,
+					   	current:current,
+					   	seachname:seachname
+					   },
+					   success: function(data){
+					   	if(data.code=='000')
+					   	{
+					   		var result=data.list;
+							intentLength=result.length;
+							var prelength=0;
+							if(current!='1'){
+								prelength=parseInt(getCookie('intentLength'));
+							}
+							intentLength=intentLength+prelength;
+							setCookie('intentLength',intentLength);
+					   		if(data.list != null)
+					   		{
+					   			$.each(data.list,function(i,item){
+	     							if(item.custsex=='1')
+	     							item.boy=true;
+	     							if(item.custsex=='2')
+	     							item.girl=true;
+	     							if(item.remark.length>5)
+	     							{
+	     								item.remark=item.remark.substr(0,10)+'...';
+	     							}
+	     							if(item.custname.length>5)
+	     							{
+	     								item.custname=item.custname.substr(0,5)+'...';
+	     							}
+	     						})
+								$.get('./templates/intention_custom_list.tpl',{"time":new Date().getTime()}, function(template){
+								    var result = Mustache.render(template, data);
+								    $('#div_table_list').append(result);
+								    current++;
+								    $('#current').val(current);
+							    	$('#hasnextpage').val(data.hasnextpage);
+									if(getQueryString('nums')){//意向客户数
+										$('#numIntent').text(getQueryString('nums'));
+									}else{
+										$('#numIntent').text(localStorage.getItem('nums'));
+									}
+
+								});
+							}
+					   		else
+					   		{
+					   			 $('#div_table_list').append("<div style='padding-top:30px;margin:0 auto; width:170px;font-size: 20px;'>您暂时没有意向客户！</div>");
+					   		}
+			   				
+					   	}
+					   	else
+					   	{
+					   		tip_window(' 无数据','确定');
+					   	}
+					   
+					   },
+					   error:function(data){
+					   		tip_window(' 无数据','确定');
+					   }
+					});
+				}
+				else
+				{
+					// tip_window('没有更多数据','确定');
+				}
+					
+			}
+			function custom_detail(id)
+			{
+				var id=id.id;
+				vid=id.slice(3)
+				window.location.href='intention_custom_detail.html?id='+vid;
+			}
+	    </script>
+	</head>
+	<body>
+		<div class="header whitebg mgt2">
+			意向客户列表
+			<a href="javascript:history.back(-1);" class="back"></a>
+			<a href="intention_custom_new.html" class="m_exit"><img src="images/xinzeng.png"/></a>
+		</div>
+		<div class="intent_search border_tb whitebg">
+			<img src="./images/search.png" >
+			<input type="text" class="intent_input" placeholder="搜索输入手机号或者客户姓名" onkeyup="">
+			<span id="intentSearch" onclick='search()'>搜索</span>
+		</div>
+		<div id='div_table_list'>
+			
+		</div>
+		<p style="font-size:1.6em;text-align: center;padding:1em 0;"><span id="numIntent"></span>位意向客户</p>
+		<input type='hidden' id='current' value='1'/>
+     	<input type='hidden' id='hasnextpage' value='true' />
+     	<script>
+		$('#div_table_list').dropload({
+			domDown : {
+		        domClass   : 'dropload-down',
+		        domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+		        domUpdate  : '<div class="dropload-update">↓释放加载</div>',
+		        domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+		    },
+		    scrollArea : window,
+		    loadDownFn : function(me){
+		    	var current ;
+					current=$('#current').val();
+					hasnextpage=$('#hasnextpage').val();
+					var seachname =$('.intent_input').val();
+				setTimeout(function(){
+	               addlist(current,hasnextpage,seachname);
+	                me.resetload();
+           		 },500);
+		    }
+		    
+		});
+		</script> 
+		<script src="./js/footercommon.js"></script>
+	</body>
+</html>

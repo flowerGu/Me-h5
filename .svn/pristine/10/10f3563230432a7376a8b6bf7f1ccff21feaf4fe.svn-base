@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"
+  />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <title>开户支行查询</title>
+  <link rel="stylesheet" type="text/css" href="css/base.css" />
+  <link rel="stylesheet" type="text/css" href="css/commonUpgrade.css" />
+  <link rel="stylesheet" type="text/css" href="css/set_address.css" />
+  <link href="css/newBase.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div id="main" class="query_bank_branch">
+    <ul>
+      <li class="u_form_single">
+        <label class="u_label_prompt">银行名称</label>
+        <input id="query_bank_name" type="text" name="name" value="" class="u_input_per pd_16" readonly/>
+      </li>
+      <li class="u_form_single js-drop-down" data-target="#dialogArea">
+        <label class="u_label_prompt">银行所在地</label>
+        <input type="hidden" name="province" class="js-province">
+        <input type="hidden" name="citiy" class="js-citiy">
+        <input type="text" id="bank_address" class="form-control js-bank-address pd_40" placeholder="银行所在地" readonly="">
+        <i class="arrow_right"></i>
+      </li>
+      <li class="u_form_single">
+        <label class="u_label_prompt">关键字</label>
+        <input id="key_word" type="text" name="tel" placeholder="请输入关键字" value="" maxlength="11" class="u_input_per pd_16" />
+      </li>
+    </ul>
+  </div>
+  <ul class="btn-sraerch-area">
+    <li id="reset_btn">重置</li>
+    <li id="search_submit">查询</li>
+  </ul>
+  <div class="query_result" id="query_result">
+    <div class="border_none query_warn_result">
+      <img src="images/no-data.png" class="global-no-data">
+      <p class="query_warn_title">提示:无结果</p>
+      <p class="query_warn_txt">请联系您的银行客服查询联行行号，然后手动输入</p>
+      <p><a href="javascript:;" class="u_btn_form_default" id="hand_write">手动输入</a></p>
+    </div>
+    <ul>
+    </ul>
+  </div>
+  <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+  <script type="text/javascript" src="js/functions.js"></script>
+  <script type="text/javascript" src='js/config.js'></script>
+  <script type="text/javascript" src='js/mustache.js'></script>
+  <script type="text/javascript" src="js/query_bank_branch.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no" />
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<title>我的银行卡</title>
+	<link rel="stylesheet" type="text/css" href="./css/base.css" />
+	<link rel="stylesheet" type="text/css" href="./css/style.css" />
+	<style type="text/css">
+		#xiahuaxian ul li {
+			margin-right: 16px;
+		}
+		.add_card {
+			display: inline-block;
+			height: 180px;
+			line-height: 140px;
+		}
+	</style>
+	<script type="text/javascript" src='js/jquery-1.9.0.min.js'></script>
+	<script src="js/dropload.min.js"></script>
+	<script type="text/javascript" src='js/functions.js'></script>
+	<script type="text/javascript" src='js/config.js'></script>
+	<script type="text/javascript" src='js/mustache.js'></script>
+	<script type="text/javascript" src='js/mybank.js'></script>
+</head>
+
+<body>
+	<div class="header whitebg btm deleteHeader" style="padding-bottom:.4em;margin-bottom:.5em;">
+		我的银行卡
+		<a href="javascript:history.back(-1)" class="back"></a>
+    <!--//todo  取消注释以开启江西-->
+		<!--<a id="showDelBtn" class="m_exit">管理</a>-->
+	</div>
+	<script type="text/ng-template" id="bankListTpl">
+		{{#bankList}}
+		{{#bankMe}}
+			<div class="card_info {{#red}}red{{/red}}{{#blue}}blue-card{{/blue}} {{#trusteeship_type}}removeable{{/trusteeship_type}}">
+			  <a class='card_del' data-id='{{bank_num}}'></a>
+			  <div class="card_logo">
+				<div class="wrap_logo">
+				  <img src='./images/backlogo/{{bank_code}}.png'>
+				</div>
+
+				<p class='bank_name'>{{bank_name}}&nbsp;</p>
+				<p class='card_type'>储蓄卡</p>
+				<!--<p class='card_trusteeship_type'>{{trusteeship_type_txt}}</p>-->
+			  </div>
+			  <div class="card_num">
+				<p>{{bank_num}}</p>
+			  </div>
+			</div>
+		{{/bankMe}}
+		{{/bankList}}
+	</script>
+	<div id="main">
+		<div class="tab_div" id="card_info"></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <script>!function(e,t){function i(){var t=n.getBoundingClientRect().width;t/m>540&&(t=540*m);var i=t/10;n.style.fontSize=i+"px",d.rem=e.rem=i}var a,r=e.document,n=r.documentElement,o=r.querySelector('meta[name="viewport"]'),l=r.querySelector('meta[name="flexible"]'),m=0,s=0,d=t.flexible||(t.flexible={});if(o){console.warn("将根据已有的meta标签来设置缩放比例");var p=o.getAttribute("content").match(/initial\-scale=([\d\.]+)/);p&&(s=parseFloat(p[1]),m=parseInt(1/s))}else if(l){var c=l.getAttribute("content");if(c){var u=c.match(/initial\-dpr=([\d\.]+)/),f=c.match(/maximum\-dpr=([\d\.]+)/);u&&(m=parseFloat(u[1]),s=parseFloat((1/m).toFixed(2))),f&&(m=parseFloat(f[1]),s=parseFloat((1/m).toFixed(2)))}}if(!m&&!s){var v=(e.navigator.appVersion.match(/android/gi),e.navigator.appVersion.match(/iphone/gi)),h=e.devicePixelRatio;m=v?h>=3&&(!m||m>=3)?3:h>=2&&(!m||m>=2)?2:1:1,s=1/m}if(n.setAttribute("data-dpr",m),!o)if(o=r.createElement("meta"),o.setAttribute("name","viewport"),o.setAttribute("content","initial-scale="+s+", maximum-scale="+s+", minimum-scale="+s+", user-scalable=no"),n.firstElementChild)n.firstElementChild.appendChild(o);else{var x=r.createElement("div");x.appendChild(o),r.write(x.innerHTML)}e.addEventListener("resize",function(){clearTimeout(a),a=setTimeout(i,300)},!1),e.addEventListener("pageshow",function(e){e.persisted&&(clearTimeout(a),a=setTimeout(i,300))},!1),"complete"===r.readyState?r.body.style.fontSize=12*m+"px":r.addEventListener("DOMContentLoaded",function(){r.body.style.fontSize=12*m+"px"},!1),i(),d.dpr=e.dpr=m,d.refreshRem=i,d.rem2px=function(e){var t=parseFloat(e)*this.rem;return"string"==typeof e&&e.match(/rem$/)&&(t+="px"),t},d.px2rem=function(e){var t=parseFloat(e)/this.rem;return"string"==typeof e&&e.match(/px$/)&&(t+="rem"),t}}(window,window.lib||(window.lib={}));</script>
+  <title>提现</title>
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="stylesheet" href="css/base.css" type="text/css" />
+  <link href="css/newBase.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="css/common_payment.css" />
+</head>
+<body>
+  <div id="main" class="wrap-page">
+    <div class="header deleteHeader">
+      <span>提现</span>
+      <a href="javascript:history.back(-1);" class="back"></a>
+    </div>
+    <div class="caution clearfix">
+      <img src="images/broad.png" />
+      <marquee class="marq" direction="left" behavior="scroll" scrollamount="3" scrolldelay="0">交易密码将在充值、提现、借款、出借等操作使用，请妥善保管</marquee>
+    </div>
+    <!--非首次提现-->
+    <form id="js_widthdraw" class="hide">
+      <ul class="pay-menthod has-border">
+        <li class="js-drop-down" data-target="#listDropDown">
+          <span id="js_bank_name_quick"></span>
+          </label>
+          <span class="pull-right second-text">
+            <input type="hidden" name="bank_id" id="js_val_quick">
+            <span class="bank-number" id="js_bank_num_quick"></span>
+          <i class="arrow-right"></i>
+          </span>
+        </li>
+        <li id="listDropDown" class="wrap-bank-card-list">
+          <ul class="bank-card-list js-wrap-bank-list">
+            <li class="clearfix js-add-new-card">
+              <a class="add-new-card pull-right">
+                <i class="icon-add"></i>
+                <span>添加银行卡</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="oprate-most">
+          <span>本次最多转出</span>
+          <span id="js_limit_quick"></span><span>元</span>
+        </li>
+      </ul>
+      <ul class="withdraw-info has-border">
+        <li class="no-border">
+          <span>提现金额</span>
+        </li>
+        <li>
+          <span>￥</span>
+          <input type="text" name="amount" class="widthdraw_amount" maxlength="9" id="widthdraw_amount">
+        </li>
+        <li class="no-border">
+          <span>提现金额</span>
+          <span id="js_widthdraw_money">0.00</span><span>元</span>
+          <span class="widthdraw_start"><span>(</span><span id="js_val_widthdraw_start">0.00</span><span>元起提)</span></span>
+        </li>
+        <li class="no-border">
+          <span>手续费</span>
+          <span id="fee">0.00</span><span>元</span>
+          <span class="real_account">实际到账</span>
+          <span id="js_real_account">0.00</span><span>元</span>
+        </li>
+      </ul>
+      <ul class="has-border">
+        <li class="js-drop-down" data-target="#dialogArea">
+          <label for="">银行所在地</label>
+          <input type="hidden" name="province" class="js-province">
+          <input type="hidden" name="citiy" class="js-citiy">
+          <input type="text" class="form-control js-bank-address" placeholder="银行所在地" readonly>
+          <i class="arrow-right"></i>
+        </li>
+        <li class="js-drop-down" data-target="#dialog_bank_subbranch" data-type="1" data-val="#sub_bank_name1">
+          <label for="">开户分行</label>
+          <input type="text" name="sub_bank_name" class="form-control" placeholder="开户分行" readonly id="sub_bank_name1">
+          <i class="arrow-right"></i>
+        </li>
+        <li class="js-drop-down" data-target="#dialog_bank_subbranch" data-type="2" data-val="#branch_name1">
+          <label for="">开户支行</label>
+          <input type="text" name="branch_name" class="form-control" placeholder="开户支行" readonly id="branch_name1">
+          <i class="arrow-right"></i>
+        </li>
+      </ul>
+    </form>
+    <!--首次提现-->
+    <form id="js_first_widthdraw" class="hide">
+      <ul class="container info-area">
+        <li>
+          <span>账户余额:</span>
+          <span id="js_balance"></span>
+        </li>
+        <li>
+          <span>提现金额:</span>
+          <span class="js-amount"></span>
+          <input type="hidden" name="amount" id="js-val-amount">
+          <span>元</span>
+        </li>
+      </ul>
+      <ul class="has-border">
+        <li>
+          <label for="id_num">身份证号</label>
+          <input type="hidden" name="id_num" id="js_id_num">
+          <input type="text" name="id_num" id="id_num" class="form-control" placeholder="请输入身份证号" autofocus>
+        </li>
+        <li>
+          <label for="account_name">姓名</label>
+          <input type="hidden" name="account_name" id="js_account_name">
+          <input type="text" name="account_name" class="form-control" placeholder="请输入姓名" id="account_name">
+        </li>
+      </ul>
+
+      <ul class="has-border">
+        <li>
+          <label for="card_no">银行卡号</label>
+          <input type="text" name="card_no" id="card_no" class="form-control" maxlength="26" placeholder="请输入银行卡号">
+        </li>
+        <li>
+          <label for="rese_mobile">银行预留手机号</label>
+          <input type="text" name="rese_mobile" class="form-control" placeholder="请输入手机号" maxlength="11" id="rese_mobile">
+        </li>
+        
+      </ul>
+      <ul class="has-border">
+        <li class="js-drop-down" data-target="#dialogArea">
+          <label>银行所在地</label>
+          <input type="hidden" name="province" class="js-province">
+          <input type="hidden" name="citiy" class="js-citiy">
+          <input type="text" name="bankAddress" class="form-control js-bank-address" placeholder="银行所在地" readonly>
+          <i class="arrow-right"></i>
+        </li>
+        <li class="js-drop-down" data-target="#dialog_bank_subbranch" data-type="1" data-val="#sub_bank_name">
+          <label for="">开户分行</label>
+          <input type="text" name="sub_bank_name" class="form-control" placeholder="开户分行" readonly id="sub_bank_name">
+          <i class="arrow-right"></i>
+        </li>
+        <li class="js-drop-down" data-target="#dialog_bank_subbranch" data-type="2" data-val="#branch_name">
+          <label for="">开户支行</label>
+          <input type="text" name="branch_name" class="form-control" placeholder="开户支行" readonly id="branch_name">
+          <i class="arrow-right"></i>
+        </li>
+      </ul>
+
+    </form>
+    <!--页面通用元素-->
+    <form id="common">
+      <div class="container">
+        <span>交易密码</span>
+        <div id="openKeyboard" class="trad-pwd-val">
+          <input type="password" readonly class="custom-pwd">
+          <input type="password" readonly class="custom-pwd">
+          <input type="password" readonly class="custom-pwd">
+          <input type="password" readonly class="custom-pwd">
+          <input type="password" readonly class="custom-pwd">
+          <input type="password" readonly class="custom-pwd">
+        </div>
+      </div>
+      <div class="other-area">
+        <a href="FindTradePwd.html" class="link-forget">忘记交易密码</a>
+      </div>
+      <div class="widthdraw_tips hide">
+        <p> 温馨提示：提现是为保障您的资金安全，Me金融采取先进的同卡进出限制当您采用快捷支付的资金在提现是需要回到该卡中！</p>
+      </div>
+      <div id="keyboardDiv" class="wrap-keyboard"></div>
+      <input type="submit" class="fixed-bottom" value="下一步">
+
+    </form>
+    <p id="prompt_lan" class="txt-tip"></p>
+  </div>
+
+  <script src="js/jquery-1.9.0.min.js"></script>
+  <script src='js/config.js'></script>
+  <script src="js/functions.js"></script>
+  <script src="js/fastclick.js"></script>
+  <script src="js/md5.js"></script>
+  <script src="js/mustache.js"></script>
+  <script src="js/plugs/keyboard.js"></script>
+  <script src="js/proxy/common.js"></script>
+  <script src="js/proxy/withdraw.js"></script>
+</body>
+</html>

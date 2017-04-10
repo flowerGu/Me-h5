@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>个人设置</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"
+	/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta http-equiv="Cache-Control" content="no-store" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<link href="css/base.css" type="text/css" rel="stylesheet" />
+	<link href='css/setting.css' type='text/css' rel='stylesheet' />
+</head>
+<body>
+	<script type="text/ng-template" id="tpl">
+		<div class="more_con whitebg mgt8">
+			<!--手机号-->
+			<div class="m_intro btn_dcdcdc">
+				<em class="common_em"></em><span>绑定手机</span>
+				<p>{{phone_number}}</p>
+			</div>
+			<!--实名认证-->
+			<div class="m_safe" id="m_safe" data-type='{{is_realname}}' onclick="{{#realname_link}}location.href='idVerifi.html?me=1'{{/realname_link}}">
+				<em class="common_em"></em> 实名认证 
+				<p>{{^realname_link}}{{name}}({{id_number}}){{/realname_link}}{{#realname_link}}未实名认证</p><i class="icon-array-right"></i>{{/realname_link}}
+			</div>
+		</div>
+		<!--存管me账户-->
+		<div class="more_con whitebg mgt8">
+			<div onclick="goPage('{{jxyhDetailsUrl}}')" class="m_weixin">
+				<em class="common_em"></em><span>银行存管</span>{{#jd_bank_id_status}}
+				<p>已开通</p>{{/jd_bank_id_status}}{{^jd_bank_id_status}}
+				<p>未开通</p>{{/jd_bank_id_status}}<i class="icon-array-right"></i>
+			</div>
+			<div onclick="{{#zh_status}}location.href='account_details.html?jd=0'{{/zh_status}}" class="m_hotline tpn_dcdcdc hide" id="J_meAccount">
+				<em class="common_em"></em><span>Me账户</span>{{#zh_status}}<p>已开通</p><i class="icon-array-right"></i>{{/zh_status}}
+				{{^zh_status}}<p>未开通</p>{{/zh_status}}
+			</div>
+		</div>
+		<!--电子邮箱联系地址-->
+		<div class="more_con border_tb whitebg mgt8">
+			<div onclick="window.location.href='set_email.html?email={{email}}'" class="m_qus btn_dcdcdc">
+				<em class="common_em"></em> 电子邮箱
+        <p>{{cus_email}}</p>
+				<p>
+          {{^cus_email}}点击可设置{{/cus_email}}
+          {{^cus_email}}{{cus_email}}{{/cus_email}}
+        </p>
+				<i class="icon-array-right"></i>
+			</div>
+			<div onclick="window.location.href='set_address.html?pcType=strate'" class="m_app">
+				<em class="common_em"></em> 我的联系地址
+				<p>
+          {{#cus_address}}{{cus_address}}{{/cus_address}}
+          {{^cus_address}}点击可设置{{/cus_address}}
+          </p>
+				<i class="icon-array-right"></i>
+			</div>
+		</div>
+		<!--登录密码风险评测-->
+		<div class="more_con border_tb whitebg mgt8" >
+			<a onclick="window.location.href='changepwd.html'" class="m_pwd">
+				<em class="common_em"></em> 登录密码
+				<i class="icon-array-right"></i>
+				<span>点击可重置</span>
+			</a>
+		</div>
+		<div class="more_con border_tb whitebg m_fxpg mgt8">
+			{{#is_ratechart}}<a  class="m_risk " onclick="window.location.href='risk_level_result.html?tokenid={{tokenid}}&channel=4'">
+				<em class="common_em"></em> 风险测评
+				<span>{{rate}}</span>
+				<i class="icon-array-right"></i>
+			</a>
+			{{/is_ratechart}}
+			{{^is_ratechart}}<a class="m_risk " onclick="window.location.href='risk_level.html?tokenid={{tokenid}}&channel=4'">
+				<em class="common_em"></em> 风险测评
+				<i class="icon-array-right"></i>
+				<span>未测评</span>
+			</a>
+			{{/is_ratechart}}
+		</div>
+	</script>
+	<div id="main">
+		<div class="header whitebg">
+			个人设置
+			<a href="myWealth.html" class="back"></a>
+		</div>
+	</div>
+	<div class="zbg"></div>
+	<div class="tip_down">
+		<span>欢迎关注“Me金融”官方微信。下载Me金融APP，收益随时查看</span>
+		<div class="tip_know">
+			我知道了
+		</div>
+	</div>
+	<script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+	<script type="text/javascript" src='js/config.js'></script>
+	<script type="text/javascript" src='js/functions.js'></script>
+	<script type="text/javascript" src="js/mustache.js"></script>
+	<script src="js/mysetting.js"></script>
+</body>
+</html>

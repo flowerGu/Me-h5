@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	<META HTTP-EQUIV="pragma" CONTENT="no-cache">
+	<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+	<META HTTP-EQUIV="expires" CONTENT="0">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="white" />
+	<meta name="format-detection" content="telephone=no" />
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<title>Me金融</title>
+	<link rel="stylesheet" href="css/base.css" />
+	<style>
+		body{
+			background-color:#fff;
+		}
+		.msg_box_details{
+			color: #5f5f5f;
+			padding:20px 15px;
+		}
+		.msg_box_details p{
+			font-size: 20px;
+			height:30px;
+			line-height:30px;
+		}
+		.msg_time{
+			font-size:16px;
+			float:right;
+		}
+		.msg-content{
+		  display: block;
+			padding-top:10px;
+			font-size:16px;
+			line-height:25px;
+			word-break: break-all;
+		}
+		.msg_box_details h3{text-align: center;padding:.5em;font-size:1.5em;}
+		.msg_box_details div{text-indent: 2em;font-size:1.4em;}
+	</style>
+	<script src="js/jquery-1.9.0.min.js"></script>
+  	<script type="text/javascript" src='js/config.js'></script>
+ 	<script type="text/javascript" src="js/functions.js"></script>
+	<script src="js/dropload.min.js"></script>
+	<script src="js/config.js"></script>
+	<script src="js/functions.js"></script>
+	</head>
+	<body>
+		<div class="header whitebg btm deleteHeader" style="padding-bottom:.6em;margin-bottom:.5em;">
+			<p></p>
+			<a href="javascript:history.back(-1);" class="back" ></a>
+		</div>
+		<div class="msg_box_details">
+			<div></div>
+		</div>
+		<script>
+			$.post(SYSTEMMESSAGE_JSON_URL,{
+				version: app_data.version
+			}).then(function(data){
+				if(data.code=='000'){
+					if(data.title != '' || data.content !='')
+					$('.header p').text(data.title);
+					$('.msg_box_details div').append(data.content);
+				}
+			},function(data){
+
+			})
+		</script>
+	</body>
+
+</html>

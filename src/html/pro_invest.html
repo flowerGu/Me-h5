@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>项目信息</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no" />
+	<script src="../js/inject/flexible.js" inline></script>
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<link href="css/base.css" type="text/css" rel="stylesheet" />
+	<link href="css/commonUpgrade.css" rel="stylesheet"/>
+	<link href="css/invest.css" type="text/css" rel="stylesheet" />
+</head>
+<body id="main" style="height:100%">
+	<div class="header whitebg">
+		<a href="javascript:history.back(-1)" class="back"></a>
+		<p></p>
+	</div>
+	<div class="obj_part_wrap">
+		<span class="textTip">协议年化利率</span>
+		<div class="year_be">
+			<span></span>%
+			<p>
+				<label class="u_btn_tag_dialog type-me">&nbsp;&nbsp;&nbsp;&nbsp;</label>
+			</p>
+		</div>
+		<ul class="obj_regular">
+			<li><em class="time_m"></em>个月项目期限</li>
+			<li><span class="start_invest"></span>元起借</li>
+		</ul>
+		<div class="process-bar">
+			<div class="process-bar-val"></div>
+		</div>
+	</div>
+	<p class="remainTip">剩余可借金额<span class="retain_money"></span>元</p>
+	<div class="obj_part_wrap intro_wrap">
+		<a href="javascript:;" class="productDetail">
+			<p><img src="images/invest/intro.png"/></p>
+			项目详情
+		</a>
+		<a href="insurance.html">
+			<p><img src="images/invest/detail.png"/></p>
+			安全保障
+		</a>
+	</div>
+	<div class="obj_part_wrap trade">
+		<label unselectable="on"onselectstart="return false;" class="decre">
+			<img src="images/invest/minus.png"/>
+		</label>
+		<label unselectable="on"onselectstart="return false;" class="incre">
+			<img src="images/invest/plus.png"/>
+		</label>
+		<input type="text" onkeyup=""  value="0.00" class="invest_num"/>
+	</div>
+	<ul class="obj_part_wrap benifit_wrap">
+		<li>
+			<p>
+				<img src="images/remain.png" />
+				最高可借(元)
+			</p>
+			<p class="max_invest"></p><!--最高可借-->
+		</li>
+		<li>
+			<p>
+				<img src="images/invest/benifit.png" />
+				协议年化收益(元)
+			</p>
+			<p class="gain_num"></p><!--收益-->
+		</li>
+	</ul>
+	<span class="agreeTip">
+		点击“立即出借”表示您已阅读<a href="about_app/risk_tip_book.html">《Me金融风险提示书》</a>
+		<br>
+		且同意<a href="about_app/tip_book.html">《个人出借服务协议》</a></span>
+	<a href="javascript:;" id='buynow' class="buynow_me">立即出借</a>
+	<script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+	<script type="text/javascript" src="js/config.js"></script>
+	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="js/pro_invest.js"></script>
+</body>
+
+</html>

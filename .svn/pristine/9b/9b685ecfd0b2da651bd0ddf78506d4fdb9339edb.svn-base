@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="white"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <title>团队尊享</title>
+    <link href="css/base.css" type="text/css" rel="stylesheet"/>
+    <!--<link href="css/intention_custom.css" type="text/css" rel="stylesheet" />-->
+    <link href="css/team_manager.css" rel="stylesheet"/>
+    <link href="css/style.css" rel="stylesheet"/>
+    <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+    <script src="./js/dropload.min.js"></script>
+    <script type="text/javascript" src="js/config.js"></script>
+    <script type="text/javascript" src="./js/functions.js"></script>
+    <script type="text/javascript" src="js/mustache.js"></script>
+    <script>
+        var tokenid = getCookie('tokenid');
+        var startTime;
+        var endTime;
+        var date    = new Date();
+        var year    = date.getFullYear();
+        var month   = date.getMonth() + 1;
+        var today   = date.getDate();
+        var last_month;
+        $(function () {
+            if (tokenid == null) {
+                tip_windows('您还未登录！', '登录', '取消', 'index.html');
+                return false;
+            }
+            if (month < 10) {
+                month = '0' + month;
+            }
+            var now_month = year + '-' + month;
+            if (today < 10) {
+                today = '0' + today;
+            }
+            if((date.getMonth()+1)==1){
+                last_month=12;
+                year=year-1;
+            }else if(date.getMonth()<9){
+                last_month='0'+(month-1);
+            }else{
+                last_month=month-1;
+            }
+            last_month = year + '-' + last_month;
+            $('#search_date').append("<option id='now_month'>" + now_month + "</option><option id='last_month'>" + last_month + "</option><option>全部</option>")
+            select_val(1);
+        });
+        function select_val(current) {
+            var dateChose = $('#search_date').val();
+            var firstDate = '01';
+            var search    = $('#search_date').val();
+            var last_month;
+            var data          = {version: app_data.version, tokenid: tokenid};
+            if (current == 1) {
+                $("#index_content").html('');
+            }
+            var sele_id = $('#search_con option:selected').attr('id');
+            var mgrcustid;
+            if (sele_id == 'all') {//经理名称-->id
+                mgrcustid = '';
+            } else {
+                mgrcustid = sele_id;
+            }
+            var now_month = year + '-' + month;
+            if (today < 10 && today.length < 2) {
+                today = '0' + today;
+            }
+            data.mgrcustid = mgrcustid;
+            if((date.getMonth()+1)==1){
+                last_month=12;
+                year=year-1;
+            }else if(date.getMonth()<9){
+                last_month='0'+(month-1);
+            }else{
+                last_month=month-1;
+            }
+            var last_month = year + '-' + last_month;
+            if (dateChose == '今天') {
+                endTime = startTime = year + '-' + month + '-' + today;
+                data['start_time'] = startTime;
+                data['end_time']   = endTime;
+            } else if (dateChose == now_month) {
+                firstDate = year + '-' + month + '-' + firstDate;
+                endTime   = startTime = year + '-' + month + '-' + today;
+                data['start_time'] = firstDate;
+                data['end_time']   = endTime;
+            } else if (dateChose == last_month) {
+                var firstDate = '01';
+                var firstDate     = year + '-' + month + '-' + firstDate;
+                var prevmonth;
+                if ((date.getMonth() + 1) == 1) {
+                    prevmonth = 12;
+                    year      = year - 1;
+                } else {
+                    prevmonth = month - 1;
+                }
+                var last            = getLastDay(year, prevmonth, 0)//最后一天
+                var prev_first_date = year + '-' + prevmonth + '-' + '01';
+                var prevdate        = year + '-' + prevmonth + '-' + last;
+                data['start_time']  = prev_first_date;
+                data['end_time']    = prevdate;
+            }
+            data.current = current;
+            addlist($('#hasnextpage').val(), data);
+
+        }
+
+        $(function () {
+            var custs = $('#search_con').val();
+            $.ajax({
+                type   : "post",
+                url    : TeamMGRNAMELIST_JSON_URL,
+                data   : {version: app_data.version, tokenid: tokenid},
+                success: function (data) {
+                    if (data.code == '000') {
+                        $.each(data.list, function (i, item) {
+                            if (item.name == null) {
+                                item.name = '未知'
+                            }
+                            $('#search_con').append("<option id=\'" + item.id + "\'>" + item.name + "</option>");
+                        })
+                    } else {
+                        tip_window(data.msg, '确定');
+                    }
+                }
+            })
+        });
+        function addlist(hasnextpage, data) {
+            var current = data.current;
+            $.ajax({
+                type    : "post",
+                version : app_data.version,
+                url     : JDTEAMMGRQUERY_JSON_URL,
+                data    : data,
+                dataType: 'json',
+                success : function (data) {
+                    if (data.code == '000') {
+                        $.each(data.list, function (i, item) {
+                            if (item.is_online_user == '0') {
+                                item.downline = true;
+                            } else {
+                                item.online = true;
+                            }
+                        })
+                        data.totalBackStepMoney = parseFloat(data.totalBackStepMoney).toFixed(2);
+                        $.get('./templates/team_manager.tpl', {"time": new Date().getTime()}, function (template) {
+                            var result = Mustache.render(template, data);
+                            $("#index_content").append(result);
+                            current++;
+                            $('#current').val(current);
+                            $('#hasnextpage').val(data.hasnextpage);
+                        });
+                    } else {
+                        tip_window('网络延迟', '确定');
+                    }
+
+                },
+                error   : function (data) {
+                    tip_window('服务器超时500！', '确定');
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<div class="header whitebg btm deleteHeader" style="padding-bottom:.4em;">
+    团队尊享
+    <a href="javascript:history.back(-1);" class="back"></a><br/>
+</div>
+<div class="whitebg mgt2 choice clearfix">
+    <select id="search_con" onchange="select_val(1)">
+        <option id='all'>全部</option>
+    </select>
+    <div class="rightSelect">
+        <select id="search_date" onchange="select_val(1)">
+            <option>今天</option>
+        </select>
+        <img src="images/yly_ril.png"/>
+    </div>
+
+</div>
+<input type='hidden' id='current' value='1'/>
+<input type='hidden' id='hasnextpage' value='true'/>
+<div class="index_content clearfix" id="index_content">
+</div>
+
+<script>
+    $(function () {
+        $('#index_content').dropload({
+            domDown   : {
+                domClass  : 'dropload-down',
+                domRefresh: '<div class="dropload-refresh">↑上拉加载更多</div>',
+                domUpdate : '<div class="dropload-update">↓释放加载</div>',
+                domLoad   : '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+            },
+            scrollArea: window,
+            loadDownFn: function (me) {
+                var current;
+                current     = $('#current').val();
+                hasnextpage = $('#hasnextpage').val();
+                dateChose   = $('#search_date').val();
+                if (hasnextpage == "true") {
+                    setTimeout(function () {
+                        select_val(current);
+                        me.resetload();
+                    }, 500);
+                }
+                else {
+                    setTimeout(function () {
+                        me.resetload();
+                    }, 500);
+                }
+            }
+
+        });
+    })
+</script>
+<script src="./js/footercommon.js"></script>
+</body>
+</html>

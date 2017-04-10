@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <script src="../js/inject/flexible.js" inline></script>
+  <title>支付</title>
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="stylesheet" href="css/base.css" type="text/css" />
+  <link href="css/newBase.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="css/common_payment.css" />
+</head>
+<body>
+  <div id="main" class="wrap-page">
+    <div class="header deleteHeader">
+      <span>支付</span>
+      <a href="javascript:history.back(-1);" class="back"></a>
+    </div>
+    <div class="caution clearfix">
+      <img src="images/broad.png" />
+      <marquee class="marq" direction="left" behavior="scroll" scrollamount="3" scrolldelay="0">交易密码将在充值、提现、借款、出借等操作使用，请妥善保管</marquee>
+    </div>
+
+    <ul class="container info-area">
+      <li>
+        <span>订单信息:</span>
+        <span id="orderInfo"></span>
+      </li>
+      <li>
+        <span>交易金额:</span>
+        <span id="trade_amount"></span>
+      </li>
+      <li>
+        <span>支付金额:</span>
+        <span id="pay_amount"></span>
+      </li>
+    </ul>
+
+    <form id="form" name="form" novalidate>
+      <input type="hidden" name="trade_id" id="trade_id">
+      <ul class="pay-menthod has-border">
+        <li class="js-radio">
+          <label for="" class="radio">
+            <input type="radio" name="payway" value="0">
+            <spn>余额支付</spn>
+          </label>
+          <label class="pull-right">
+            <span class="second-text" id="js_balance"></span>
+            <span id="charge"
+                  style="border: 1px solid #ff4c4c;
+                      border-radius: 0.13333333rem;
+                      font-size: 10px;
+                      padding: 0 0.05333333rem;
+                      color: #ff4c4c;
+                      margin-bottom: 10px;
+                      margin-left:.08rem;" >
+                    充值
+            </span>
+          </label>
+        </li>
+        <li class="no-border js-drop-down js-radio" data-target="#listDropDown">
+          <label class="radio">
+            <input type="radio" name="payway" value="1">
+            <span>快捷支付</span>
+          </label>
+          <input type="hidden" name="bank_id" id="js_val_quick">
+          <span id="js_text_quick" class="second-text"></span>
+          <span id="js_bank_num_quick" class="second-text"></span>
+          <span class="pull-right second-text two-line">
+            <span>本次最多支付<br /><span id="js_limit_quick"></span>元</span>
+          <i class="arrow-right"></i>
+          </span>
+        </li>
+        <li id="listDropDown" class="wrap-bank-card-list">
+          <ul class="bank-card-list js-wrap-bank-list">
+            <li class="clearfix js-drop-down" data-href="account_charge.html?type=0">
+              <a id="toAddCard" class="add-new-card pull-right">
+                <i class="icon-add"></i>
+                <span>添加银行卡</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <div class="container">
+        <span>交易密码</span>
+        <div id="openKeyboard" class="trad-pwd-val">
+          <input type="password" readonly class="custom-pwd" maxlength="1">
+          <input type="password" readonly class="custom-pwd" maxlength="1">
+          <input type="password" readonly class="custom-pwd" maxlength="1">
+          <input type="password" readonly class="custom-pwd" maxlength="1">
+          <input type="password" readonly class="custom-pwd" maxlength="1">
+          <input type="password" readonly class="custom-pwd" maxlength="1">
+        </div>
+      </div>
+      <div class="other-area">
+        <a href="FindTradePwd.html" class="link-forget">忘记交易密码</a>
+      </div>
+      <div id="keyboardDiv" class="wrap-keyboard"></div>
+
+      <input type="submit" class="fixed-bottom" value="确认支付">
+    </form>
+  </div>
+
+  <script src="js/jquery-1.9.0.min.js"></script>
+  <script src='js/config.js'></script>
+  <script src="js/functions.js"></script>
+  <script src="js/fastclick.js"></script>
+  <script src="js/mustache.js"></script>
+  <script src="js/md5.js"></script>
+  <script src="js/plugs/keyboard.js"></script>
+  <script src="js/proxy/common.js"></script>
+  <script src="js/proxy/payment.js"></script>
+</body>
+</html>

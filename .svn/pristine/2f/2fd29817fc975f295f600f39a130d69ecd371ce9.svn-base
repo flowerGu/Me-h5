@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>帮助中心</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"
+	/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta http-equiv="Cache-Control" content="no-store" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<link href="css/base.css" type="text/css" rel="stylesheet" />
+	<link href="css/more.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src='./js/mustache.js'></script>
+	<script type="text/javascript" src="js/config.js"></script>
+</head>
+<body class="helpCenter">
+	<div class="contentWrap">
+		<script type="text/ng-template" id="learn-data-list">
+			<h2>热门问题</h2>
+			<div class="quesHot">
+				{{#list}} {{#topFive}}
+				<div class="more_con whitebg mgt8">
+					<a href="general_as.html?basicId={{basicId}}" class="learn-data-list">
+							{{index}}{{basicTitle}}
+							<i class="icon-array-right"></i>
+						</a>
+				</div>
+				{{/topFive}} {{/list}}
+			</div>
+		</script>
+		<script type="text/tpl" id="problem-classify">
+			<h2>问题分类</h2>
+			<ul class="quesClassisy">
+				{{#list}}
+				<li><a href="general_classify_list.html?basicId={{categoryId}}">{{categoryTitle}}</a></li>
+				{{/list}}
+			</ul>
+		</script>
+		<script type="text/tpl" id="self-service">
+			<h2>自助服务</h2>
+			<ul class="quesClassisy">
+				{{#list}}
+					{{#topFive}}
+					{{#goDetail}}
+					<li><a href="general_as.html?basicId={{basicId}}">
+							<img src="{{thumbnails}}"/>
+							{{title}}
+						</a>
+					</li>
+					{{/goDetail}}
+					{{^goDetail}}
+					<li><a href="{{hyperApplink}}">
+							<img src="{{thumbnails}}"/>
+							{{title}}
+						</a>
+					</li>
+					{{/goDetail}}
+					{{/topFive}}
+				{{/list}}
+			</ul>
+		</script>
+	</div>
+	<div class="tel">
+		<span>400-044-3888</span>
+		<span>客服电话（人工服务8:00－22：00）</span>
+	</div>
+	<script src="js/general_ans.js"></script>
+</body>
+</html>

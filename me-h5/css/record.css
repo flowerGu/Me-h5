@@ -1,0 +1,132 @@
+/*资金记录*/
+
+body{
+  font-size: 14px;
+   color: #5F5F5F;
+}
+.container>.list-item,.container>.month-tag{
+  padding-left: 1.5rem;
+}
+/*#main{
+  padding-top: 42px;
+}*/
+.fixed{
+  position: fixed;
+  top:42px;
+}
+.month-tag{
+  border-bottom: 1px solid #ddd;
+  padding-top:1rem;
+  padding-bottom: 1rem;
+  width: 100%;
+  background-color: #FFF;
+}
+
+/*颜色圈圈*/
+.bg-0{background-color:rgb(142,142,142)}
+.bg-2{
+  background-color: #FD6D65;
+}
+.bg-3{
+  background-color: #61C2ED;
+}
+.bg-1{
+  background-color: #BB97FF;
+}
+.bg-4{
+  background-color: #FEB955;
+}
+.bg-5{
+  background-color: #57C16C;
+}
+.bg-6{
+  background-color: #FF9574;
+}
+.bg-7{
+  background-color: #3DCBC9;
+}
+.bg-8{
+  background-color: #DA80FF;
+}
+.bg-9{
+  background-color: #D39D82;
+}
+.bg-10{
+  background-color: #FF68BA;
+}
+.bg-11{
+  background-color: #ff4c4c;
+}
+.bg-12{
+  background-color: #ff8522;
+}
+.bg-13{
+  background-color: #fc4e51;
+}
+/**/
+
+.list-item{
+  position:relative;
+  border-bottom: 1px solid #ddd;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-right: 15px;
+  *zoom: 1;
+}
+
+.list-item:after {
+  clear: both;
+  content: '';
+  height: 0;
+  display: block;
+  visibility: hidden;
+}
+.list-item >div{
+  display: inline-block;
+}
+.list-item  > .type{
+  display: inline-block;
+  vertical-align: top;
+  color: #FFF;
+  font-size: 12PX;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  border-radius: 50%;
+}
+
+.list-item  > .info{
+  max-width: 66%;
+  padding-left: 8px;
+}
+.info >p:first-child{
+  margin-bottom: 5px;
+}
+.list-item  > .money{
+  position: absolute;
+  right: 15px;
+  top:50%;
+  margin-top:-10px;
+  line-height: 20px;
+}
+
+.no-data>p{
+  margin-bottom: 10px;
+  color: #8e8e8e;
+  font-size: 14px;
+  text-align: center;
+}
+.no-data>a{
+    display: block;
+    width: 80%;
+    height: 36px;
+    margin: 0 auto;
+    line-height: 36px;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+    background-color: #ff4c4c;
+    border-radius: 5px;
+    border-bottom: #ff4c4c 2px solid;
+}

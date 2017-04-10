@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>关于我们</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<link href="css/base.css" type="text/css" rel="stylesheet" />
+	<link href="css/about_more.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="js/config.js"></script>
+
+</head>
+<body style="background-color:#f6f6f6;">
+	<div class="about_con">
+		<img src="images/about_us/about_us.png" class="logo_ico">
+		<p class="broad_tip">懂 money 的少数派</p>
+		<p class="broad_tip" >Me 金融 微信版 V3.7.2 </p>
+	</div>
+	<ul class="about_list">
+        <li>
+            <a href="about_app/xieyi.html"><em class="icon">o</em> &nbsp;使用协议</a>
+        </li>
+        <li class="nojiantou">
+            <a href="javascript:;"><em class="icon">p</em> &nbsp;官方网站
+            <span>mejinrong.com</span>
+            </a>
+        </li>
+        <li>
+            <a href="readme.html"><em class="icon">q</em> &nbsp;功能说明
+
+            </a>
+        </li>
+        <li id="showDialog">
+            <a href="javascript:;"><em class="icon">r</em> &nbsp;官方微信
+                <span>MeCredit888</span>
+            </a>
+        </li>
+        <li class="noborder" style="border-bottom: 1px solid #dcdcdc;">
+            <a href="tel:4000443888"><em class="icon">s</em> &nbsp;出借客服热线
+                <span>
+                    <p> 400-044-3888</p>
+                    工作日9:00-18:00
+                </span>
+            </a>
+        </li>
+        <li class="noborder">
+            <a href="tel:4000443999"><em class="icon">s</em> &nbsp;借款客服热线
+                <span>
+                    <p>400-044-3999</p>
+                    工作日9:00-18:00
+                </span>
+            </a>
+        </li>
+	</ul>
+	<!--<p>© 2012-2016 mejinrong.com. allrights reserved</p>-->
+  <div class="zbg"></div>
+  <div class="tip_down">
+    <span>欢迎关注“Me信金融”官方微信。下载Me金融APP，收益随时查看</span>
+    <div class="tip_know">
+      我知道了
+    </div>
+  </div>
+  <script>
+    $('#showDialog').on('click',function(){
+      $('.zbg,.tip_down').show();
+    })
+    $('.tip_know').click(function(){
+      $('.zbg,.tip_down').hide();
+    })
+  </script>
+</body>
+
+</html>

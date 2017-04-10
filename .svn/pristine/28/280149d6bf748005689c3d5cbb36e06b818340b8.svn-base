@@ -1,0 +1,13 @@
+.findProgress{width:100%;padding:1em 4%;margin-bottom:.5em;}
+.findProgress li{float:left;text-align: center;font-size:1.5em;color:#5f5f5f;}
+.findProgress li.selected{color:#ff5e55}
+.findProgress li img{vertical-align: middle;width:25px;height:25px;filter: grayscale(100%);-webkit-filter: grayscale(100%);filter: gray;opacity: 0.5;margin-right:.5em;}
+.findProgress li.selected img{filter: grayscale(0);-webkit-filter: grayscale(0);opacity: 1;}
+.textArea{width:100%;color:#5f5f5f;font-size:1.5em;padding:1em 0 1em 4%;}
+.nextDiv{position:fixed;left:0;bottom:0;width:100%;height:3em;line-height:3em;background:#dcdcdc;text-align: center;color:#fff;font-size:1.6em;z-index:2}
+.textArea ul li:nth-of-type(1){border-bottom:1px solid #dcdcdc;padding:0 0 1em;}
+.textArea ul li:nth-of-type(2){padding:1em 0 0;width:100%;}
+.textArea ul li:nth-of-type(2) input.code-message{height:30px;float:left;}
+.textArea+span{display:block;padding:1em;text-align: right;color:#565656}
+input.code-message::-webkit-input-placeholder {color:#5f5f5f;font-size:1.1em;}
+input#send{float:right;padding:.5em 1em;margin-right:4%;background-color:#ff4c4c;color:#fff;border-radius:5px;}

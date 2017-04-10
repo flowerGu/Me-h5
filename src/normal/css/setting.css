@@ -1,0 +1,137 @@
+/*个人设置页面css*/
+body{
+	background: #f6f6f6
+}
+.more_con{
+	padding-left:4%
+}
+.btn_dcdcdc{
+	border-bottom:1px solid #dcdcdc
+}
+.tpn_dcdcdc{
+	border-top:1px solid #dcdcdc
+}
+.more_con>a,.more_con>div{
+	position:relative;
+	padding:20px 0;
+	padding-left:35px;
+	display:block;
+	color:#5f5f5f;
+	font-size:14px;
+	height:52px;
+	line-height: 14px
+}
+.more_con>a.m_weixin span,.more_con>div p,.more_con>.m_pwd span,.more_con>.m_risk span{
+	position:absolute;
+	right:10%;
+	top:50%;
+	transform:translate(0,-50%);
+	color:#8e8e8e;
+}
+.more_con>div p span,.more_con>div p a{
+	display:block;
+	color:#747474;
+	text-align:right;
+	font-size:.8em;
+}
+.more_con em.head_img{
+	position:absolute;
+	left:0;top:6px;
+	display:inline-block;
+	width:30px;
+	height:30px;
+	background:url(../images/nick.png) no-repeat
+}
+.more_con em.common_em{
+	position:absolute;
+	left:0;
+	top:50%;
+	margin-top:-10px;
+	display:inline-block;
+	width:22px;
+	height:22px;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 22px;
+	font-size: 20px;
+}
+.more_con div p:last-child{
+	 right:16px !important;
+}
+.more_con .m_intro em.common_em{
+	background: url(../images/my_setting_icon/phone_icon.png) no-repeat;
+	background-size: 100% 100%;
+}
+.more_con .m_safe em.common_em{
+	background: url(../images/my_setting_icon/realname_icon.png) no-repeat;
+	background-size: 100% 100%;
+}
+.more_con .m_weixin em.common_em{
+	background: url(../images/my_setting_icon/bank_icon.png) no-repeat;
+	background-size: 100% 100%;
+}
+.more_con .m_card em.common_em{
+	background: url(../images/my_setting_icon/realname_icon.png) no-repeat;
+	background-size: 100% 100%;
+}
+.more_con .m_hotline em.common_em{
+	background: url(../images/my_setting_icon/me_icon.png) no-repeat;
+	background-size: 100% 100%;
+}
+.more_con .m_qus em.common_em{
+	background: url(../images/my_setting_icon/email_icon.png) no-repeat;
+	background-size: 100% 100%;
+}
+.more_con .m_app em.common_em{
+	background: url(../images/my_setting_icon/address_icon.png) no-repeat;
+	background-size: 100% 100%;
+}
+.more_con .m_pwd em.common_em{
+	background: url(../images/my_setting_icon/password_icon.png) no-repeat;
+	background-size: 100% 100%;
+}
+.more_con .m_risk em.common_em{
+	background: url(../images/my_setting_icon/wind_icon.png) no-repeat;
+	background-size: 100% 100%;
+}
+.icon-array-right{
+	width: 10px;
+	height:20px;
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAmCAYAAADEO7urAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAABTklEQVRIx7XWL0tEQRQF8PN2xeAMyIAXbjBdtmrVvNbVYFybLAZNuxhEQbEZBIsa/CaiNoOfwWAQxFXDCz4m+a9MWFDYZec4bcqPe2bm3XdhKqemIiCtGoA9AIemoiwUpjJlKhemMstGT0ylwUQnTeU8B60PbsoqfgbvLgHsBO+eyyq+ZoEJ/Qre3QDYDt71yyq+ZIEJ/Q7eXQHoBu/eyyo+ZYEJRaq0E7z7KKv4OO65/lqmsm8qTRqY0K6ptMaO/McR3AXvWsG7mbKK98xKO6bSZsdfN5U1Nto2lQ02umoqm2x0xVR6bHTJVHYBoCCiTQCLNWqp/xGZgfEuJT2bLRbGe9jUT4/aHFJPXGZiQxvsqNjIv4BiCFQAOABw/dB/u82tqjCVI1NZYESsm8qxqcwzsImEzTGw7GFpEOONc9SB01SmU0zOSGwqZ8yh/Qc8mGCwTeJ7sgAAAABJRU5ErkJggg==) no-repeat;
+	background-size: 100% 100%;
+	position: absolute;
+	right: 16px;
+	top: 50%;
+	margin-top: -10px;
+}
+.more_con .paypsd em.common_em{background-position:0 -209px}
+.more_con .handpsd em.common_em{background-position:0 -235px}
+.more_con em.exit.common_em{background-position:0 -180px}
+.zbg,.tip_down{display:none;position:fixed;}
+.zbg{left:0;top:0;width:100%;height:100%;z-index:9998;background-color: #666;opacity:.5;filter:Alpha(opacity=50)}			
+.tip_down {
+	left: 20%;
+	top: 50%;
+	margin-top: -5.5em;
+	z-index: 9999;
+	width: 60%;
+	height: 150px;
+	border-radius: 5px;
+	color:#151515;
+	text-align: center;
+	font-size: 1.4em;
+	background-color: #fff;
+	padding-top:30px;
+	
+}	
+/*.more_con a#login_herf em{position:absolute;left:0;top:4px;display:inline-block;width:40px;height:30px;}
+.more_con a#login_herf em.exit{background:url(../images/setting.png) no-repeat;background-position:0 -249px}
+.more_con a#login_herf em.login_em{background:url(../images/login.png)}*/
+.tip_down span{padding:0 1.5em;margin-bottom:1em;display:block;}		
+.tip_know{width:100%;padding:1em 1.5em 0;border-top:1px solid #bbbbbb;font-size:1.1em;color:#ff4c4c}
+.table_wrap{padding:10px 4%;color:#555;font-size:1.6em;}
+.year_tb{padding:10px 0;}
+.table_wrap table{width:100%;border:1px solid #dbdbdb;}
+.table_wrap table td,.table_wrap table th{height:35px;font-weight:normal;text-align: center}
+.table_wrap table td{border-top:1px solid #dbdbdb;}
+.remain_no{color:#ff0000;}

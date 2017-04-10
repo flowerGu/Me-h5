@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>支持银行卡</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="css/base.css" />
+    <link rel="stylesheet" href="css/supportBank.css" />
+</head>
+<body>
+    <div class="support_tip">
+        注:绑卡支持全国商业银行及股份制商业银行(北京银行除外)，快捷充值支持银行如下表，其他银行不支持快捷充值，但可用于提现。
+    </div>
+    <table cellpadding="0" cellspacing="0" id="support_list">
+        <tr>
+            <th width="20%">支持银行</th>
+            <th width="20%">单笔限额</th>
+            <th width="20%">单日限额</th>
+            <th width="40%">备注</th>
+        </tr>
+    </table>
+    <script type="text/javascript" src='./js/jquery-1.7.0.min.js'></script>
+    <script type="text/javascript" src="./js/config.js"></script>
+    <script type="text/javascript" src='./js/functions.js'></script>
+</body>
+<script>
+    $.ajax({
+        url: BANK_LIST_SUPPORT_URL,
+        type:'POST',
+        dataTyoe:"json",
+        data: {
+            tokenid: getQueryString("tokenid") || tokenid,
+            version: app_data.version,
+            channel: app_data.type
+        },
+        success: function (data) {
+            var tpl = "";
+            for (var i = 0; i < data.list.length; i++) {
+                data.list[i].remark = data.list[i].remark || '';
+                tpl += "<tr> \
+                        <td>"+ data.list[i].bankName + "</td> \
+                        <td>"+ data.list[i].rechargeHigh + "</td> \
+                        <td>"+ data.list[i].dayRecharge + "</td> \
+                        <td>"+ data.list[i].remark + "</td> \
+                        </tr>"
+            }
+            $("#support_list").append(tpl);
+        }
+    })
+
+</script>
+</html>

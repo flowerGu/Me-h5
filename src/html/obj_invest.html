@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>项目信息</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"
+	/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no" />
+	<script src="../js/inject/flexible.js" inline></script>
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<link href="css/base.css" type="text/css" rel="stylesheet" />
+	<link href="css/commonUpgrade.css" rel="stylesheet"/>
+	<link href="css/invest.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+	<div class="header whitebg">
+		<a onclick="backFn()" class="back"></a>
+		<p class="id-p"></p>
+	</div>
+	<div class="obj_part_wrap">
+		<span class="textTip">协议年化利率<img style="display:none;" src="images/highQues.png"/></span>
+		<div class="year_be">
+			<span></span>%
+			<p>
+				<label class="u_btn_tag_dialog type-jx">&nbsp;&nbsp;&nbsp;&nbsp;</label>
+			</p>
+		</div>
+		<ul class="obj_regular">
+			<li><em class="time_m"></em>个月项目期限</li>
+			<li><span class="start_invest"></span>元起借</li>
+		</ul>
+		<div class="process-bar">
+			<div class="process-bar-val"></div>
+		</div>
+	</div>
+	<p class="remainTip">剩余可借金额<span class="retain_money"></span>元</p>
+	<div class="obj_part_wrap intro_wrap">
+		<a href="javascript:;" class="productDetail">
+			<p><img src="images/invest/intro.png"/></p>
+			项目详情
+		</a>
+		<a href="insurance.html">
+			<p><img src="images/invest/detail.png"/></p>
+			安全保障
+		</a>
+	</div>
+	<div class="obj_part_wrap trade">
+		<label unselectable="on"onselectstart="return false;" class="decre">
+			<img src="images/invest/minus.png"/>
+		</label>
+		<label unselectable="on"onselectstart="return false;" class="incre">
+			<img src="images/invest/plus.png"/>
+		</label>
+		<input type="text" onkeyup=""  value="0.00" class="invest_num"/>
+	</div>
+	<ul class="obj_part_wrap benifit_wrap">
+		<li>
+			<p>
+				<img src="images/remain.png" />
+				<span id="priceTip">最高可借(元)</span>
+			</p>
+			<p class="max_invest"></p><!--最高可借-->
+		</li>
+		<li class="discount">
+			<p>
+				<img src="images/invest/benifit.png" />
+				<span id="discountTip">协议年化收益(元)</span>
+			</p>
+			<p class="gain_num"></p><!--收益-->
+		</li>
+	</ul>
+	<span class="agreeTip"><span class="checkboxWrap ">
+        <input type="checkbox" id="isCheck">
+	</span>我已阅读<a href="about_app/risk_tip_book.html">《Me金融风险提示书》</a>且同意<a href="" class="bidTransfer">《个人出借服务协议》</a></span>
+	<a href="javascript:;"id='buynow'></a>
+
+	<div class="bg-sendcode"></div>
+	<div class="sendcode-wrap">
+		<img src="images/send.png" />
+		<p class="msgp">短信安全验证</p>
+		<p class="tipp">短信将发送至：<span id="tel-span"></span></p>
+		<div class="codewrap">
+			<input type="text" placeholder="短信验证码" id="code-input" />
+			<input type="button" value="点击发送" class="sendcodebtn" onclick="topaycheckcode()">
+		</div>
+		<input type="button" value="取消" id="cancel" onclick="hide()" class="sendcancel">
+		<input type="button" value="确认" id="confirm" class="sendconfirm" onclick="insurebuy()">
+	</div>
+    <script src="js/jquery-1.9.0.min.js" type="text/javascript"></script>
+    <script src="js/TouchSlide.1.1.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/functions.js"></script>
+    <script src="js/obj_pro_invest.js"></script>
+	<script>
+
+	</script>
+</body>
+
+</html>

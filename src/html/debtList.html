@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	    <meta name="apple-mobile-web-app-capable" content="yes" />
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	    <meta name="format-detection" content="telephone=no"/>
+	    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	    <title>债权列表</title>
+		<link rel="stylesheet" type="text/css" href="./css/base.css"/>
+		<link rel="stylesheet" type="text/css" href="./css/debtList.css"/>
+		<script src="./js/zepto.min.js"></script>
+  		<script src="./js/dropload.min.js"></script>
+		<script type="text/javascript" src="js/config.js"></script>
+		<script type="text/javascript" src="js/functions.js"></script>
+		<script type="text/javascript" src="js/mustache.js"></script>
+		<script>
+			window.onload = function()
+			{
+				addList(1,'true');
+			}
+			function addList(current,hasnextpage){
+					var orderId=getQueryString('orderId');
+					var tokenid=getCookie('tokenid');
+					if(hasnextpage=='true'){
+						$.ajax({
+							url:host+'billDetail.json',
+							type:'post',
+							data:{version:app_data.version,tokenid:tokenid,orderId:orderId,current:current},
+							dataType:'json',
+							success:function(data){
+								if(data.code='000'){
+									if(data.debtList.length>0){
+										$.each(data.debtList,function(i,item){
+											item.debtSumAmount=(parseFloat(item.debtSumAmount)).toFixed(2);
+											item.debtName=item.debtName.substring(0,2)+'XX';
+										})
+										$.get('./templates/debtList.tpl',{"time":new Date().getTime()}, function(template){
+										    var result = Mustache.render(template, data);
+										    $('.debt_wrap').append(result);
+										    current++;
+										    $('#current').val(current);
+										    $('#hasnextpage').val(data.hasnextpage);
+										});
+									}
+									
+								}
+							}
+						})
+					}
+					
+				}
+		</script>
+	</head>
+	<body>
+		<div class="header whitebg deleteHeader" style="border-bottom: 1px solid rgb(220,220,220);padding-bottom:10px">
+			债权列表
+			<a href="javascript:history.back(-1);" class="back" ></a>
+		</div>
+		<div class="debt_wrap">
+		</div>
+		<input type='hidden' id='current' value='1'/>
+     	<input type='hidden' id='hasnextpage' value='true' />
+     	<script>
+     		$('.debt_wrap').dropload({
+			domDown : {
+		        domClass   : 'dropload-down',
+		        domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+		        domUpdate  : '<div class="dropload-update">↓释放加载</div>',
+		        domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+		    },
+		    scrollArea : window,
+		    loadDownFn : function(me){
+		    	var current ;
+					current=$('#current').val();
+					hasnextpage=$('#hasnextpage').val();
+				setTimeout(function(){
+	               addList(current,hasnextpage);
+	                me.resetload();
+           		 },500);
+		    }
+		    
+		});
+     		var istitle = getQueryString('istitle');
+	 		if(istitle=='0')
+	 		{
+	 			$('.header').hide();
+	 		}
+     	</script>
+	</body>
+</html>

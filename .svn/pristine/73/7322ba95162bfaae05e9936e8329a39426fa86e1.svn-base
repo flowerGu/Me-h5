@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+<script>
+    function post_yb(URL,PARAMS){
+        var temp = document.createElement("form");
+        var timestamp = Date.parse(new Date())+Math.round(Math.random()*1000);
+        temp.id="myform"+timestamp;
+        temp.action = URL;
+        temp.method = "post";
+        temp.style.display = "none";
+        for (var x in PARAMS) {
+            var opt = document.createElement("input");
+            opt.name = x;
+            opt.value = PARAMS[x];
+            opt.id=x;
+            temp.appendChild(opt);
+        }
+        document.body.appendChild(temp);
+        temp.submit();
+        return temp;
+    }
+    function url(){
+        var url= window.location.href,arr1={};
+        var arr = url.split("?")[1].split("&");
+        for(var i = 0;i < arr.length;i++){
+            arr1[arr[i].split("=")[0]] = arr[i].split("=")[1];
+        }
+        return arr1;
+    }
+    var data = url().data.replace(/%22/g,"\"");
+    data = JSON.parse(data);
+    data.rem = decodeURI(data.rem);
+    post_yb(url().notify_url,data);
+</script>
+</html>

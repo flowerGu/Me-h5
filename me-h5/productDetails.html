@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+	  <meta charset="utf-8">
+	  <title>订单详细</title>
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	  <meta name="apple-mobile-web-app-capable" content="yes" />
+	  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	  <meta name="format-detection" content="telephone=no" />
+	  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	  <link href="css/base.css" type="text/css" rel="stylesheet" />
+	  <link href="css/productDetails.css" type="text/css" rel="stylesheet" />
+	  <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+	  <script type="text/javascript" src="js/functions.js"></script>
+	  <script type="text/javascript" src='./js/config.js'></script>
+	  <script src="js/mustache.js"></script>
+	</head>
+	<body>
+		<script type="text/template" id="productDetail">
+		<div class="proDetail-page">
+	      <ul class="whitebg">
+	        <li class="clearfix">
+	          <span>项目简介</span></li>
+	        <li class="clearfix">
+	          <span>协议年化利率</span>
+	          <data>{{years_income}}%</data>
+	        </li>
+	        <li class="clearfix">
+	          <span>项目期限</span>
+	          <data>{{product_cycle}}个月</data>
+	        </li>
+	        <li class="clearfix">
+	          <span>起息日</span>
+	          <data>{{startDay}}</data>
+	        </li>
+	        <li class="clearfix">
+	          <span>退出日</span>
+	          <data>{{endDay}}</data>
+	        </li>
+	        <li class="clearfix">
+	          <span>收益方式</span>
+	          <data>{{incomeWay}}</data>
+	        </li>
+	      </ul>
+	      <ul class="whitebg">
+	        <li class="clearfix">
+	          <span>项目优势</span>
+	        </li>
+	        <li class="clearfix">
+	          <span>{{advantage}}</span>
+	        </li>
+	      </ul>
+	      <ul class="whitebg">
+	        <li class="clearfix">
+	          <span>项目介绍</span>
+	        </li>
+	        <li class="clearfix">
+	          <span>{{projectDetail}} </span>
+	        </li>
+	      </ul>
+	      <ul class="whitebg">
+	        <li class="clearfix">
+	          <span>适用人群</span>
+	        </li>
+	        <li class="clearfix">
+	          <span>{{fit_people}}</span>
+	        </li>
+	      </ul>
+	      <ul class="whitebg">
+	        <li class="clearfix">
+	          <span>出借限制</span>
+	        </li>
+	        <li class="clearfix">
+	          <span>起借金额</span>
+	          <data>{{start_invest_money}}元</data>
+	        </li>
+	        <li class="clearfix">
+	          <span>单笔出借限额</span>
+	          <data>{{max_invest}}元</data>
+	        </li>
+	      </ul>
+	      <ul class="whitebg">
+	        <li class="clearfix">
+	          <span>出借费用</span>
+	        </li>
+	        <li class="clearfix">
+	          <span>出借费用</span>
+	          <data>{{borrowCost}}元</data>
+	        </li>
+	        <li class="clearfix">
+	          <span>充值费用</span>
+	          <data>{{rechargeCost}}元</data>
+	        </li>
+	        <li class="clearfix">
+	          <span>提现费用</span>
+	          <data>{{cashCost}}元</data>
+	        </li>
+	      </ul>
+	      <ul class="lastUl whitebg">
+	        <li class="clearfix" id="tolook">
+	          <span>查看债权列表</span>
+	          <data>点击查看债权列表</data>
+	          <i class="weui_cell_ft"></i>
+	        </li>
+	      </ul>
+
+	  </div>
+	  </script>
+	  <script>
+      var id=getQueryString('id');
+      var tokenid=getCookie('tokenid');
+	  	$.post(PRODUCTINTROINFO_JSON_URL,{
+	  		version:app_data.version,
+	  		id:id
+	  	}).then(function(data){
+	  		if(data.code=='000'){
+	  			var template=toTemplate('productDetail');
+          if(data.protuct_name!=''){
+            $('title').text(data.protuct_name);
+          }
+          data.years_income=(parseFloat(data.years_income)*100).toFixed(2);
+	  			$('body').append(Mustache.render(template,data));
+          $("#tolook").on("click",function(){
+            window.location.href="debtList.html?orderid="+id;
+          })
+	  		}else{
+	  			tip_window(data.msg,'确定');
+	  		}
+	  	},function(data){
+
+	  	})
+
+	  </script>
+	</body>
+</html>

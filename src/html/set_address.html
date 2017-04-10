@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <title>我的联系地址</title>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/commonUpgrade.css"/>
+    <link rel="stylesheet" type="text/css" href="css/set_address.css"/>
+    <script type="text/javascript" src='./js/jquery-1.9.0.min.js'></script>
+    <script type="text/javascript" src='./js/functions.js'></script>
+    <script type="text/javascript" src='./js/config.js'></script>
+</head>
+<body>
+    <div class="header whitebg deleteHeader">
+        我的联系地址
+        <a href="javascript:history.back(-1);" class="back"></a>
+    </div>
+    <div id="main">
+        <ul>
+            <li class="u_form_single">
+                <label class="u_label_prompt">收件人&nbsp;&nbsp;&nbsp;</label>
+                <input type="text" name="name" placeholder="请输入您的姓名" value="" class="u_input_per"/>
+            </li>
+            <li class="u_form_single">
+                <label class="u_label_prompt">手机号码&nbsp;&nbsp;&nbsp;</label>
+                <input type="text" name="tel" placeholder="请输入您的手机号" value="" maxlength="11"  class="u_input_per"/>
+            </li>
+            <li class="u_form_single">
+                <label class="u_label_prompt">所在地区&nbsp;&nbsp;&nbsp;</label>
+                <input type="text" name="area" placeholder="选择省市"id='area' readonly="readonly" onclick="location.href='address_select.html'" class="u_input_per"/>
+                <i class="arrow_right"></i>
+                <input type="hidden" id="hd_area" value="" />
+            </li>
+            <li class="u_form_single">
+                <label class="u_label_prompt">详细地址</label>
+                <textarea name="address" id="address" placeholder="请输入详细地址"></textarea>
+            </li>
+        </ul>
+    </div>
+    <button class="u_btn_bottom" id="submit" onclick="next()">保存</button>
+    <script src="js/set_address.js"></script>
+</body>
+</html>

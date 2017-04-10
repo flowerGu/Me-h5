@@ -1,0 +1,69 @@
+/*css reset*/
+*{padding:0;margin:0;box-sizing:border-box;}
+body{width:100%;max-width:640px;margin:0 auto;font-size:10px;font-family: "微软雅黑",arial;}
+a{text-decoration:none;-webkit-tap-highlight-color:rgba(255,255,255,0);box-sizing:border-box;}
+ul{list-style:none;}
+input{outline:none}
+input[type="button"], input[type="submit"], input[type="reset"] {-webkit-appearance: none}
+iframe{box-sizing: border-box;width: 100%;border:none;background-color:#fff;}
+.clearfix{zoom:1}
+.clearfix:after{clear:both;content: '';height:0;display:block;visibility: hidden;}
+/*header*/
+.whitebg{background-color:#ffffff;}
+.border_tb{border-top:1px solid #dcdcdc;border-bottom:1px solid #dcdcdc;}
+.btm{border-bottom:1px solid #ddd;}
+.header{box-sizing:border-box;width:100%;padding:15px 4% 0;font-size:2.3em;text-align: center;position:relative;}
+.header a.back{position:absolute;left:4%;top:22px;display:inline-block;width:10px;height:17px;background:url(../images/ico.png) no-repeat;background-position:-95px -161px}
+.mgt2{margin-bottom:15px;}
+/*footer*/
+.footer {
+	width: 100%;
+	height: 70px;
+	background-color: #fff;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	z-index: 999;
+	box-sizing: border-box;
+	border-top: 1px solid #dcdcdc
+}
+.footer a {
+	float: left;
+	display: block;
+	
+	text-align: center;
+	font-size: 1.5em;
+	color: #a6a6a6;
+}
+/*.footer1 a{width:33.33%}*/
+.footer2 a{width:25%}
+.footer a i {
+	display: block;
+	width: 30px;
+	height: 30px;
+	margin: 8px auto 4px;
+	background: url(../images/ico.png) no-repeat center center;
+	background-size:309px auto;
+}
+a.f_list i{background-position:-189px 0;}
+.footer a.f_list i.f_a_list{background-position:-189px -30px;}
+.footer a.f_manager i{background-position:-219px 0;}
+.footer a.f_manager i.f_ma_list{background-position:-219px -30px;}
+.footer a.f_me i{background-position:-280px 0;}
+.footer a.f_me i.f_me_list{background-position:-280px -30px;}
+.footer a.f_more i{background-position:-249px 0;}
+.footer a.f_more i.f_more_list{background-position:-249px -30px}
+
+.insure{padding:40px 4% 0}
+.insure a,.insure .sbt{
+	display: block;
+	height: 40px;
+	line-height: 40px;
+	font-size: 1.7em;
+	color: #fff;
+	text-align: center;
+	background-color:#67af36;
+	border-radius:5px;
+	border-bottom:#3e890b 2px solid;
+	}
+.insure a:active{background-color:#5ca128;border-bottom:2px solid #3b8a00;}

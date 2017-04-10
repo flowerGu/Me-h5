@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <meta charset="utf-8" /> 
+  <title>已投项目</title> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" /> 
+  <meta name="apple-mobile-web-app-capable" content="yes" /> 
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" /> 
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <link href="css/base.css" type="text/css" rel="stylesheet" />
+  <link href="css/relate_card.css" type="text/css" rel="stylesheet" />
+	</head>
+	<body>
+		 <div class="header btm">
+		    已投项目 
+		   <a href="myWealth.html" class="back"></a> 
+		  </div>
+		  <div class="no_con">
+		  	<img class="no_tip"src="images/without_03.png" />
+		  	<p class="tip_p">说声抱歉：您暂无资产</p>
+		  </div>
+		  <div class="insure">
+		  	<a href="index.html">立即出借</a>
+		  </div>
+	</body>
+</html>

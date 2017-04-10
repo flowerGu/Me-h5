@@ -1,0 +1,26 @@
+/**{box-sizing:border-box}*/
+input{border:none;}
+body{background-color:#f6f6f6}
+.header{padding:15px 4% 10px}
+.modi_con{padding:40px 5% 0;/*height:150px;*/position: relative;font-size:2em;color:#3a3a3a;text-align: center;}
+.pwd{display:block;padding:30px 0 10px;}
+input.pass {
+	margin-right:-5px;
+	width: 45px;
+	height: 45px;
+	line-height: 45px;
+	text-align: center;
+	font-size: 2em;
+	border-left: 1px solid #dbdbdb;
+	border-top: 1px solid #dbdbdb;
+	border-bottom: 1px solid #dbdbdb;
+}
+input[type=password]:nth-of-type(1){border-radius:10px 0 0 10px;}
+input[type=password]:nth-of-type(6){border-radius: 0 10px 10px 0;border-right:1px solid #dbdbdb}
+.a_next{display:block;width:65%;margin:1em auto;text-align: center;color:#fff;background-color:#ff4c4c;border-radius:5px;padding:.5em 0;font-size:1.6em;}
+.a_forget{position:absolute;right:4%;color:#237ef0;font-size:1.5em;}
+.rela_tip{width:100%;padding:.5em 1em;color:#818181;letter-spacing: .08em}
+.rela_tip img{margin-top:.01em;}
+.rela_tip .marq{width:calc(100% - 20px);}
+.keybordWrap li.grayKey{background:rgb(212,216,219)}
+#forget{display:block;text-align: right;margin-right:2em;color:#5f5f5f;font-size:.6em;}

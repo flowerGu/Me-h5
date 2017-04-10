@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>更改注册手机号</title>
+    <script src="../js/inject/flexible.js" inline></script>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/common.css">
+    <link href="css/commonUpgrade.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="css/changePhoneNum.css">
+</head>
+<body>
+    <div class="loading"></div>
+    <div class="chooseType">
+        <h3>请选择</h3>
+        <div class="chooseBox" data-type="tel">
+            <p>通过原手机短信修改</p>
+            <div class="textChoose">
+                <p>您的<span class="registerTel"></span>手机还在正常使用请选择此方式</p>
+            </div>
+        </div>
+        <div class="chooseBox marginTB check" data-type="notel">
+            <p>通过平台认证信息修改</p>
+            <div class="textChoose">
+                <p>如果您的用户手机号注销或遗失等请选择此方式</p>
+            </div>
+        </div>
+        <a href="#" class="u_btn_form_default next red" id="nestStep">下一步</a>
+    </div>
+<script src="js/jquery-1.9.0.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/functions.js"></script>
+<script src="js/changePhoneNum.js"></script>
+</body>
+</html>

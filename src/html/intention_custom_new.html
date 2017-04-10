@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	    <meta name="apple-mobile-web-app-capable" content="yes" />
+	    <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+	    <meta name="format-detection" content="telephone=no"/>
+	    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	    <title>意向客户新建</title>
+	    <link href="css/base.css" type="text/css" rel="stylesheet" />
+	    <link href="css/intention_custom.css" type="text/css" rel="stylesheet" />
+	    <link rel="stylesheet" type="text/css" href="./css/style.css"/>
+	    <link href="css/more.css" type="text/css" rel="stylesheet" />
+	    <style>
+	    	.tip_down span{display:block;margin-bottom:.2em;}
+	    	.tip_s{color:#3a3a3a}
+	    	.level_s{color:#979797}
+	    	.insure .sbt_r{background:url(images/btn_login_red.png) no-repeat;border-bottom-color:rgb(176, 44, 81)}
+	    </style>
+ 		<script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+ 		<script type="text/javascript" src="js/config.js"></script>
+	    <script type="text/javascript" src="./js/functions.js"></script>
+		<script type="text/javascript" src='./js/mustache.js'></script>
+	    <script type="text/javascript">
+	    $(function(){
+
+	    	 $('.tip_know').click(function(){
+		    	$('.zbg').css('display','none');
+		    	$('.tip_down').css('display','none');
+		    })
+	    	var id=getQueryString('id');
+	    	if(id!=null)
+	    	{
+	    		$('#title').html('意向客户修改');
+	    		
+	    		document.title = '意向客户修改';
+	    		var tokenid=getCookie('tokenid');
+		    	$.ajax({
+				   type: "post",
+				   url: SHOWINTENTCUST_JSON_URL,
+				   data: {
+				   	version:app_data.version,
+				   	tokenid:tokenid,
+				   	id:id
+				   },
+				   success: function(data){
+				   	if(data.code=='000')
+				   	{
+				   		$('#custname').val(data.custname)
+				   		$('#idnumber').val(data.idnumber)
+					    $('#phonenums').val(data.phonenums)
+					    $('#telnums').val(data.telnums)
+					    $('#custsource').val(data.custsource)
+					    $('#custage').val(data.custage)
+					    $('#idtypecd').val(data.idtypecd)
+					    $('#telnums').val(data.telnums)
+					    $('#contactaddress').val(data.contactaddress)
+					    $('#level').val(data.level)
+					    $('#remark').val(data.remark)
+					    var custsex = parseInt(data.custsex)-1;
+					    $("input[name='custsex']:eq("+custsex+")").attr('checked','checked')
+
+				  	}
+				  },
+				   error:function(data){
+				   		tip_window(' 网络超时','确定');
+				   }
+				});
+	    	}
+	    	else{
+	    		//check();
+	    	}
+	    })
+
+	    function message(){
+	    	$('.zbg').css('display','block');
+	    	$('.tip_down').css('display','block');
+	    }
+	    function check(){
+	    	var custname=$('#custname').val().trim();
+			var tel=$('#phonenums').val().trim();
+			var re = /^[1][3-8][0-9]{9}$/;
+			if(custname == '' ){
+				tip_window('客户姓名不能为空','确定');
+				return false;
+			}
+			if(tel==''){
+				tip_window('手机号不能为空','确定');
+				return false;
+			}
+			if(!re.test(tel)){
+				tip_window('手机号格式不正确','确定');
+				$('#phonenums').val('');
+				return false;
+			}
+			return true;
+	    }
+	    function checkIdCard(){
+	    	var idtypecd=$('#idtypecd').val();
+	    	if(idtypecd=='1'){
+	    		var idCard=$('#idnumber').val().trim();
+		    	var re=/^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/
+		    	if(!re.test(idCard)){
+		    		tip_window('身份证号错误','确定');
+		    		$('#idnumber').val('').focus();
+		    	}
+	    	}
+	    	
+	    }
+	    function idselect()
+	    {
+	    	$('#idnumber').val('');
+	    }
+	    function submit()
+	    {
+	    	if(!check())
+	    		return false;
+	    	var submitdata={};
+	    	id=getQueryString('id');
+	    	if(id!=null){
+
+	    		submitdata.id=id;
+	    		url=CHANGEINTENTCUST_JSON_URL;
+	    	}else{
+	    		url=INSERTINTENTCUST_JSON_URL;
+	    	}
+	    	submitdata.tokenid=getCookie('tokenid');
+	    	submitdata.version=app_data.version;
+	    	submitdata.custname=$('#custname').val();
+	    	submitdata.phonenums=$('#phonenums').val();
+	    	submitdata.idnumber=$('#idnumber').val();
+	    	submitdata.custage=$('#custage').val();
+	    	submitdata.telnums=$('#telnums').val();
+		    submitdata.contactaddress=$('#contactaddress').val();
+		    if($('#custsource').val()!='' || $('#custsource').val()!='1')
+		    	 submitdata.custsource=$('#custsource').val();
+		    if($('#idtypecd').val()!='' || $('#idtypecd').val()!='0')
+		    	submitdata.idtypecd=$('#idtypecd').val();
+		    if($('#level').val()!='' || $('#level').val()!='0')
+		    	submitdata.level=$('#level').val();
+		    if($('#level').val()=='0')
+		    	submitdata.level='';
+		    if($('#idtypecd').val()=='0')
+		    	submitdata.idtypecd='';
+		     if($('#custsource').val()=='1')
+		    	submitdata.custsource='';
+		    submitdata.remark=$('#remark').val();
+		    submitdata.custsex=$("input[name='custsex']:checked").val();
+		    	$.ajax({
+						   type: "post",
+						   url: url,
+						   data: submitdata,
+						   success: function(data){
+						   	if(data.code=='000')
+						   	{
+						   		if(id!=null)
+						   		{
+									 tip_success('修改成功','继续修改','查看用户','body','intention_custom_new.html?id='+id,'intention_custom_detail.html?id='+id);
+						   		}
+						   		else
+						   		{
+							    	 tip_success('新建成功','继续新建','查看用户','body','intention_custom_new.html','intention_custom_detail.html?id='+data.id);
+						   		}
+						   		
+						   	}
+						   	else if(data.code=="999")
+						   	{
+						   		tip_window(' 网络超时','确定');
+						   	}
+						   	else
+						   	{
+						   		tip_window(data.msg,'确定');
+						   	}
+						   
+						   },
+						   error:function(data){
+						   		tip_window(' 网络超时','确定');
+						   }
+						});
+			
+	    }
+
+	    </script>
+	</head>
+	<body>
+		<div class="header whitebg mgt2">
+			<span id='title'>意向客户新建</span>
+			<a href="javascript:history.back(-1);" class="back"></a>
+			<a href="intention_custom_list.html" class="m_exit">列表</a>
+		</div>
+		<form id='custom_form' method='post'> 
+		<div class="detail_con border_tb whitebg">
+			<div class="detail_list btm">
+				<label><i>＊</i>客户姓名</label>
+				<input type="text" placeholder="请输入客户姓名"onkeyup="" id='custname' name='custname' maxlength='20'/>
+			</div>
+			<div class="detail_list">
+				<label><i>＊</i>手机号</label>
+				<input type="tel" placeholder="请输入中国大陆手机号"maxlength='11' onkeyup=""id='phonenums' name='phonenums'/>
+			</div>
+		</div>
+		
+		<div class="detail_con border_tb whitebg">
+			<div class="detail_list btm">
+				<label>客户来源</label>
+				<select style='width:200px;height:30px;	' id='custsource' name='custsource'>
+					<option value='1'>请选择</option>
+					<option>定向拜访</option>
+					<option>其他</option>
+					<option>朋友介绍</option>
+				</select>
+			</div>
+			<div class="detail_list btm">
+				<label>证件类型</label>
+				<select style='width:200px;height:30px;	' id='idtypecd' name='idtypecd' onchange="idselect()">
+					<option  value='0'>请选择</option>
+					<option value='1'>身份证</option>
+					<option value='2'>其他</option>
+				</select>
+			</div>
+			<div class="detail_list btm">
+				<label>证件号码</label>
+				<input type="text" placeholder="请输入您的证件号码" id='idnumber' name='idnumber'onchange="checkIdCard()" />
+			</div>
+			<div class="detail_list btm">
+				<label class="level_cus">客户等级<img onclick="message()"src="./images/question.png"/></label>
+				<select style='width:200px;height:30px;	' id='level' name='level'>
+					<option value='0'>请选择</option>
+					<option value='1'>一级</option>
+					<option value='2'>二级</option>
+					<option value='3'>三级</option>
+					<option value='4'>四级</option>
+					<option value='5'>五级</option>
+				</select>
+			</div>
+			<div class="detail_list btm">
+				<label>性别</label>
+				<input type='radio' name='custsex' value="1" style='vertical-align: middle;'>男
+				<input type='radio' name='custsex' value="2" style='vertical-align: middle;'>女
+				<p></p>
+			</div>
+			<div class="detail_list btm">
+				<label>年龄</label>
+				<input type="text" placeholder="请输入年龄" id='custage' name='custage' />
+			</div>
+			<div class="detail_list btm">
+				<label>固定电话</label>
+				<input type="text" placeholder="请输入固定电话" id='telnums' name='telnums'/>
+			</div>
+			<div class="detail_list btm">
+				<label>通讯地址</label>
+				<input type="text" placeholder="请输入家庭住址" id='contactaddress' name='contactaddress'/>
+			</div>
+			<div class="detail_list" style='height: 100px;overflow:hidden;'>
+				<label style='    vertical-align: middle;'>备注</label>
+				<textarea  placeholder="请输入备注信息" id='remark' name='remark' maxlength='100' style='height: 79px;width:210px;margin-top:10px;'></textarea>
+			</div>
+		</form>
+		</div>
+		<div class="insure" style="padding:20px 4% 0">
+			<input type="button" id="submit" onclick="submit()" class="sbt sbt_r" value="确认">
+		</div>
+		<div class="zbg"></div>
+		<div class="tip_down">
+			<span class="tip_s">提示</span>
+			<span class="level_s">一级等级最低</span>
+			<span class="level_s">五级等级最高!</span>
+			<div class="tip_know">
+				我知道了
+			</div>
+		</div>
+	</body>
+</html>

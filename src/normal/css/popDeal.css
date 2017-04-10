@@ -1,0 +1,9 @@
+.dealWrap{padding:0 2%;text-overflow: ellipsis;word-wrap:break-word;word-break:break-all;font-size:14px;border-radius:5px;color:rgb(51,51,51);}
+.tip_panel{padding:.5em 2%;background-color:rgb(247,247,247)}
+.tip_content{padding:.5em 5%;line-height:20px;}
+.tip_title{display:block;text-align:center;}
+.checkbox{display:inline-block;width:12px;height:12px;border-radius:50%;border:1px solid #ff4c4c;margin-right:.5em;}
+.checkbox.checked{background:#ff4c4c;}
+.tip_panel2{padding:0 5%;}
+.btn_prove{display:block;width:30%;height:1.8em;line-height:1.8em;border-radius:5px;color:#fff;outline:none;text-align:center;margin:.5em auto;border:none;background:#ff4958;-webkit-appearance: none;}
+.btn_prove.notallow{background-color:gray;}

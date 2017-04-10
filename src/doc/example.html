@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link href="css/commonUpgrade.css" type="text/css" rel="stylesheet" />
+    <style>
+        body{background:#eeeeee;padding:10px}
+        p{text-indent:1em}
+        h3{margin:.5rem auto;}
+        .m_icon{border:1px solid black}
+        .instro{text-indent:2em}
+    </style>
+</head>
+<body>
+<h2>一.按钮</h2>
+<p><u>使用说明</u>：按钮元件在unit.less文件，目前共两类，前缀分别为标准按钮u_btn及表单按钮u_btn_form,使用方式例如：</p>
+<p>&lt;span class="u_btn_default"&gt;出借&lt;/span&gt;</p>
+<p>&lt;span class="u_btn_disabled"&gt;售罄&lt;/span&gt;</p>
+<p>&lt;a class="u_btn_form_default"&gt;登录&lt;/a&gt;</p>
+<p>&lt;a class="u_btn_form_disabled"&gt;注册&lt;/a&gt;</p>
+<p>&lt;input type="submit" class="u_btn_bottom" value="下一步"&gt;</p><!--底部按钮-->
+<p><u>扩展说明</u>：新增按钮需新增按钮类别基础样式，例如新增文本类型按钮,需要新增u_btn_text基础样式,同类按钮不同状态下需引入基础样式，增加特殊样式,例如u_btn_text_primary,u_btn_text_disabled等...</p>
+<h3>1.出借按钮</h3>
+ <span class="u_btn_default">出借</span>
+ <span class="u_btn_disabled">售磬</span>
+ <h3>2.表单按钮</h3>
+ <a href="javascript:;" class="u_btn_form_default">登录</a>
+ <a href="javascript:;" class="u_btn_form_disabled">注册</a>
+ <input type="submit" class="u_btn_bottom" value="下一步">
+<hr>
+<h2>二.标签</h2>
+<p><u>使用说明</u>：标签元件在unit.less文件使用方式例如：</p>
+<p>&lt;span class="u_btn_tag"&gt;新手标&lt;/span&gt;</p>
+<p>&lt;span class="u_btn_tag_disabled"&gt;热门推荐&lt;/span&gt;</p>
+<p>&lt;span class="u_btn_tag_dialog"&gt;热门推荐&lt;/span&gt;</p>
+<p><u>扩展说明</u>：新增标签需在标签类别下新增样式，命名以.u_btn_tag开始，后缀需具有描述性。</p>
+ <span class="u_btn_tag">新手标</span>
+ <span class="u_btn_tag_disabled">热门推荐</span>
+ <span class="u_btn_tag_dialog">热门推荐</span>
+<hr>
+<h2>三.箭头</h2>
+<p><u>使用说明</u>：箭头元件在unit.less文件使用方式例如：</p>
+<p>&lt;i class="u_arr_right"&gt;&lt;/i&gt;</p>
+<p>&lt;i class="u_arr_left"&gt;&lt;/i&gt;</p>
+<p>&lt;i class="u_ques_mark"&gt;&lt;/i&gt;</p>
+<p>&lt;i class="u_back_login"&gt;&lt;span&gt;<&lt;/span&gt;&lt;/i&gt;</p>
+<p><u>扩展说明</u>：新增标签需在箭头类别下新增样式，命名以.u_btn_tag开始，后缀需具有描述性。</p>
+ <h3>1.普通箭头</h3>
+ <i class="u_arr_right"></i>
+ <i class="u_arr_left"></i>
+<h3>2.常见问题</h3>
+ <i class="u_ques_mark"></i>
+<h3>3.登录后退箭头</h3>
+ <i class="u_back_login"><span></span></i>
+<hr>
+<h2>四.表单</h2>
+<p><u>使用说明</u>：输入框元件在unit.less文件使用方式例如：</p><br>
+<p>&lt;ul&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;li class="u_form_single"&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;input type="text" placeholder="6-16位数字、字母、符号组合" class="u_input_full"&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/li&gt;<br>&nbsp;&nbsp;&lt;/ul&gt;</p><br>
+<p>其中.u_input_full为普通输入框，.u_input_per为带label输入框（增加class为u_form_send的button，可以增加发送短信验证码按钮</p>
+<p><u>扩展说明</u>：新增表单元素需在表单类别下新增样式，父元素命名以.u_form开始，输入框元素以u_input开始后缀需具有描述性。</p>
+<h3>1.普通输入框</h3>
+<ul>
+    <li class="u_form_single">
+        <input type="text" placeholder="6-16位数字、字母、符号组合" class="u_input_full"/>
+    </li>
+</ul>
+<h3>2.label输入框</h3>
+ <ul>
+     <li class="u_form_single">
+         <label class="u_label_prompt">登录密码</label>
+         <input type="text" placeholder="6-16位数字、字母、符号组合" class="u_input_per"/>
+     </li>
+ </ul>
+<h3>3.验证码输入框</h3>
+<ul>
+    <li class="u_form_single">
+        <label class="u_label_prompt">验证码</label>
+        <input type="text" placeholder="手机验证码" class="u_input_per"/>
+        <input type="button" value="发送验证码" class="u_form_send"/>
+    </li>
+</ul>
+<hr>
+<!--header-->
+<h2>五.头部模块</h2><br>
+<p><u>使用说明</u>：模块部分在module.less文件,为项目个性化文件，使用方式右键查看源码：</p>
+<p><u>扩展说明</u>：新增模块需在module.less新增样式，命名以.m_开始，后缀需具有描述性。</p>
+<div class="m_header">
+    头部
+    <a href="javascript:history.back(-1);" class="u_arr_left m_back fl"></a>
+    <i class="u_ques_mark m_message fr"></i>
+</div>
+<hr>
+<!--listGroup-->
+<h2>六.列表模块</h2><br>
+<div class="m_list_group">
+    <a href="javascript:;" class="m_list">
+        <em class="m_icon"></em>
+        理财头条
+        <i class="u_arr_right fr"></i>
+    </a>
+</div>
+<div class="m_list_group">
+    <a href="javascript:;" class="m_list">
+        <em class="m_icon"></em>
+        理财头条
+        <i class="u_arr_right fr"></i>
+    </a>
+    <a href="javascript:;" class="m_list">
+        <em class="m_icon"></em>
+        品牌介绍
+        <i class="u_arr_right fr"></i>
+    </a>
+    <a href="javascript:;" class="m_list">
+        <em class="m_icon"></em>
+        理财头条
+        <i class="u_arr_right fr"></i>
+    </a>
+</div>
+</body>
+</html>

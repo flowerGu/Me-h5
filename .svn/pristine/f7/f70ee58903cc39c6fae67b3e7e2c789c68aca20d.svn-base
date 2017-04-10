@@ -1,0 +1,149 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"
+	/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<meta name="format-detection" content="telephone=no" />
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<title>区域选择</title>
+	<link rel="stylesheet" type="text/css" href="./css/base.css" />
+	<link rel="stylesheet" type="text/css" href="./css/style.css" />
+	<link href="css/relate_card.css" type="text/css" rel="stylesheet" />
+	<script src="js/zepto.min.js"></script>
+	<script src="js/dropload.min.js"></script>
+	<script type="text/javascript" src='./js/functions.js'></script>
+	<script type="text/javascript" src='./js/config.js'></script>
+	<script type="text/javascript" src='./js/mustache.js'></script>
+</head>
+<body style='background-color: rgb(240,241,241);position:relative;z-index:9999'>
+	<div class="header whitebg">
+		<div id='areatext'>区域选择</div>
+		<a href="javascript:;" class="back" onclick="goback()"></a>
+	</div>
+	<div style='font-size:16px;color:rgb(105,105,105);font-weight:bold;margin-top:15px;' id='div_area'><span id='pro'></span>&nbsp;&nbsp;&nbsp;<span id='city'></span>&nbsp;&nbsp;&nbsp;<span id='qu'></span></div>
+	<div id="main">
+		<div class='div_top100 border_tb' style="background-color:#fff;<!-- padding:2px 0 2px 4% -->">
+			<table cellspacing='0' cellpadding='0' border='0'>
+			</table>
+		</div>
+	</div>
+	<input type='hidden' id='parentId' value='00' />
+	<input type='hidden' id='pcType' value='' />
+	</div>
+
+	<script>
+			var sourcePage=getQueryString('redirect');
+			 $('#div_area').hide();
+			 $('#pcType').val('000')
+		 	function addarea(parentId,pcType){
+		 		
+		 		if(parentId < 0  || pcType < 0)
+		 		{
+		 			return false;
+		 		} 
+		 		$.ajax({
+					   type: "post",
+					   url: GETPROVINCECITY_JSON_URL	,
+					   data:{version:app_data.version,tokenid:getCookie('tokenid'),parentId:parentId,pcType:pcType},
+					   success: function(data){
+							$.get('./templates/address_select.tpl',{"time":new Date().getTime()}, function(template){
+							    var result = Mustache.render(template, data);
+							    $('.div_top100 table').html('');
+							    $('.div_top100 table').append(result);
+							});
+					   },
+					   error:function(data){
+					   }
+				});
+		 	}
+			$(function(){
+					addarea(0,1);
+			});
+			function add_area(obj)
+			{
+				$('#div_area').show();
+				var parentId=obj.attr('parentId');
+				var pcType=parseInt(obj.attr('pcType'));
+				var view='';
+				if(pcType==1)
+				{
+					view=$('#pro');
+					$('#parentId').val(parentId)
+					$('#pcType').val(2)
+				}
+				if(pcType==2)
+				{
+					view=$('#city')
+					$('#pcType').val(3)
+				}
+
+				if(pcType==3)
+				{
+					view=$('#qu')
+				}
+				if(pcType<3)
+				{
+					pcType2=pcType+1;
+					addarea(parentId,pcType2);
+				}
+				view.html(obj.find('td span').html())//给区赋值
+				if(pcType==3){
+					if(sourcePage){
+						window.location.href=sourcePage;
+						localStorage.setItem("removeable_address", $('#pro').html()+'@'+$('#city').html()+'@'+$('#qu').html());
+					}
+					else{
+						localStorage.setItem("my_address", JSON.stringify($('#pro').html()+'@'+$('#city').html()+'@'+$('#qu').html()));
+						window.location.href='set_address.html?pcType=seclect_area';
+					}
+				}
+			}
+			function goback()
+			{
+				var parentId = $('#parentId').val()
+				var pcType = parseInt($('#pcType').val())
+				if(pcType==3)
+				{
+					addarea(parentId,2);
+					$('#pcType').val(2)
+					$('#qu').html('请选择')
+				}
+				if(pcType==2)
+				{
+					addarea(0,1);
+					$('#pcType').val('000')
+					$('#pro').html('请选择')
+					$('#city').html('请选择')
+				}
+				if(pcType=='000')
+				{
+					history.back(-1);
+				}
+				
+			}
+		</script>
+
+
+	<script>
+		// dropload
+		$('.div_top100').dropload({
+			domDown : {
+		        domClass   : 'dropload-down',
+		        domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+		        domUpdate  : '<div class="dropload-update">↓释放加载</div>',
+		        domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+		    },
+		    scrollArea : window,
+		    loadDownFn : function(me){
+		    	setTimeout(function(){
+	           addnext();
+		       		me.resetload();
+          },1000);
+		    }
+		});
+		</script>
+</body>
+</html>

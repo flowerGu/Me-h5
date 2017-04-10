@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>更改注册手机号</title>
+    <script src="../js/inject/flexible.js" inline></script>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/changePhoneNum.css">
+</head>
+<body>
+<div class="loading"></div>
+<form class="form none">
+    <ul class="telList">
+        <li class="u_form_single">
+            <label class="u_label_prompt">原注册手机号</label>
+            <input type="text" placeholder="" class="u_input_per" readonly="readonly" id="J_oldtel">
+        </li>
+        <li class="u_form_single">
+            <label class="u_label_prompt">新手机号</label>
+            <input type="text" placeholder="请输入新绑定手机号" class="u_input_per" name="newTel" maxlength="11">
+        </li>
+        <li class="u_form_single">
+            <label class="u_label_prompt">验证码</label>
+            <input type="text" placeholder="手机验证码" class="u_input_per" name="msgCode">
+            <input type="button" value="发送验证码" class="u_form_send sendMsgCode">
+        </li>
+        <li class="u_form_single">
+            <label class="u_label_prompt">姓名</label>
+            <input type="text" placeholder="实名认证的姓名" class="u_input_per" name="userName">
+        </li>
+        <li class="u_form_single">
+            <label class="u_label_prompt">身份证</label>
+            <input type="text" placeholder="实名认证的本人身份证号" class="u_input_per" name="idCard">
+        </li>
+        <li class="u_form_single">
+            <label class="u_label_prompt">绑定银行卡号</label>
+            <input type="text" placeholder="已绑定的银行卡号" class="u_input_per" name="bankCard">
+        </li>
+        <li class="u_form_single">
+            <label class="u_label_prompt">登录密码</label>
+            <input type="text" placeholder="6-16位数字，字母，符号组合" class="u_input_per" name="password">
+        </li>
+    </ul>
+    <a class="u_btn_form_default next" id="bindnoTel">绑定手机号</a>
+</form>
+<form class="formlast none">
+    <ul class="telList">
+        <li class="u_form_single">
+            <label class="u_label_prompt">原注册手机号</label>
+            <input type="text" placeholder="请输入新绑定手机号" class="u_input_per" id="oldTel" readonly="readonly" name="newTel" maxlength="11">
+        </li>
+        <li class="u_form_single">
+            <label class="u_label_prompt">验证码</label>
+            <input type="text" placeholder="手机验证码" class="u_input_per" name="msgCode">
+            <input type="button" value="发送验证码" class="u_form_send sendMsgCode">
+        </li>
+        <li class="u_form_single">
+            <label class="u_label_prompt">登录密码</label>
+            <input type="text" placeholder="6-16位数字，字母，符号组合" class="u_input_per" name="password">
+        </li>
+    </ul>
+    <a class="u_btn_form_default next" id="bindTel">下一步</a>
+</form>
+
+<script src="js/jquery-1.9.0.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/functions.js"></script>
+<script src="js/changeTel.js"></script>
+</body>
+</html>

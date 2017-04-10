@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>关于我们</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	    <meta name="apple-mobile-web-app-capable" content="yes" />
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	    <meta name="format-detection" content="telephone=no"/>
+
+	    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+		
+	    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	    <link href="../css/base.css" type="text/css" rel="stylesheet" />
+	    <link href="../css/about_more.css" type="text/css" rel="stylesheet" />
+	    <script type="../text/javascript" src="js/jquery-1.7.0.min.js"></script>
+	    <script>
+	    </script>
+	</head>
+	<body style="background-color:#fff;">
+		<div class="about_con">
+				<img src="images/logo.png" class="logo_ico" style="margin-top:20px">
+				<p class="broad_tip">轻松赚钱 实现梦想新选择！</p>
+				<p class="broad_tip">万众期待：Me金融V2.1 IOS/Android</p>
+				<p class="broad_tip">全新上线，微信公众号版本同步发布！</p>
+		</div>
+	</body>
+</html>

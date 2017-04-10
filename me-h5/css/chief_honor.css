@@ -1,0 +1,19 @@
+body{background-color:#f6f6f6}
+.searchWrap{padding:1em 4%;margin-bottom:.5em;color:#666666;text-align: center;}
+.searchWrap select{float:left;height:100%;outline:none;padding:.5em 0;border:1px solid #ddd;}
+.searchWrap>select{margin-right:5%;width:45%;height:32px;}
+.rightSelect{position:relative;float:right;width:50%;height:32px;}
+.rightSelect select{position:absolute;left:0;top:0;width:100%;height:100%;z-index:22;background:transparent;-webkit-appearance:none;-moz-appearance:none;appearance:none;}
+.rightSelect img{position:absolute;right:2%;top:5px;z-index:21;}
+/*content*/
+.conWrap{padding:.5em 4%;}
+.conWrap table{width:100%;}
+.conWrap table td{width:33.33%}
+.countUl li{float:left;width:40%;font-size:1.4em;text-align: center;}
+.countUl li:nth-of-type(2){width:20%;}
+.countUl li span{color:#181818;font-size:1.1em;font-weight: bold;}
+.conWrap table{border:1px solid #e4e4e4;border-bottom:none;}
+.conWrap table td,.conWrap table th{width:33.33%;padding:.8em 0;border-bottom:1px solid #e4e4e4}
+.conWrap table th{color:#ff4c4c;font-size:1.3em;}
+.conWrap table tr td{background-color:#fff;text-align: center;font-size:1.1em;color:#666666}
+.conWrap table tr td:nth-of-type(1){color:#181818;}

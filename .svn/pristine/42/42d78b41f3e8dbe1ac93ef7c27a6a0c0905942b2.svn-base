@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="cleartype" content="on">
+    <meta name="description" content="资金记录">
+    <meta name="keywords" content="资金记录">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <meta name="apple-itunes-app" content="app-id=1080260971">
+    <title>资金记录</title>
+    <meta name="application-name" content="Me金融">
+    <link rel="stylesheet" type="text/css" href="css/base.css" />
+    <link rel="stylesheet" type="text/css" href="css/record.css" />
+</head>
+<body>
+    <div class="header whitebg deleteHeader" style="border-bottom: 1px solid rgb(220,220,220);padding-bottom:10px">
+        资金记录
+        <a href="javascript:history.back(-1);" class="back"></a>
+    </div>
+    <div>
+    <div id="main" class="container"></div>
+    </div>
+
+    <script type="text/ng-template" id="tpl">
+        {{#list}}
+            {{#dateTag}}
+            <div class="month-tag">
+                <span>{{dateTag}}</span>
+            </div>
+            {{/dateTag}}
+            <div class="list-item">
+                <div class="type bg-{{bg_num}}">{{option_type}}</div>
+                <div class="info">
+                    <p>{{create_reldate}}</p>
+                    <p>{{remark}}</p>
+                </div>
+                <div class="money">{{operation_amount}}</div>
+            </div>
+        {{/list}}
+        {{^list}}
+            <div class="no-data">
+                <img class="global-no-data global-no-data-no-bottom" src="images/no-data.png">
+                <p>说声抱歉：您暂无资金记录</p>
+                <a href="chongzhi.html">存管充值</a>
+            </div>
+        {{/list}}
+    </script>
+    <script src='js/jquery-1.9.0.min.js'></script>
+    <script src="js/dropload.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/functions.js"></script>
+    <script src='js/mustache.js'></script>
+    <script src='js/record.js'></script>
+    <script src="js/footercommon.js"></script>
+</body>
+</html>

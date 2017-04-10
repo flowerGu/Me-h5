@@ -1,0 +1,77 @@
+/*解绑银行卡*/
+
+body {
+  position: relative;
+  background-color: #E9E9E9;
+}
+
+#main {
+  margin-top: .5rem;
+  background-color: #FFFFFF;
+}
+
+.container {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.form-group > label {
+  width: 7rem;
+  color: #5F5F5F;
+}
+
+form {
+  font-size: 14px;
+}
+
+.fr {
+  float: right;
+}
+
+.label-text {
+  float: right;
+  padding-right: 1.77rem;
+  color: #8e8e8e;
+}
+
+.ui-radio {
+  font-size: 14px;
+}
+
+.ui-radio:first-child {
+  margin-right: 1rem;
+}
+
+.form-group-alone {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.send_code {
+  /*height: 35px;*/
+  /*width: 110px;*/
+  width: 110px;
+  padding: 5px 5px;
+  background-color: #ff4c4c;
+  font-size: 14px;
+  display: block;
+  position: absolute;
+  top: 8px;
+  right: 5px;
+  color: #FFFFFF;
+  font-weight: bold;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.btn-success {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 4rem;
+  border: none;
+  color: #FFFFFF;
+  font-size: 2rem;
+  background-color: #ff4c4c;
+}

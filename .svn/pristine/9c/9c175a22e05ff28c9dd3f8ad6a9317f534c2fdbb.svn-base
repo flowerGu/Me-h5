@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <title>实名认证</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="css/base.css" />
+    <link rel="stylesheet" type="text/css" href="css/idVerifi.css" />
+    <script type="text/javascript" src='js/jquery-1.9.0.min.js'></script>
+    <script type="text/javascript" src='js/functions.js'></script>
+    <script type="text/javascript" src='js/config.js'></script>
+    <script type="text/javascript" src='js/idVerifi.js'></script>
+</head>
+
+<body>
+    <div class="header whitebg deleteHeader" style="height: 45px;">
+        实名认证
+        <a href="javascript:history.back(-1);" class="back"></a>
+    </div>
+    <div class=" caution clearfix">
+        <img src="images/broad.png" />
+        <marquee class="marq" direction="left" behavior="scroll" scrollamount="3" scrolldelay="0">为了确保您资金的安全，请进行实名认证</marquee>
+    </div>
+    <form id="mainForm" class="main" novalidate>
+        <div class="form-group">
+            <input type="text" id="realName" name="name" placeholder="请输入真实姓名" onkeyup="cheackmobile()">
+        </div>
+        <div class="form-group">
+            <input type="text" id="id_number" name="id_number" readonly="readonly" placeholder="请输入本人身份证号" maxlength='18'>
+        </div>
+        <input class="btn btn-success disable" type="submit" id="submit" value="下一步">
+
+    </form>
+    <form id="ybForm" method="post">
+        <input type="hidden" name="message" class="yb-req">
+        <input type="hidden" name="signature" class="yb-sign">
+    </form>
+    <div class="info-div">
+        验证通过“全国公民身份证信息系统”完成，平台不会向第三方泄露您的任何信息
+    </div>
+    <div class="keybordWrap">
+        <ul>
+            <li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">1</li>
+            <li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">2</li>
+            <li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">3</li>
+            <li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">4</li>
+            <li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">5</li>
+            <li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">6</li>
+            <li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">7</li>
+            <li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">8</li>
+            <li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">9</li>
+            <li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">X</li>
+            <li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">0</li>
+            <li data-type='del' style="-moz-user-select:none;" onselectstart="return false;"><img src="images/del.png" /></li>
+        </ul>
+    </div>
+</body>
+</html>

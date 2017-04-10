@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>新手指导</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="Me金融,民信Me金融,Me金融理财,互联网金融，出借理财,P2P理财" />
+	<meta name="discription" content="Me金融-民信公司旗下独立品牌，专业的个性化互联网金融服务平台" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"
+	/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<link rel="stylesheet" type="text/css" href="./css/base.css">
+	<link rel="stylesheet" type="text/css" href="./css/new_guide.css">
+</head>
+<body>
+	<img src="images/new_guide/new_guide_01.jpg" class="guide_fullWidth">
+	<div class="guide_fullWidth opration1">
+		<img src="images/new_guide/new_guide_02.jpg" class="guide_fullWidth ">
+		<div id="old_guide"></div>
+	</div>
+	<div class="guide_fullWidth opration1">
+		<img src="images/new_guide/new_guide_03.jpg" class="guide_fullWidth ">
+		<div id="new_guide"></div>
+	</div>
+	<img src="images/new_guide/new_guide_04.jpg" class="guide_fullWidth ">
+	<img src="images/new_guide/new_guide_05.jpg" class="guide_fullWidth ">
+	<div class="guide_fullWidth opration1">
+		<img src="images/new_guide/new_guide_06.jpg" class="guide_fullWidth ">
+		<a href="general_ans.html">
+			<div id="help_center"></div>
+		</a>
+	</div>
+	<script src="js/jquery-1.9.0.min.js"></script>
+	<script src="js/config.js"></script>
+	<script type="text/javascript" src='js/jquery-1.9.0.min.js'></script>
+	<script type="text/javascript" src='js/functions.js'></script>
+	<script>
+		// 老用户登录操作
+		function goLogin() {
+				if(tokenid === null || tokenid == ""){
+					window.location.href = "login.html"
+				}else{
+					ajax({
+						url : JD_GET_DETAIL_URL,
+						data:{
+							tokenid : tokenid
+						},
+						cb 	:	function(data){
+							if(data.temp4 == 1){
+								tip_window("亲，您的江西账户已经升级过了。","确定")
+							}else{
+								if(data.realname_status == '1'){
+									window.location.href = "openAnAccount.html"
+								}else{
+									window.location.href = "idVerifi.html?jd=1"
+								}
+							}
+						}
+					})
+				}
+			}
+
+		// 新用户注册
+		function goRegist() {
+			if(tokenid === null || tokenid == ""){
+				window.location.href = "regester.html"
+			}else{
+				tip_window("亲，您已经是Me金融平台用户啦！","确定")
+			}
+		}
+		// 微信中操作
+		if(isWeiXin()){
+			var tokenid = getCookie("tokenid");
+			$("#old_guide").click(function(){
+				goLogin()
+			});
+			$("#new_guide").click(function(){
+				goRegist()
+			})
+		}else{
+			//app中操作，排除老版本
+			if(getQueryString("tokenid") !== null){
+				var tokenid = getQueryString("tokenid");
+				$("#old_guide").click(function(){
+					goLogin()
+				});
+				$("#new_guide").click(function(){
+					goRegist()
+				})
+			}
+		}
+	</script>
+</body>
+</html>

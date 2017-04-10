@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+<title>设置交易密码</title>
+<link href="css/base.css" rel="stylesheet" type="text/css"/>
+<link href="css/passwordkeyboard.css" rel="stylesheet" type="text/css" />
+</head>
+<script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+<script type="text/javascript" src="js/fastclick.js"></script>
+<script type="text/javascript" src="js/config.js"></script>
+<script type="text/javascript" src="js/functions.js"></script>
+<script type="text/javascript" src="js/md5.js"></script>
+<script type="text/javascript">
+ function init(){
+    var width=$(window).width();
+    var height=$(window).height();
+    $("body").css("height",height);
+    $("body").css("width",width);
+ }
+ window.addEventListener('load', function() {
+	  FastClick.attach(document.body);
+	}, false);
+</script>
+<body onload="init()">
+<div class="header btm deleteHeader"style="padding:10px 0;">
+	设置交易密码
+	<a href="javascript:history.back(-1);" class="back"></a>
+</div>
+<div style="background-color:#fff;padding-bottom:20px">
+    <div style="text-align: center;padding-top: 10px;"><span id="set_text" style="font-size: large;"></span></div>
+        <div style="text-align: center;padding-top: 20px;">
+            <form id="password" style="text-align: center;" >
+            <input readonly class="pass" type="password"maxlength="1"value=""><input readonly class="pass" type="password"maxlength="1"value=""><input readonly class="pass" type="password"maxlength="1"value=""><input readonly class="pass" type="password"maxlength="1"value=""><input readonly class="pass" type="password"maxlength="1"value=""><input readonly class="pass pass_right" type="password"maxlength="1"value="">
+            </form>
+        </div>
+</div>
+ <dl><dt><input id="btn_next" style="color:#fff" type="button"value="下&emsp;一&emsp;步"class="btn_next"disabled></dt></dl>
+<div id="keyboardDIV"></div>
+</body>
+<script type="text/javascript" src="js/ladingPasswordSetting.js"></script>
+</html>

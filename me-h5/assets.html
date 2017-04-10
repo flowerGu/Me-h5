@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no" />
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<title>资产明细</title>
+	<link href="css/base.css" type="text/css" rel="stylesheet" />
+	<link href="css/commonUpgrade.css" type="text/css" rel="stylesheet"/>
+	<link href="css/assets.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+	<div class="header clearfix">
+		<p>江西存管</p>
+		<a href="myWealth.html" class="back"></a>
+		<a href="general_ans.html" class="quesA u_ques_mark">
+		</a>
+	</div>
+	<div class="assets_wrap">
+		<div class="assets_top">
+			<p></p><!--环行背景颜色-->
+			<p>
+				<img src="images/pig.png" class="assets-img" />
+			</p>
+			<ul>
+				<li>
+					<p>累计收益</p>
+					<span id="jdBenifit"></span>
+					<span id="zhBenifit"></span>
+					<span id="zjBenifit"></span> 
+					元
+				</li>
+				<li>
+					<p>账户余额</p>
+					<span id="jdBalance"></span>
+					<span id="zhBalance"></span>
+					<span id="zjBalance"></span>
+					元
+				</li>
+			</ul>
+		</div>
+		<div class="tab-content">
+			<div class="tab-pane" id="jd"><!--江西-->
+				<a class="btn_assets" onclick = "canBuy('jxcz')"><img src="images/charge.png"/>存管充值</a>
+				<a class="btn_assets" id="hasTradingPwd" href="JX_tixian.html"><img src="images/withdraw.png"/>存管提现</a>
+			</div>
+			<div class="tab-pane" id="zh"><!--Me账户-->
+				<a class="btn_assets" href="javascript:;" onclick="canBuy('cz')"><img src="images/charge.png"/>充值</a>
+				<a class="btn_assets" href="javascript:;" onclick="jumpTarget('tx')"><img src="images/withdraw.png"/>提现</a>
+			</div>
+		</div>
+		<div class="m_list_group tab-zj clearfix hide" id="tab-zj">
+			<a href="tixian.html" class="m_list">
+				中金托管提现
+				<i class="u_arr_right fr"></i>
+				<span id="totalAssetsZj" class="tab-zj-money"></span>
+			</a>
+			<a href="assets_data.html?zj=1" class="m_list">
+				查看中金资产明细
+				<i class="u_arr_right fr"></i>
+
+			</a>
+		</div>
+		<a class="lookassets fix-bottom" id="lookassets" href="assets_data.html?jd=1">查看江西资产明细</a>
+	</div>
+	<script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="js/config.js"></script>
+	<script type="text/javascript" src="js/assets.js"></script>
+</body>
+</html>

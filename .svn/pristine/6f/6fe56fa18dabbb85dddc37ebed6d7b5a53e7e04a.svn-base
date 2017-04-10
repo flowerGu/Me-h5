@@ -1,0 +1,63 @@
+/*
+ *理财详情
+ *员工学习区-客户资料区详情
+*/
+.content,.content_list{
+    width:100%;
+    background: #f6f6f6;
+    overflow: hidden;
+}
+.content_list li{
+    width:100%;
+    height:226px;
+    margin-bottom:10px;
+    position: relative;
+}
+.content_list li a{
+    display: block;
+    width:100%;
+    height:100%;
+    background: #fff
+}
+.content_list .financial_img{
+    width:100%;
+    height:82%;
+}
+.content_list .title{
+    position: absolute;
+    left:18px;
+    top:20px;
+    font-size:20px;
+    color:#fff;
+    text-shadow: #8e8e8e 1px 1px 1px;
+}
+.content_list .time{
+    display: block;
+    width:100%;
+    height:18%;
+    font-size:14px;
+    color:#5f5f5f;
+    margin:12px 0 0 24px;
+}
+/*详情页*/
+.financial_title{
+    font-size:2.2em;
+    color:#5f5f5f;
+    padding: 0 15px; 
+}
+.financial_time{
+    font-size:1.5em;
+    color:#5f5f5f;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding:0 15px;
+}
+.financial_detial,.learn-data-detail-txt{
+    color:#8e8e8e; 
+}
+.financial_detial img,.learn-data-detail-txt img{
+    width:100%;
+}
+.learn-data-detail-txt{
+    padding:10px 15px;
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+		<meta http-equiv="Pragma" content="no-cache" />
+		<meta http-equiv="Expires" content="0" />
+	    <meta name="apple-mobile-web-app-capable" content="yes" />
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	    <meta name="format-detection" content="telephone=no"/>
+	    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	    <link href="css/base.css" rel="stylesheet" type="text/css" />
+	    <link href="css/risk_level_result.css" rel="stylesheet" type="text/css" />
+	    <script src="js/jquery-1.9.0.min.js"></script>
+	    <script src="js/config.js"></script>
+	    <script src="js/functions.js"></script>
+	    <script src="js/risk_level_result.js"></script>
+	</head>
+	<body>
+		<div class="header btm deleteHeader" style="padding-bottom:.4em;display:none;">
+			风险测评问卷
+			<a href="javascript:history.back(-1); " class="back"></a>
+		</div>
+		<div class="riskContent">
+			<div class="scoreWrap">
+
+			</div>
+			<p class="belong_p">您属于<span id="belongRate"></span></p>
+			<table>
+				<tr>
+					<td width="40%"colspan="2">出借者姓名:<span id="name">_</span></td>
+					<td width="25%"align="right">联系方式:</td>
+					<td id="phoneNumber"></td>
+				</tr>
+				<tr>
+					<td colspan="2">证件类型:<span id="idType" style="margin-left:.5rem;"></span></td>
+					<td align="right">证件号码:</td>
+					<td id="id_number">_</td>
+				</tr>
+					<tr>
+					<td colspan="4">评测时间:<span id="create_time" style="margin-left:.5rem;">----:--:--</span></td>
+				</tr>
+			</table>
+			<p class="commentP">评语：
+				<br>
+				您的评测结果为<span class="pinkSpan" id="belongRate2"></span>，您
+				<span class="pinkSpan" id="evaluate"></span>
+			</p>
+		</div>
+		<a href="javascript:;" style="bottom:6.5rem" id="refresh_result">重新评测</a>
+		<a id="skipTo"></a>
+	</body>
+</html>

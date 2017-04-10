@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>民信专享</title>
+  <script src="../js/inject/flexible.js" inline></script>
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/wealth_manager.css">
+</head>
+<body class="has-nav">
+
+	<script id="tpl" type="text/html">
+		<header>
+			<p class="line-user-tel">
+				<span>{{name}}</span><span class="span-tel">{{phone_number}}</span>
+			</p>
+			<p class="line-position">{{cus_manager_name}}</p>
+			<ul class="list-statistics">
+				<li>
+					<p>本月新增邀请</p>
+					<p>{{current_month_num}}人</p>
+				</li>
+				<li>
+					<p>本月新增出借</p>
+					<p>{{current_month_amount}}万</p>
+				</li>
+				<li>
+					<p>本月业绩排名</p>
+					<p>{{cus_report_order}}名</p>
+				</li>
+			</ul>
+		</header>
+		<ul class="content-list">
+			<li>
+				<a href="customer_list.html">
+					<i class="icon icon-big color-blue">7</i>
+					<p class="item-title">客户列表</p>
+					<p class="item-value">{{cus_sum_num}}位</p>
+				</a>
+			</li>
+			<li>
+				<a href="my_account.html">
+					<i class="icon icon-big color-yellow">4</i>
+					<p class="item-title">订单查询</p>
+					<p class="item-value">{{cus_sum_amount}}万</p>
+				</a>
+			</li>
+			<li>
+				<a href="Performance_s.html">
+					<i class="icon icon-big color-red">.</i>
+					<p class="item-title">业绩查询</p>
+					<p class="item-value">民信排名</p>
+				</a>
+			</li>
+			<li>
+				<a href="{{if manager_invite_num>0}}my_invited.html{{else}}my_account_no.html{{/if}}">
+					<i class="icon icon-big color-orange">8</i>
+					<p class="item-title">我的邀请</p>
+					<p class="item-value">{{manager_invite_num}}位</p>
+				</a>
+			</li>
+			<li>
+				<a href="intention_custom_list.html?nums={{intentcust_num}}">
+					<i class="icon icon-big color-purple">:</i>
+					<p class="item-title">意向客户</p>
+					<p class="item-value">{{intentcust_num}}位</p>
+				</a>
+			</li>
+			{{if custtype === '2'}}
+			<li>
+				<a href="team_manager.html">
+					<i class="icon icon-big" style="color:#68d6ff;">;</i>
+					<p class="item-title">团队尊享</p>
+					<p class="item-value">{{custmgr_num}}位经理</p>
+				</a>
+			</li>
+			{{else if custtype === '3'}}
+			<li>
+				<a href="chief_honor.html">
+					<i class="icon icon-big" style="color:#ff8150;"><</i>
+					<p class="item-title">总监尊享</p>
+					<p class="item-value">{{team_num}}个团队</p>
+				</a>
+			</li>
+			{{else if custtype === '4'}}
+			<li>
+				<a href="center_honor.html">
+					<i class="icon icon-big" style="color:#ffdf7e;">=</i>
+					<p class="item-title">中心尊享</p>
+					<p class="item-value">{{team_num}}位</p>
+				</a>
+			</li>
+			{{/if}}
+			<li class="hide" id="study">
+				<a href="learn_data.html?type=w">
+					<i class="icon icon-big color-brown">t</i>
+					<p class="item-title">员工学习</p>
+					<p class="item-value">不断进步</p>
+				</a>
+			</li>
+		</div>
+	</script>
+	
+
+
+	<script src="js/jquery-1.9.0.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/functions.js"></script>
+  <script src="js/plugs/artTemplate/template.js"></script>
+	<script src="js/wealth_manager.js"></script>
+</body>

@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	    <meta name="apple-mobile-web-app-capable" content="yes" />
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	    <meta name="format-detection" content="telephone=no"/>
+	    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+		<link rel="stylesheet" type="text/css" href="./css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="./css/base.css"/>
+		<script type="text/javascript" src="./js/jquery-1.9.0.min.js"></script>
+		<script type="text/javascript" src='./js/config.js'></script>
+		<script type="text/javascript" src="./js/functions.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				cheackmobile();
+				var dd=$(document).height();
+				$('body').css("minHeight",dd);//设置body的高度
+				$('input[name=idCode]').click(function(){
+            	$('.keybordWrap').toggle();
+            })
+        	var id='';
+            $('.keybordWrap ul li').click(function(){
+            	if($(this).attr('data-type')=='del'){//删除键
+	        		var id_input=$('input[name=idCode]').val();
+            		if(id_input.length>=1 && id_input!=''){
+            			id_input=id_input.substr(0,id_input.length-1);
+            			$('input[name=idCode]').val(id_input)
+            		}
+            	}
+            	id_input=$('input[name=idCode]').val();
+            	if($(this).attr('data-type')=='num'){//数字键
+            		if(id_input.length>=18){
+            			return false;
+            		}
+            		id_input=id_input+($(this).html());
+            		$('input[name=idCode]').val(id_input)
+            	}
+            	cheackmobile()
+            })
+        })
+			function cheackmobile(){
+				var idcard = getCookie("find_pwd_idcard");
+				var idCode = $("input[name=idCode]").val().trim().toUpperCase();
+				var re = /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/ ;
+				var id_number = $("#id_number").val().trim();
+//	            if(id_number.length<18)
+//	            {
+//	                $("input[name=idCode]").val($("input[name=idCode]").val().replace(/[^0-9]/g,''))
+//	            }
+//	            else
+//	            {
+//	                var x=id_number.substring(id_number.length-1,id_number.length).toUpperCase();
+//	                if(x!='X')
+//	                {
+//	                    $("input[name=idCode]").val($("input[name=idCode]").val().replace(/[^0-9]/g,''))
+//	                }
+//					if(!re.test(idCode)){
+//		               tip_window("身份证号格式不对！",'确定');
+//		               return false;
+//		           }
+//	            }
+				if(!re.test(idCode)){
+						document.getElementById("submit").style.backgroundColor="#d3d3d3"
+						document.getElementById("submit").setAttribute("disabled", true);
+					}else{
+						$('.keybordWrap').hide();
+						document.getElementById("submit").removeAttribute("disabled");
+						document.getElementById("submit").style.backgroundColor="#ff4c4c";
+
+					}
+			}
+		</script>
+	</head>
+	<body>
+		<div class="header whitebg deleteHeader" style="height: 45px;">
+			身份验证
+			<a href="javascript:history.back(-1);" class="back"></a>
+		</div>
+		<div id="main">
+			<div id="xiahuaxian">
+				<ul>
+					<li class="li_xiahuaxian">身份验证</li>
+					<li>填写验证码</li>
+					<li>重设密码</li>
+				</ul>
+
+			</div>
+			<div class="pwd-text">
+				<p style="color:rgb(165,165,165)">为了保障您的账户安全,请填写身份证号进行身份认证</p>
+			</div>
+			<div class="input-divtype" style="border: 1px solid rgb(220,220,220);">
+				<input type="text" name="idCode"readonly="readonly" style="width:95%;padding-left: 63px;" id="id_number" placeholder="输入中国大陆身份证号" maxlength="18"/>
+			</div>
+			<button class="button blue but_pwd" id="submit" onclick="next()">下一步</button><br/><br/>
+		</div>
+		<div class="keybordWrap">
+			<ul>
+				<li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">1</li>
+				<li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">2</li>
+				<li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">3</li>
+				<li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">4</li>
+				<li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">5</li>
+				<li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">6</li>
+				<li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">7</li>
+				<li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">8</li>
+				<li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">9</li>
+				<li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">X</li>
+				<li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">0</li>
+				<li data-type='del' style="-moz-user-select:none;" onselectstart="return false;"><img src="images/del.png"/></li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+			function next(){
+			var idCode = $("input[name=idCode]").val().trim();
+
+				// if(idCode.trim() ==''){
+				// 	tip_window('身份证号不能为空！','确定！');
+				// 	return false;
+				// }
+				// var re = /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/;
+				//  if(!re.test(idCode.trim())){
+			 //        tip_window('身份证格式不对！','确定！');
+			 //        return false;
+			 //    }
+			 var logintel='';
+			 var version='1.0';
+			 var type=getQueryString('type');
+			 var  url='';
+			 if(type=="21e119daf697467b14b076f2d5819aec"){//找回交易密码--填写身份证号
+
+		   		var tokenid=getCookie('tokenid');
+		   		var data = {version:app_data.version,idcard:idCode,tokenid:tokenid};
+		   		url = FPT_VERIFICATIONIDCARD_JSON_URL;
+			 }
+			 if(type=="d56b699830e77ba53855679cb1d252da"){//找回登陆密码--填写身份证号
+			 	url = FP_VERIFICATIONIDCARD_JSON_URL;
+		   		logintel=getCookie("find_pwd_tel");
+		   		var data = {version:app_data.version,logintel:logintel,idcard:idCode};
+			 }
+				 $.ajax({
+					   url: url,
+					   type: "post",
+					   data:data,
+					   async: false,
+					   success: function(data){
+						   if(data.code=='000')
+						   {
+
+						   		var idCode = $("input[name=idCode]").val().trim();
+							 	if(type=="21e119daf697467b14b076f2d5819aec"){//找回交易密码--填写身份证号
+							 		var forgettradeData = {
+		        						version: app_data.version,
+		       							idcard:idCode,
+		       							tokenid:tokenid,
+		       							logintel:data.logintel
+		        						}
+		        					localStorage.setItem("forgettradeData", JSON.stringify(forgettradeData));
+								}
+							 	if(type=="d56b699830e77ba53855679cb1d252da"){//找回登陆密码--填写身份证号
+							   		setCookie("find_pwd_idcard", idCode);
+								}
+							 	location.href="verifiCode2.html?type="+type;
+						   }else
+						   {
+						   		tip_window('身份验证失败','取消')
+						   }
+					   }
+					});
+
+			}
+		</script>
+	</body>
+</html>

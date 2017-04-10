@@ -1,0 +1,49 @@
+/*header*/
+.m_header{
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px 4%;
+    font-size: 18px;
+    text-align: center;
+    position: relative;
+    background:#ff4c4d;
+    color: #fff
+}
+/*列表*/
+.m_list_group{
+  padding-left: 4%;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+  .m_list{
+    position: relative;
+    padding: 15px 0;
+    padding-left: 40px;
+    display: block;
+    color: #181818;
+    font-size: 1.3em;
+    height: 44px;
+    line-height: 14px;
+    border-bottom: 1px solid #ddd;
+      .m_icon{
+            position: absolute;
+            left: 0;
+            top: 50%;
+            display: inline-block;
+            width: 28px;
+            height: 26px;
+            font-size: 22px;
+            margin-top: -13px;
+      }
+      .m_intro{
+            position: absolute;
+            right: 8%;            
+            top: 15px;
+            color: #8e8e8e;
+            display: inline-block;
+            font-size: .95em;
+      }
+  }
+  >.m_list:last-child{
+    border-bottom:none;
+  }
+}

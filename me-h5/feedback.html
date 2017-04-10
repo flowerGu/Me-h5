@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <title>意见反馈</title>
+  <link href="css/base.css" type="text/css" rel="stylesheet" />
+  <link href="css/about_more.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+  <script type="text/javascript" src="js/config.js"></script>
+  <script type="text/javascript" src="js/functions.js"></script>
+  <style>
+    .tip_span {
+      color: gray
+    }
+    html,
+    body {
+      height: 100%;
+    }
+    .insure {
+      padding: 0;
+    }
+    .insure .sbt {
+      border-radius: 0;
+    }
+  </style>
+</head>
+<body style="position:relative">
+  <div class="header whitebg btm">
+    意见反馈
+    <a href="javascript:history.back(-1);" class="back"></a>
+  </div>
+  <script>
+    var app=getQueryString('app')==='1';
+    if(app){
+      $('.header').addClass('hide');
+    }
+  </script>
+  <div class="form_area">
+    <textarea class="textarea" placeholder="请输入您的问题和意见（字数140以内），您留下的每个字都将用来改善我们的项目。并有机会获得意外惊喜。"></textarea>
+  </div>
+  <div class="cust_tel abs-bottom2">
+    <a href="tel:4000443888" class="tel"><img src="images/tel.png" class="contant_img">4000443888</a>
+  </div>
+  <div class="insure abs-bottom">
+    <input type="button" value="提交" class="sbt">
+  </div>
+
+
+  <script>
+    var tokenid;
+    if(app){
+      tokenid=getQueryString("tokenid");
+    }
+    else{
+      tokenid=getCookie("tokenid");
+    }
+    if(getQueryString('app')==='1'){
+      $('.header').addClass('hide');
+    }
+
+    $(function(){
+        if(tokenid==null){
+            tip_windows('您还未登录','点此登录','取消','more.html');
+        }
+        var _h=$(document.body).height();
+
+        $(document.body).height(_h>450?_h:450);
+
+        $('.sbt').click(function(){
+            if($('.textarea').val()==''){
+                tip_window('请输入您的宝贵意见','确定');
+              }else if($('.textarea').val().length>140){
+              tip_window('输入内容不能多于140字','确定');
+              }else{
+                submit();
+            }
+        })
+    });
+    function submit(){
+        var comment=$('.textarea').val().trim();
+        if(comment==''){
+          tip_window('意见不能为空,请重新输入','取消');
+          $('.textarea').val('');
+          return false;
+        }
+        comment = comment.replace(/<script>/g,"").replace(/<\/script>/g,"");
+        $.ajax({
+            url:FEEDBACK_JSON_URL,
+            type:"post",
+            data:{tokenid:tokenid,comment:comment},
+            success:function(data){
+                if(data.code=='000'){
+                  $('.textarea').val('');
+                  tip_window('反馈成功！','确定');
+                }
+            },
+            error:function(data){
+              tip_window(data.msg,'确定');
+            }
+        })
+    }
+	</script>
+</body>
+</html>

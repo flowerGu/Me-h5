@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>找回交易密码</title>
+    <link rel="stylesheet" type="text/css" href="css/base.css" />
+    <link rel="stylesheet" type="text/css" href="css/FindTradePwd.css" />
+
+</head>
+<body>
+    <div class="header">
+        <p>找回交易密码</p>
+        <a onclick="backFun()" class="back"></a>
+    </div>
+    <ul class="findProgress whitebg clearfix">
+        <li><img src="images/findtradepwd/code_red.png"/>填写验证码</li>
+        <li><img src="images/findtradepwd/reset_red.png"/>重设密码</li>
+    </ul>
+    <div class="findWrap">
+    </div>
+    <!--身份证验证 start-->
+    <script type="text/ng-template" id="veri">
+        {{#idverifi}}
+        <div class="textArea whitebg">
+            身份证号
+            <input type="text" readonly="readonly" name="idCode" placeholder="请输入中国大陆身份证号" value=""/>
+        </div>
+        <span>为了保障您的账户安全，请填写身份证号进行身份验证</span>
+        {{/idverifi}}
+    </script>
+    <!--身份证验证 end-->
+    <!--验证码发送 start-->
+    <script type="text/ng-template" id="code">
+        <div class="textArea whitebg">
+            <ul>
+                <li>点击发送短信向您<span id="loginTel">{{logintel}}</span>发送验证码</li>
+                <li class="clearfix">
+                    <input type="tel" placeholder="短信验证码" class="code-message" id="codeMessage"/>
+                    <input type="button" id="send" value="免费获取"/>
+                </li>
+            </ul>
+        </div>
+    </script>
+    <!--验证码发送 end-->
+    <div class="nextDiv idverifi">
+        下一步
+    </div>
+    <div class="keybordWrap">
+        <ul>
+            <li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">1</li>
+            <li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">2</li>
+            <li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">3</li>
+            <li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">4</li>
+            <li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">5</li>
+            <li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">6</li>
+            <li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">7</li>
+            <li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">8</li>
+            <li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">9</li>
+            <li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">X</li>
+            <li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">0</li>
+            <li data-type='del' style="-moz-user-select:none;" onselectstart="return false;"><img src="images/del.png"/></li>
+        </ul>
+    </div>
+    <script src="js/jquery-1.9.0.min.js"></script>
+    <script type="text/javascript" src='js/config.js'></script>
+    <script type="text/javascript" src='js/functions.js'></script>
+    <script src="js/mustache.js"></script>
+    <script src="./js/sendCodeDialog/sendCode.js"></script>
+    <script src="js/FindTradePwd.js"></script>
+</body>
+</html>

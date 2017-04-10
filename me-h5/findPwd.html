@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	    <meta name="apple-mobile-web-app-capable" content="yes" />
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	    <meta name="format-detection" content="telephone=no"/>
+	    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	    <title>找回密码</title>
+		<link rel="stylesheet" type="text/css" href="./css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="./css/base.css"/>
+		<script type="text/javascript" src='./js/jquery-1.9.0.min.js'></script>
+		<script type="text/javascript" src='./js/functions.js'></script>
+		<script type="text/javascript" src='./js/config.js'></script>
+		<script type="text/javascript">
+			var type=getQueryString('type');
+			$(function(){
+				cheackmobile();
+			})
+			function cheackmobile(){
+			var logintel = $('input[name=logintel]').val();
+			var re = /^[1][3-8][0-9]{9}$/;
+			var indent_re = /^\d+$/;
+			if(!indent_re.test(logintel)){
+					$('input[name=logintel]').val('');
+			}
+			if(!re.test(logintel)){
+					$('#submit').css({'background':'#dddcdd'}).attr('disabled',true)
+				}else{
+					$('#submit').css({'background':'#ff4c4c'}).removeAttr('disabled');
+				}
+		}
+		</script>
+	</head>
+	<body>
+		<div class="header whitebg deleteHeader" id="find_pwd_hd" style="height: 45px;">
+				<span>找回密码</span>
+				<a href="javascript:history.back(-1);" class="back"></a>
+		</div>
+		<div id="main">
+			<div class="pwd-text">
+				输入注册时的账号
+			</div>	
+			<div class="input-divtype">
+				<label>手机号</label>
+				<input type="text" name="logintel"  placeholder="请输入手机号" maxlength='11' onkeyup="cheackmobile()"/>
+			</div>
+			<br/>
+			<button class="button blue" onclick="next()" id="submit" style="width: 90%;height:52px;float:left;margin-left:5%;margin-top:20px;">下一步</button><br/><br/>
+		</div>
+		 <script type="text/javascript">
+			function next(){
+				var logintel = $('input[name=logintel]').val();
+				var version = '1.0';
+				var url ='';
+				var tokenid ='';
+				$.ajax({
+					url:FORGETPASSWORDLOGINTEL_JSON_URL,
+					type:'post',
+					data:{version:app_data.version,logintel:logintel,tokenid:tokenid},
+					success:function(data){
+						if(data.code != '000'){
+							if(data.code=='LI003'){
+								tip_window('该手机号没有被注册',"确定");	
+							}else{
+								tip_window(data.msg,"确定");	
+							}
+							
+						}
+						if(data.code == '000'){
+							setCookie("find_pwd_tel", logintel);
+							
+							if(data.isrealname=='1'){
+								if(type=="d56b699830e77ba53855679cb1d252da"){//找回登录密码--已实名
+									setCookie("find_pwd_idcard", data.idcard);									
+								}
+								
+								location.href="verification.html?type="+type;
+							}else{
+								if(type=="d56b699830e77ba53855679cb1d252da"){//找回登陆密码--未实名
+									setCookie("find_pwd_idcard",'');								
+								}
+								
+								
+								location.href="verifiCode2.html?type="+type;
+							}
+						}
+					}
+				});
+			   
+			}
+		</script>
+	</body>
+</html>

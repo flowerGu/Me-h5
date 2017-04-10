@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <title>存管账号</title>
+  <link rel="stylesheet" type="text/css" href="css/base.css" />
+  <link rel="stylesheet" type="text/css" href="css/addNewCard.css" />
+  <script src="js/jquery-1.9.0.min.js"></script>
+  <script type="text/javascript" src='js/config.js'></script>
+  <script type="text/javascript" src='js/functions.js'></script>
+  <script type="text/javascript" src='js/mustache.js'></script>
+  <script src="js/account_details.js"></script>
+</head>
+<body>
+  <div class="header clearfix deleteHeader">
+    <a class="back" onclick="goBack()"></a>
+    <span></span>
+  </div>
+  <script type="text/html" id="zhTpl">
+    <div class="caution clearfix">
+      <img src="images/broad.png" />
+      <p>更安全、更可靠。</p>
+    </div>
+    <div id="main" class="main">
+      <div class="query-info">
+        <div class="form-group">
+          <label>真实姓名</label>
+          <span class="right-text">{{user_name}}</span>
+        </div>
+        <div class="form-group">
+          <label>身份证号</label>
+          <span class="right-text">{{id_card}}</span>
+        </div>
+        <div class="form-group">
+          <label>开户时间</label>
+          <span class="right-text">{{open_time}}</span>
+        </div>
+      </div>
+      <div class="query-info mt">
+        <div class="form-group mt" onclick="window.location.href='my_bank.html'">
+          <label>银行卡</label>
+          <span class="right-text">{{bank_count}}张</span>
+          <i class="icon weui_cell_ft"></i>
+        </div>
+        <a class="form-group" onclick="window.location.href='{{#hastrade}}set_trade_pwd.html?modify=1{{/hastrade}}{{^hastrade}}set_trade_pwd.html{{/hastrade}}'">
+        <label>交易密码</label>
+        <span class="right-text has-icon">{{^hastrade}}<span>点击去设置</span>{{/hastrade}}{{#hastrade}}<span>点击可重置</span>{{/hastrade}}<i class="icon weui_cell_ft"></i></span>
+        </a>
+      </div>
+    </div>
+  </script>
+
+  <script type="text/html" id="jdTpl">
+
+    <div class="caution clearfix">
+      <img src="images/broad.png" />
+      <marquee class="marq" direction="left" behavior="scroll" scrollamount="3" scrolldelay="0">更安全、更可靠，江西银行存管业务已开通。</marquee>
+    </div>
+    <div id="main" class="main">
+      <div class="query-info">
+        <div class="form-group">
+          <label>姓名</label>
+          <span class="right-text">{{name}}</span>
+        </div>
+        <div class="form-group">
+          <label>身份证</label>
+          <span class="right-text">{{id_number}}</span>
+        </div>
+        <div class="form-group">
+          <label>开户时间</label>
+          <span class="right-text">{{register_date}}</span>
+        </div>
+        <div class="form-group">
+          <label>电子账户</label>
+          <span class="right-text">{{temp2}}</span>
+        </div>
+        <a class="form-group" href="{{^bank_id}}addNewCard.html{{/bank_id}}{{#bank_id}}unbindCard.html{{/bank_id}}">
+          <label>银行卡信息</label>
+          <span class="right-text{{^bank_id}} has-icon{{/bank_id}}">
+            {{#bank_id}}<span>{{bank_id}}&nbsp;{{bank_name}}</span>{{/bank_id}}
+            {{^bank_id}}<span>绑卡</span><i class="icon weui_cell_ft"></i>{{/bank_id}}
+            {{#bank_id}}<span>解绑</span><i class="icon weui_cell_ft"></i>{{/bank_id}}
+          </span>
+        </a>
+      </div>
+      <div class="query-info mt">
+        <a class="form-group" onclick="window.goTradingPwd()">
+          <label>交易密码</label>
+          <span class="right-text has-icon"><span>点击可重置</span><i class="icon weui_cell_ft"></i></span>
+        </a>
+        <a   class="form-group"{{^is_debtSell}} {{/is_debtSell}}>
+          <label>转让授权</label>
+          <span class="right-text has-icon">{{#is_debtSell}}<span>已授权</span>{{/is_debtSell}}{{^is_debtSell}}<span id="jdtransfer">未授权</span>{{/is_debtSell}}</span><i class="icon {{^is_debtSell}}weui_cell_ft{{/is_debtSell}}"></i></span>
+        </a>
+      </div>
+    </div>
+  </script>
+</body>
+</html>

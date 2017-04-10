@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	    <meta name="apple-mobile-web-app-capable" content="yes" />
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	    <meta name="format-detection" content="telephone=no"/>
+	    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	    <title>重设密码</title>
+		<link rel="stylesheet" type="text/css" href="./css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="./css/base.css"/>
+		<script type="text/javascript" src='./js/jquery-1.9.0.min.js'></script>
+		<script type="text/javascript" src="./js/functions.js"></script>
+		<script type="text/javascript" src="./js/config.js"></script>
+		<script src="./js/jquery.toggle-password.js"></script>
+		<script src="./js/md5.js"></script>
+		<script type="text/javascript">
+		var type=getQueryString('type');
+		$(function(){
+			cheackmobile();
+			$('#password').togglePassword({
+				el: '#togglePassword'
+			});
+			if(type=="d56b699830e77ba53855679cb1d252da"){
+					$('.header span').text('重设登录密码');
+			}
+			$('.pwdimg_eye').click(function(){
+				var src = this.src;
+				if(src.indexOf('/images/eye_no.png')>0){
+					$('.pwdimg_eye').attr('src','./images/eye.png');	
+				}else{
+					$('.pwdimg_eye').attr('src','./images/eye_no.png');
+				}					
+			})
+		});
+		function cheackmobile(){
+				var new_pwd = $("input[name=new_pwd]").val().trim();
+				var pwd_re =  /(?!^[0-9]+$)(?!^[A-z]+$)(?!^[^A-z0-9]+$)^.{6,16}$/;
+				if(!pwd_re.test(new_pwd)){
+						document.getElementById("submit").style.backgroundImage="url('./images/btn_un_click.png')";
+						document.getElementById("submit").setAttribute("disabled", true);
+					}else{
+						document.getElementById("submit").removeAttribute("disabled");
+						document.getElementById("submit").style.backgroundImage="url('./images/btn_login.png')";
+					}
+			}
+		</script>
+	</head>
+	<body style="background-color: rgb(238,238,238);">
+		<div class="header whitebg deleteHeader" style="height: 55px;">
+			<span>重设密码</span>
+			<a href="javascript:history.back(-1);" class="back"></a>
+		</div>
+		<div id="main">	
+			<div id="xiahuaxian">
+				<ul>
+					<li>身份验证</li>
+					<li>填写验证码</li>		
+					<li class="li_xiahuaxian">重设密码</li>		
+				</ul>
+				
+			</div>
+			<div class="pwd-text">
+				<p style="color:rgb(165,165,165)">请重新输入密码</p>
+			</div>
+			<div class="input-divtype" style="border: 1px solid rgb(220,220,220);">
+				<label>登录密码</label>
+				<input type="password" name="new_pwd" id='password' style="width:95%;font-size:15px;" placeholder="6-16位数字,字母或符号组合" onkeyup="cheackmobile()" />
+				<img src="./images/eye_no.png" id='togglePassword' class='pwdimg_eye' />
+			</div>
+
+			<button class="button blue but_pwd" id="submit" onclick="next()">完成</button><br/><br/>
+			<script type="text/javascript">
+			function next(){
+				var version='1.0';
+				var find_pwd_tel=getCookie('find_pwd_tel');
+				var findpwd_msg_code=getCookie('findpwd_msg_code');
+				var find_pwd_idcard = getCookie('find_pwd_idcard');
+				var password = hex_md5($('#password').val());
+				$.ajax({
+					url:FORGETPASSWORD_JSON_URL,
+					type:'post',
+					data:{
+						version:app_data.version,
+						logintel:find_pwd_tel,
+						checkcode:findpwd_msg_code,
+						idcard:find_pwd_idcard,
+						password:password
+					},
+					dataType:'json',
+					success:function(data){
+						if(data.code == '000'){
+							tip_windows_conform('恭喜您:设置成功，<br>快去出借并获得收益吧!','返回首页','登录','index.html','login.html');
+							deleteCookie('find_pwd_tel');
+							deleteCookie('findpwd_msg_code');
+							deleteCookie('find_pwd_idcard');
+						}else if(data.isbindbank=='0'){
+							location.href="verification.html";
+						}
+						else {
+							tip_window(data.msg,"确定");	
+						}
+					}
+				});
+				// var new_pwd = $("input[name=new_pwd]").val();
+				// if(new_pwd == ''){
+				// 	tip_window('新密码不能为空！','确定！');
+				// 	return false;
+				// }
+				// var re =  /(?!^[0-9]+$)(?!^[A-z]+$)(?!^[^A-z0-9]+$)^.{6,16}$/;
+				// if(!re.test(new_pwd)){
+				// 	tip_window('新密码格式不对！','确定！');
+				// 	return false;
+				// }
+
+				// location.href="login.html";
+			}
+		</script>
+		</div>
+	</body>
+</html>

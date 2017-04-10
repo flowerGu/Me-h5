@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>更多</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"
+	/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta http-equiv="Cache-Control" content="no-store" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="css/common.css" />
+	<link rel="stylesheet" href="css/more.css" />
+	<script src="js/jquery-1.9.0.min.js"></script>
+	<script src="js/mustache.js"></script>
+	<script src="js/config.js"></script>
+	<script src="js/functions.js"></script>
+</head>
+<body>
+	<div class="more_con border_tb whitebg mgt8">
+		<a href="p2p_knowledge.html" class="m_financial">
+			<em class="icon "></em> 网贷知识
+			<i class="icon-array-right"></i>
+		</a>
+	</div>
+	<div class="more_con border_tb whitebg mgt8">
+		<a href="about_app/brand_intro.html" class="m_intro btm">
+			<em class="icon"></em> 品牌介绍
+			<i class="icon-array-right"></i>
+		</a>
+		<a href="insurance.html" class="m_safe btm">
+			<em class="icon"></em> 安全保障
+			<i class="icon-array-right"></i>
+		</a>
+		<a href="general_ans.html" class="m_qus btm">
+			<em class="icon"></em> 帮助中心
+			<i class="icon-array-right"></i>
+		</a>
+		<a href="feedback.html" class="m_pwd btm">
+			<em class="icon"></em> 意见反馈
+			<i class="icon-array-right"></i>
+		</a>
+		<a href="about_us.html" class="m_app ">
+			<em class="icon"></em> 关于我们
+			<i class="icon-array-right"></i>
+		</a>
+	</div>
+	<div class="more_con border_tb whitebg mgt8" style="margin-bottom:60px">
+		<a href="http://looyuoms7613.looyu.com/chat/chat/p.do?g=10052878&md=2&c=20000506&v=14013b3dde2220836581d3f852503c9d7e&u=00f53eea81a2ebf8742c61935363180676&f=10064730&site=0&p0=http%3A%2F%2Fwww.mejinrong.com%2F&ct=17&refer=&loc=http%3A%2F%2Fwww.mejinrong.com%2F&_d=1471578924993"
+			class="btm">
+			<em class="icon onlineCust"></em>在线客服
+			<i class="icon-array-right"></i>
+		</a>
+		<a href="javascript:;" id='login_herf'>
+			<em class="icon-exit"></em>
+			<span id='logout'></span>
+		</a>
+	</div>
+	<script>
+	// 处理屏幕html缩放属性
+	(function(win, lib) {
+		custFn(5)//底部浮层
+    var nav = $(".page-nav");
+    var dpr = 0;
+    var scale = 0;
+    if (!dpr && !scale) {
+        var isAndroid = win.navigator.appVersion.match(/android/gi);
+        var isIPhone = win.navigator.appVersion.match(/iphone/gi);
+        var devicePixelRatio = win.devicePixelRatio;
+        if (isIPhone) {
+            // iOS下，对于2和3的屏，用2倍的方案，其余的用1倍方案
+            if (devicePixelRatio >= 3 && (!dpr || dpr >= 3)) {                
+                dpr = 3;
+            } else if (devicePixelRatio >= 2 && (!dpr || dpr >= 2)){
+                dpr = 2;
+            } else {
+                dpr = 1;
+            }
+        } else {
+            // 其他设备下，仍旧使用1倍的方案
+            dpr = 1;
+        }
+        scale = 1 / dpr;
+    }
+    nav.attr('data-dpr', dpr);
+
+})(window, window['lib'] || (window['lib'] = {}));
+		var tokenid = getCookie("tokenid");
+		$(function() {
+			var bH = $(document).height();
+			$('body').css('min-height', bH); //自定义body高度
+			$('.tip_know').click(function() {
+				$('.zbg').css('display', 'none');
+				$('.tip_down').css('display', 'none');
+			})
+			choice();
+		})
+		function choice() { //退出&登录
+			if (tokenid != null) {
+				$('#login_herf>span').text('安全退出');
+				$('#login_herf').on('click',function() {
+					tip_tuichu('确定要退出？', '确定', '取消');
+				})
+			} else {
+				$('#login_herf>span').text('登录');
+				$('#login_herf').attr("href", 'login.html');
+			}
+		}
+		function loginOut() {
+			$.ajax({
+				url: LOGINOUT_JSON_URL,
+				type: 'post',
+				data: {
+					version: app_data.version,
+					tokenid: tokenid
+				},
+				dataType: 'json',
+				success: function(data) {
+					if (data.code == '000') {
+						location.reload();
+						clearCookie();
+						sessionStorage.clear()
+            			var messageid = window.localStorage.getItem('messageid');
+						var fengxiantishi = window.localStorage.getItem('fengxiantishi');
+						localStorage.clear();
+						if(messageid !=''){
+						  window.localStorage.setItem('messageid',messageid);
+						}
+						if(fengxiantishi){
+							window.localStorage.setItem('fengxiantishi',fengxiantishi);
+						}
+					} else {
+						tip_window(data.msg, '取消');
+					}
+				}
+			})
+		}
+	</script>
+</body>
+</html>

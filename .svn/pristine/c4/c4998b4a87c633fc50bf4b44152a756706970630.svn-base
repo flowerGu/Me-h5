@@ -1,0 +1,456 @@
+/*登录*/
+body{
+  position:relative;
+  background: #fff;
+}
+.login_back{
+  padding:3% 6% 0 5%;
+}
+.logo_warp{
+    overflow: hidden;
+    .login_image{
+        display: block;
+        width:38%;
+        margin:50px auto;
+    }
+}
+
+.loginWrap {
+    width:73.3%;
+    margin:0px auto
+}
+.warp_login{
+  width:100%;
+  background: #ff4c4c;
+  padding:8px 0;
+  margin-top:35px
+}
+.loginWrap{
+   li{
+    height:52px !important;
+    font-size:16px !important;
+    input{
+      padding-top:8px;
+      font-size:14px
+    }
+  }
+}
+.login {
+    margin: 22px auto;
+    position: relative;
+    height: 40px;
+    font-size: 1.4em;
+}
+.login a:nth-of-type(1) {
+    float: right;
+}
+.login a:nth-of-type(2) {
+    float: left;
+}
+.login a {
+    color: #5f5f5f;
+    font-size:12px;
+}
+.contant_us_num {
+    text-align: center;
+    font-size: 13px;
+    height: 26px;
+    line-height: 26px;
+    color: #5f5f5f;
+    margin-left: 5px;
+}
+.login_warn {
+    position: absolute;
+    bottom: 3rem;
+    width: 100%;
+    text-align: center;
+    color: #8e8e8e;
+    font-size:12px;
+}
+.contant_img{
+    width: 10px;
+    margin-top: -3px;
+}
+.contant {
+    position: absolute;
+    bottom: 1em;
+    width: 100%;
+    text-align: center;   
+}
+/*注册*/
+.register_back{
+  .u_back_login{
+    float:left
+  }
+  .go_login{
+    float:right;
+    font-size:16px;
+    color:#5f5f5f
+  }
+}
+.register_image{
+   display: block;
+   width:38%;
+   margin:20px auto;
+}
+.registerWrap{
+  width:73%;
+  margin:0 auto;
+}
+.registerWrap{
+  li{
+    height:44px !important;
+    font-size:15px !important;
+    line-height: 44px;
+    input{
+      font-size:12px
+    }
+  }
+  
+}
+.xieyi{
+  color:#5f5f5f;
+  margin-top:12px; 
+  font-size:12px;
+  a{
+    color:#ff4c4c;
+  }
+}
+/*弹窗*/
+.puzz_picture_box {
+    width: 225px;
+    height: 171px;
+    position: absolute;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    left: 50%;
+    margin-left: -127px;
+    top: 108px;
+    display: none;
+}
+
+.puzz_picture_box2 {
+    top: 60px
+}
+
+.puzz_title {
+    font-size: 15px;
+    font-family: "微软雅黑";
+    text-align: center;
+    margin-top: 10px
+}
+
+.question_pic {
+    width: 160px;
+    height: 44px;
+    background: #f3f3f3;
+    border-radius: 10px;
+    margin-top: 12px;
+    margin-left: 22px;
+    float: left
+}
+.question_pic img{
+    width:100%
+}
+.change_puzz {
+    font-size: 12px;
+    color: #ccc;
+    float: right;
+    margin-right: 5px;
+    margin-top: 25px
+}
+
+.puzz_intro {
+    font-size: 12px;
+    color: #8e8e8e;
+    text-align: center;
+    margin: 12px 0;
+}
+
+.answer_puzz {
+    width: 186px;
+    height: 30px;
+    background: #f3f3f3;
+    margin: 0px auto;
+    border-radius: 10px;
+    position: relative;
+}
+.answer_puzz img{
+    width:100%
+}
+
+.arrow_container {
+    width: 270px;
+    position: absolute;
+    bottom: 0;
+    left: 12px;
+}
+
+.puzz_arrow {
+    width: 13px;
+    height: 8px;
+    position: absolute;
+    left: 0px;
+    bottom: 0;
+    background: url("../images/chanpin_pic_bg_03.png");
+    background-size: cover;
+}
+
+/*滑块*/
+.reg1 {
+    height: 0px;
+    display: none;
+}
+
+.slide_bg {
+    width: 214px;
+    height: 31px;
+    position: relative;
+    border-radius: 50px;
+    background: #e4e4e4;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-family: "微软雅黑";
+    line-height: 31px;
+    text-align: center;
+    color: #a2a2a2;
+    float: left;
+    left: 50%;
+    margin-left: -120px;
+    top: 50%;
+    margin-top: -15px;
+}
+
+.slide_block {
+    width: 31px;
+    height: 31px;
+    background: url("../images/silid_block1.png") no-repeat;
+    background-size: cover;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    cursor: move;
+}
+
+.slide_isPass {
+    width: 19px;
+    height: 21px;
+    float: right;
+    margin-top: 10px;
+    background-size: cover
+}
+
+.slide_isPass2 {
+    margin-top: 13px;
+    margin-right: 5px;
+}
+
+.slide_isPass img {
+    float: right;
+}
+
+.answer_puzz ul {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.answer_puzz ul li {
+    width: 31px;
+    height: 31px;
+    float: left;
+}
+
+.isMoved {
+    background: rgba(190, 190, 190, .6)
+}
+/*注册成功*/
+.reg_success,
+.regi_success {
+    background: #fff;
+    width: 80%;
+    left: 10%;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    height: 230px;
+    padding-top: 5px;
+    position: fixed;
+    top: 27%;
+    z-index: 99999;
+    display: none;
+}
+#zhezhao {
+    background-color: #666;
+    position: fixed;
+    z-index: 99;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    -moz-opacity: 0.5;
+    display: none;
+}
+.reg_success span,
+.regi_success span {
+    color: #000;
+    font-size: 16px;
+    display: block;
+}
+.reg_success div,
+.regi_success div {
+    margin: 0 auto;
+    text-align: center;
+}
+.reg_success img,
+.regi_success img {
+    width: 60px;
+    clear: both;
+}
+.regi_success img {
+    margin-top: 10px
+}
+.reg_success input {
+    outline: none;
+    background: transparent;
+    width: 60px;
+    border-top: 1px solid rgb(200, 200, 200);
+    line-height: 45px;
+    color: #ff4c4c;
+    font-size: 1.4em;
+    padding-top: 6px;
+}
+.regi_success input {
+    background: transparent;
+    margin-top: 10px;
+    border: 1px solid #dbdbdb;
+    border-radius: 5px
+}
+.reg_success p,
+.regi_success p {
+    color: rgb(178, 178, 178);
+    width: 200px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.regi_success p {
+    text-align: center;
+    margin: 5px auto;
+}
+/*邀请好友*/
+.invite_header{
+  width:95.6%;
+  height:64px;
+  margin:2px auto;
+  position: relative;
+  .invite_img{
+    width:100%;
+    height:100%;
+  }
+  .invi_tip{
+    font-size:12px;
+    color:#5f5f5f;
+    position: absolute;
+    width:200px;
+    height:20px;
+    line-height: 20px;
+    left: 25px;
+    bottom:4px
+  }
+}
+.invite_warp{
+  width:90%;
+  margin:0 auto;
+   li{
+    height:48px !important;
+    font-size:16px !important;
+    line-height:48px;
+    input{
+      font-size:14px
+    }
+  }
+}
+.regi_tip{
+  text-align:center;
+  font-size:1rem;
+  color:#666666;
+  margin:15px 0;
+}
+.regi_tip a{
+  color:#ff4c4c
+}
+.invite_code{
+  display: block;
+  width:100%;
+  margin:0 auto;
+  position: relative;
+    .code_bg{
+        width:100%;
+        height:100%
+    }
+    .code_image{
+        position: absolute;
+        left: 12%;
+        top: 39%;
+        width: 21%;
+    }
+}
+.warp_invite{
+  width:100%;
+  background: #ff4c4c;
+  padding:8px 0;
+  margin-top:20px
+}
+.invite_button{
+  width:100%;
+  margin-top:33px;
+  font-size:15px;
+  .invite_ad{
+    width:48%;
+    height:38px;
+    border:1px solid black;
+    border-radius:5px;
+    line-height: 38px;
+    text-align: center;
+    float:left;
+    img{
+      width:18px;
+      margin-bottom:5px;
+    }
+    span{
+      color:black
+    }
+  }
+  .invite_ios{
+    width:48%;
+    height:38px;
+    line-height: 38px;
+    text-align: center;
+    border-radius:5px;
+    float:right;
+    background: #4f4f4f;
+    img{
+     width:18px;
+     margin-bottom:5px;
+    }
+    span{
+      color:#fff
+    }
+  }
+}
+.slide_li{
+  height:0;display: none
+}
+.invite{
+  width:100%;
+  height:100%
+}
+.puzz_picture_box2{
+	top:18px
+}
+.checkboxWrap{display:inline-block;width:13px;height:13px;border-radius:3px;border:1px solid rgb(155,155,155);vertical-align:middle;margin-right:3px;}
+.checkboxWrap input{opacity: 0;filter:alpha(opacity=0)}
+.checked{background:url("../images/common/checked.png") no-repeat center center;background-size:100%}

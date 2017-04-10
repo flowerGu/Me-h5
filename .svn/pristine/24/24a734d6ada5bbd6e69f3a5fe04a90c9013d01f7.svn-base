@@ -1,0 +1,99 @@
+// 字体图标
+.color-blue{
+  color: #61c2ed;
+}
+.color-yellow{
+  color: #ffcf23;
+}
+.color-red{
+  color: #ff5e55;
+}
+.color-orange{
+  color: #ffb142;
+}
+.color-purple{
+  color: #cdb2ff;
+}
+.color-purple{
+  color: #cdb2ff;
+}
+.color-brown{
+  color:#d39d82;
+}
+.color-lightYellow{
+  color:#ff8762;
+}
+
+//
+.icon {
+  display: inline-block;
+  width: 24/75rem;
+  height: 24/75rem;
+}
+.icon-middle{
+  display: inline-block;
+  width: 40/75rem;
+  height: 40/75rem;
+  font-size: 18px;
+} 
+
+[data-dpr="2"] .icon-middle{
+  font-size: 18*2px;
+}
+[data-dpr="3"] .icon-middle{
+  font-size: 18*3px;
+}
+.icon-setting{
+  color:#fff;
+  // background-image: url(../images/icon/icon-setting.png);
+  background-size: 34/75rem 34/75rem;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 34/75rem;
+  height: 34/75rem;
+}
+.icon-email {
+    background:url(../images/icon/icon-email.png) no-repeat center;
+    background-size: 100%;
+}
+.icon-user {
+    background: url(../images/icon/icon-user.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.icon-blue-user{
+  background: url(../images/icon/icon-blue-user.png) no-repeat;
+  background-size: 100% 100%;
+}
+.icon-array-right{
+  width: 20/75rem;
+  background: url(../images/icon/icon-arrow-right.png) no-repeat;
+  background-size: 100% 100%;
+}
+.icon-file{
+  background: url(../images/icon/icon-file.png) no-repeat;
+  background-size: 100% 100%;
+}
+.icon-wallet{
+  background: url(../images/icon/icon-wallet.png) no-repeat;
+  background-size: 100% 100%;
+}
+.icon-gift{
+  background: url(../images/icon/icon-gift.png) no-repeat;
+  background-size: 100% 100%;
+}
+.icon-invite{
+  background: url(../images/icon/icon-invite.png) no-repeat;
+  background-size: 100% 100%;
+}
+.icon-me{
+  background: url(../images/icon/icon-me.png) no-repeat;
+  background-size: 100% 100%;
+}
+.icon-zj{
+  background: url(../images/icon/icon-zj.png) no-repeat;
+  background-size: 100% 100%;
+}
+.icon-page{
+  color: #73b1ed;
+}

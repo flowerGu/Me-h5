@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>出借结果</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no"/>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<link href="css/base.css" rel="stylesheet"/>
+	<link href="css/object.css" rel="stylesheet"/>
+
+</head>
+<body id="main" style="height:100%">
+		<div class="header whitebg mgt2">
+			<a onclick="backFn()" class="back"></a>
+			出借结果
+		</div>
+	 	<div class="contentwrap">
+			<div class="topedg"></div>
+			<div class="content-invest" id="dataWrap">
+				<img src="images/invest.png" class="invest-img"/>
+				<p class="suc-tip"></p>
+				<div id="dataW">
+				<script type="ng/template" id="datas">
+					{{#payresultS}}<!--金盾出借成功-->
+					<ul class="clearfix img-ul">
+						<li><img src="images/success.png"></li>
+						<li>——</li>
+						<li><img src="images/jixi.png"></li>
+						<li>——</li>
+						<li><img src="images/daoqi.png"></li>
+					</ul>
+					<ul class="text-ul clearfix">
+						<li>出借成功</li>
+						<li></li>
+						<li>计息</li>
+						<li></li>
+						<li>到期</li>
+					</ul>
+							<table>
+								<tr>
+									<td width="40%">项目名称:</td>
+									<td width="55%">{{loan_title}}</td>
+								</tr>
+								<tr>
+									<td>出借金额:</td>
+									<td>{{invest_amount}}元</td>
+								</tr>
+								<tr>
+									<td width="45%">协议出借利率:</td>
+									<td>{{year_reat}}%</td>
+								</tr>
+								<tr>
+									<td>项目期限:</td>
+									<td>{{loan_times}}个月</td>
+								</tr>
+								<tr>
+									<td>计息日:</td>
+									<td>{{interrest_date}}</td>
+								</tr>
+								<tr>
+									<td>协议年化收益:</td>
+									<td>{{expire_profit}}元</td>
+								</tr>
+							</table>
+					{{/payresultS}}
+				</script>
+
+				<script type="ng/template" id="Vip">
+					{{#payresultS}}<!--VIP债转出借成功-->
+					<ul class="clearfix img-ul">
+						<li><img src="images/success.png"></li>
+						<li>——</li>
+						<li><img src="images/jixi.png"></li>
+						<li>——</li>
+						<li><img src="images/daoqi.png"></li>
+					</ul>
+					<ul class="text-ul clearfix">
+						<li>出借成功</li>
+						<li></li>
+						<li>计息</li>
+						<li></li>
+						<li>到期</li>
+					</ul>
+							<table>
+								<tr>
+									<td width="40%">项目名称:</td>
+									<td width="55%">{{loan_title}}</td>
+								</tr>
+								<tr>
+									<td>出借金额:</td>
+									<td>{{invest_amount}}元</td>
+								</tr>
+								<tr>
+									<td width="45%">协议出借利率:</td>
+									<td>{{year_reat}}</td>
+								</tr>
+								<tr>
+									<td>项目期限:</td>
+									<td>{{loan_times}}个月</td>
+								</tr>
+								<tr>
+									<td>计息日:</td>
+									<td>{{interrest_date}}</td>
+								</tr>
+							</table>
+					{{/payresultS}}
+				</script>
+				
+
+				<script type="ng/template" id="zz_data"><!--债转-->
+					{{#payresultS}}
+					<ul class="clearfix img-ul">
+						<li><img src="images/success.png"></li>
+						<li>——</li>
+						<li><img src="images/jixi.png"></li>
+						<li>——</li>
+						<li><img src="images/daoqi.png"></li>
+					</ul>
+					<ul class="text-ul clearfix">
+						<li>出借成功</li>
+						<li></li>
+						<li>计息</li>
+						<li></li>
+						<li>到期</li>
+					</ul>
+					<table>
+						<tr>
+							<td width="40%">项目名称:</td>
+							<td width="55%">{{loan_title}}</td>
+						</tr>
+						<tr>
+							<td>承接金额:</td>
+							<td>{{invest_amount}}元</td>
+						</tr>
+						<tr>
+							<td width="45%">协议年化利率:</td>
+							<td>{{year_reat}}</td>
+						</tr>
+						<tr>
+							<td>剩余期限:</td>
+							<td>{{loan_times}}个月</td>
+						</tr>
+						<tr>
+							<td>交易时间:</td>
+							<td>{{trade_date}}</td>
+						</tr>
+					</table>
+					{{/payresultS}}
+				</script>
+				
+				<script type="ng/template" id="zj_datas"><!--产品-->
+					{{#payresultS}}
+					<ul class="clearfix img-ul">
+						<li><img src="images/success.png"></li>
+						<li>——</li>
+						<li><img src="images/jixi.png"></li>
+						<li>——</li>
+						<li><img src="images/daoqi.png"></li>
+					</ul>
+					<ul class="text-ul clearfix">
+						<li>出借成功</li>
+						<li></li>
+						<li>计息</li>
+						<li></li>
+						<li>到期</li>
+					</ul>
+							<table>
+								<tr>
+									<td width="40%">项目名称:</td>
+									<td width="55%">{{projectName}}</td>
+								</tr>
+								<tr>
+									<td>出借金额:</td>
+									<td>{{buyAmount}}元</td>
+								</tr>
+								<tr>
+									<td width="45%">协议出借利率:</td>
+									<td>{{yearRate}}%</td>
+								</tr>
+								<tr>
+									<td>项目期限:</td>
+									<td>{{projectPeriod}}个月</td>
+								</tr>
+								<tr>
+									<td>计息日:</td>
+									<td>{{valueDate}}</td>
+								</tr>
+								<tr>
+									<td>协议年化收益:</td>
+									<td>{{prospectiveEarnings}}元</td>
+								</tr>
+							</table>
+					{{/payresultS}}
+				</script>
+				</div>
+				<a href="" class="continue">继续出借</a>
+				<a href="having_project.html" class="backindex">订单详情</a>
+			</div>
+			<div class="btmedg btmd">
+			</div>
+		</div>
+		<script src="js/jquery-1.9.0.min.js"></script>
+		<script type="text/javascript" src="js/mustache.js"></script>
+		<script src="js/config.js"></script>
+		<script src="js/functions.js"></script>
+		<script src="js/obj_invest_result.js"></script>
+</body>
+</html>

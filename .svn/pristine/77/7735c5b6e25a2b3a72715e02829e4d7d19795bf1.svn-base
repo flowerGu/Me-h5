@@ -1,0 +1,19 @@
+*{box-sizing:border-box}
+body{background-color:#eeeeee}
+.header{padding:15px 4% 10px;border-bottom:1px solid #dbdbdb;}
+.order_pay{padding-left:4%;}
+.order_money{padding:15px 0;position:relative;}
+.order_money label{font-size:1.7em;color:#181818}
+.order_money p{position:absolute;top:12px;right:4%;width:110px;font-size:1.8em;color:#e9483b}
+.order_money p span{font-size:1.1em;margin-right:.2em;}
+.order_money p i {
+	display: inline-block;
+	width: 14px;
+	height: 20px;
+	vertical-align: middle;
+	background: url(../images/ico.png) no-repeat center center;
+	background-position:-81px -160px;
+	margin-left: 10px;
+}
+.p_most{padding:15px 4% 0;font-size:1.5em;color:#8d8d8d;}
+.p_most a{color:#0188dd}

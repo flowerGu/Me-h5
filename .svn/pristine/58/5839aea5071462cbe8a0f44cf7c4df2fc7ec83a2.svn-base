@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no" />
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<title>消息</title>
+	<link rel="stylesheet" type="text/css" href="./css/style.css" />
+	<link rel="stylesheet" type="text/css" href="./css/base.css" />
+	<style>
+		.msg_box li{
+			color:#DDDCDD !important;
+		}
+		.msg_box li.mess_grey {
+			color: rgb(58, 58, 58);
+		}
+		.msg_box .dropload-down {
+			height: 0;
+		}
+	</style>
+	<script src="./js/zepto.min.js"></script>
+	<script src="./js/dropload.js"></script>
+	<script type="text/javascript" src='./js/config.js'></script>
+	<script type="text/javascript" src='./js/functions.js'></script>
+	<script type="text/javascript" src='./js/mustache.js'></script>
+
+</head>
+<body style="background-color:#e8e8e8;">
+	<div class="msg_box">
+		<ul id="msgList"></ul>
+	</div>
+	<script>
+			var tokenid=null,init=false;
+			dropDownPageOpts = {page: 1,enable: true};
+			//app调用
+			var source=getQueryString('source');
+			if(source=='app'){
+				tokenid=getQueryString('tokenid');
+			}
+			else{
+				tokenid=getCookie('tokenid');
+			}
+			if(tokenid == null || tokenid==''){
+				tip_windows('您还未登录！','登录','取消','index.html');
+				//return;
+			}
+			sessionStorage.setItem('tokenid',tokenid);
+			addlist(dropDownPageOpts.page++,'true');
+			function initDropload(){
+				if(init){
+					return;
+				}
+				init=true;
+				$('.msg_box ul').dropload({
+				 threshold : 50,
+				 domDown : {
+							domClass   : 'dropload-down',
+							domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+							domUpdate  : '<div class="dropload-update">↓释放加载</div>',
+							domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+							domNoData  : '<div class="dropload-noData">暂无数据</div>'
+					},
+					scrollArea : window,
+					loadDownFn : function(me){
+						var current;
+						me.lock();
+							addlist(dropDownPageOpts.page++,function(){
+								
+								me.resetload();
+								me.unlock();
+								me.noData(false);
+							},function(){
+								me.lock();
+								me.noData();
+								me.resetload();
+							});
+						}
+					});
+			}
+		
+			function addlist(current,successFun,errorFun){
+					$.ajax({
+					   type: "post",
+					   url: MESSAGES_JSON_URL,
+					   data: {
+					   	version:app_data.version,
+					   	tokenid:tokenid,
+					   	current:current
+					   },
+					   success: function(data){
+					   	if(data.code=='000'){
+					   		if(data.hasnextpage==='false'){
+								dropDownPageOpts.enable=false;
+							}
+					   		if(data.list != null){
+					   			$(data.list).each(function(idx, item) {  
+					   				item.current=current;
+								    if(item['status'] == '1'){
+							    		 item['status']=true;
+								    }
+								    else{
+								    	 item['status']=false;
+								    }
+								    
+								}); 
+								$.get('./templates/message.tpl',{"time":new Date().getTime()}, function(template){
+								
+								    var result = Mustache.render(template, data);
+								    $('.msg_box ul').append(result);
+								  
+								});
+								initDropload();
+					   		}
+					   		else
+					   		{
+					   			console.log(dropDownPageOpts.page)
+					   			if(dropDownPageOpts.page==2){
+					   			 $('.msg_box').append("<div style='padding-top:30px;margin:0 auto; width:170px;font-size: 20px;'>您暂时没有消息！</div>");
+					   			}
+					   		}
+					   		if(data.hasnextpage==='false'){
+								if($.isFunction(errorFun)){
+									errorFun();
+								};	
+							}
+							else if($.isFunction(successFun)){
+								successFun();
+							}
+			   				
+					   	}
+					   	else
+					   	{
+					   		dropDownPageOpts.page--;
+					   		tip_window(data.msg,'确定');
+					   	}
+					   
+					   },
+					   error:function(data){
+					   		tip_window(' 网络超时','确定');
+					   }
+					});
+			}
+
+			$('#msgList').on('click','li',function(){
+					var _this=$(this);
+					if(_this.data('status')===false){
+						$.ajax({
+						   type: "post",
+						   url: MESSAGESOPRATE_JSON_URL,
+						   data: {
+						   	version:app_data.version,
+						   	tokenid:tokenid,
+						   	messageflag:1,
+						   	messageid:_this[0].id
+						   },
+						   success: function(data){
+						   	if(data.code=='000'){
+									$('#'+_this[0].id).removeClass('mess_grey');
+								}
+						   },
+						   error:function(data){
+						   }
+						});
+					}
+					localStorage.setItem('message',_this.html());
+					window.location.href='message_detail.html';
+			})
+		</script>
+</body>
+</html>

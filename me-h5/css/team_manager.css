@@ -1,0 +1,14 @@
+body{background-color:#eee;}
+input{border:none;}
+.header{padding:10px 4% 10px;border-bottom:1px solid #dbdbdb;}
+.choice{padding:.5em 4%;}
+.choice select{float:left;height:100%;outline:none;padding:.5em 0;border:1px solid #ddd;}
+.choice>select{width:45%;margin-right:5%;height:32px;}
+.countWrap{padding:.5em 4%;color:#666666;font-size:1.1em;}
+.countWrap li label{color:#181818;font-size:1.1em;}
+.countWrap li{float:left;text-align:center;}
+.countWrap li:nth-of-type(1){width:36%;}
+.countWrap li:nth-of-type(2){width:28%}
+.rightSelect{position:relative;float:right;width:50%;height:32px;}
+.rightSelect select{position:absolute;left:0;top:0;width:100%;height:100%;z-index:22;background:transparent;-webkit-appearance:none;-moz-appearance:none;appearance:none;}
+.rightSelect img{position:absolute;right:2%;top:5px;z-index:21;}

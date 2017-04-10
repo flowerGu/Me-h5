@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no" />
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<title>消息详情</title>
+	<link rel="stylesheet" type="text/css" href="./css/style.css" />
+	<link rel="stylesheet" type="text/css" href="./css/base.css" />
+	<script type="text/javascript" src="./js/jquery-1.9.0.min.js"></script>
+	<script type="text/javascript" src="./js/mustache.js"></script>
+	<script type="text/javascript" src="./js/functions.js"></script>
+	<script type="text/javascript" src="./js/config.js"></script>
+	<style>
+		body{
+			background-color:#fff;
+		}
+		.msg_box_details{
+			color: #5f5f5f;
+			padding:20px 15px;
+		}
+		.msg_box_details p{
+			font-size: 20px;
+			height:30px;
+			line-height:30px;
+		}
+		.msg_time{
+			font-size:16px;
+			float:right;
+		}
+		.msg-content{
+		  display: block;
+			padding-top:10px;
+			font-size:16px;
+			line-height:25px;
+			word-break: break-all;
+		}
+	</style>
+</head>
+<body>
+	<div class="msg_box_details"></div>
+</body>
+<script>
+		$(function(){
+				var msg=localStorage.getItem('message');
+				if(msg==null){
+					return;
+				}
+				$(".msg_box_details").append(msg);
+		})
+		</script>
+</html>

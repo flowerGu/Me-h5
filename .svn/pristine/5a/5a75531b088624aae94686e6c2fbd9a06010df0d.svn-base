@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<Meta charset="utf-8">
+	<title>文章详情</title>
+	<Meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<Meta naMe="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"
+	/>
+	<Meta naMe="apple-mobile-web-app-capable" content="yes" />
+	<Meta naMe="apple-mobile-web-app-status-bar-style" content="black" />
+	<Meta naMe="format-detection" content="telephone=no" />
+
+	<META HTTP-EQUIV="pragma" CONTENT="no-cache">
+	<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+	<META HTTP-EQUIV="expires" CONTENT="0">
+
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<link href="css/base.css" type="text/css" rel="stylesheet" />
+	<link href="css/index.css" type="text/css" rel="stylesheet" />
+	<link href="css/financial.css" type="text/css" rel="stylesheet" />
+	<script src="./js/jquery-1.7.0.min.js"></script>
+	<script type="text/javascript" src='./js/config.js'></script>
+	<script type="text/javascript" src='./js/mustache.js'></script>
+	<script type="text/javascript" src='./js/functions.js'></script>
+
+	<style type="text/css">
+		div.finacialCon {
+			padding: 1rem 4%;
+		}
+		
+		.imgWrap {
+			padding: 0 4%;
+		}
+		
+		.imgWrap img {
+			width: 100%;
+		}
+		
+		.about_con {
+			background-color: #fff;
+			padding:18px 4% 0px;
+		}
+
+	</style>
+</head>
+<body style="background-color:#fff">
+	<div class="finacialCon">
+	</div>
+	<div class="imgWrap"></div>
+</body>
+<script>
+	    var id=getQueryString('id').trim();
+	    var tokenid=getQueryString('tokenid');
+		if(getQueryString('type')==0){
+			$('.header').hide();
+		}else{
+			$('.header').show();
+		}
+	    $.ajax({
+    			url:CLASSIFICATIONDETAIL_JSON_URL,
+    			type:'post',
+    			async:false,
+    			data:{version:app_data.version,id:id},
+    			dataType:'json',
+    			success:function(data){
+    				if(data.code!='000')
+    				{
+    					tip_window(data.msg,'确定');
+    					return false;
+    				}
+    				else
+    				{
+	    				$.get('./templates/financial_detial.tpl',{"time":new Date().getTime()}, function(template){
+						   var result = Mustache.render(template, data);
+						    $('.finacialCon').append(result);
+						    $('.financial_detial').append(data.content);
+						});
+    				}
+    			}
+    		});
+
+	    </script>
+</html>

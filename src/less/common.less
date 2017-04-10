@@ -1,0 +1,37 @@
+//
+@import '../css/base.css';
+@import './core/icon';
+
+// less function
+@import './bootstrap/public';
+@import './core/buttons';
+@import 'core/nav';
+@import 'core/header';
+@import "core/dropload";
+@import "core/tip_window";
+@import 'core/modals';
+
+
+// 全局无数据 base.css里面有
+// .global-no-data{
+// 	display: block;
+//   width: 80%;
+//   height: auto;
+// 	margin: 30% auto;
+// }
+
+// 三项开关-Me账户
+body{
+  display: block !important;
+}
+.switch-me-business,
+.switch-me-account{
+  display: none;
+}
+
+body.switch-me-business .switch-me-business{
+  display: block;
+}
+body.switch-me-account .switch-me-account{
+  display: block;
+}

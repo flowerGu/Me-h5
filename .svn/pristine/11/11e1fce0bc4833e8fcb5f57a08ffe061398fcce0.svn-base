@@ -1,0 +1,29 @@
+//进度条
+.process-bar{
+  position: relative;
+  height: 7/75rem;
+  background-color: @gray3;
+  border-radius: 6px;
+
+  >.process-bar-val{
+    position: absolute;
+    left: 0;
+    top:0;
+    background-color: #f5004c;
+    border-radius: 6px;
+    height: 100%;
+    width: 0;
+
+    transition: width 1.5s ease-in;
+  }
+}
+
+.disabled{
+  .process-bar{
+    background-color: #f5f5f5;
+    >.process-bar-val{
+
+      background-color: @gray3;
+    }
+  }
+}

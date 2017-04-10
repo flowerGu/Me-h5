@@ -1,0 +1,110 @@
+body {
+  position: relative;
+  background-color: #E9E9E9;
+}
+#form {
+  margin-top: .5rem;
+  background-color: #FFFFFF;
+}
+
+.info-div {
+  padding-left: 15px;
+  padding-top: 15px;
+  color: #8E8E8E;
+}
+
+.info-bottom {
+  position: absolute;
+  color: #8E8E8E;
+  width: 95%;
+  min-height: 2.4rem;
+  font-size: 1.4rem;
+  text-align: center;
+  bottom: 7rem;
+  background-image: url(../images/openAnAccount/icon_dot.png);
+  background-position: 1rem .5rem;
+  background-repeat: no-repeat;
+  background-size: 18.5px 14.5px;
+  padding-top: .5rem;
+  padding-left: 2.5rem;
+}
+
+.info-bottom.nologo {
+  font-size: 12px;
+  text-align: left;
+  background-image: none;
+  padding-left: 15px;
+}
+.info-bottom >a{
+  color: #ff4c4c;
+} 
+/*.info-bottom >a{
+   color: #8E8E8E;
+}*/
+
+.btn-success {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 4rem;
+  border: none;
+  color: #FFFFFF;
+  font-size: 2rem;
+  background-color: #ff4c4c;
+}
+
+.form-control {
+  float: right;
+  text-align: right;
+  color: #8E8E8E;
+  padding-right: 15px;
+}
+
+.form-group>label {
+  color: #5F5F5F;
+}
+
+.input-check-code {
+  float: none;
+  text-align: left;
+  width: 110px;
+}
+
+
+/*交易密码设置*/
+
+.TradPwdBody {
+  max-width: 100%;
+  position: relative;
+}
+
+.TradPwdMain label {
+  font-size: 1.4em;
+}
+
+.TradPwdMain .form-control {
+  height: 20px;
+  font-size: 1.4em;
+  font-family: "微软雅黑";
+}
+
+.TradPwdMain .btnCheckCode {
+  position: absolute;
+  right: 10px;
+  top: 45%;
+  margin-right: 0;
+  font-size: 1.4em;
+  padding: 6px;
+}
+
+.TradPwdText {
+  position: absolute;
+  font-size: 1.4em;
+  line-height: 1.4em;
+  bottom: 90px;
+  padding: 0 15px;
+}
+.checkboxWrap{display:inline-block;width:12px;height:12px;border-radius:3px;border:1px solid rgb(155,155,155);vertical-align:middle}
+.checkboxWrap input{opacity: 0;filter:alpha(opacity=0)}
+.checked{background:url("../images/common/checked.png") no-repeat center center;background-size:100%}
+.info-bottom.nologo{line-height:22px;}

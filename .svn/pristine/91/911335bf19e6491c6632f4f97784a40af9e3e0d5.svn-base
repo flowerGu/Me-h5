@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no" />
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<title>民信-Me信</title>
+	<style>
+	*{margin: 0;padding:0;}
+	body{background: #e9e9e9;color:#686868;font-size: 12px;}
+	p{line-height: 20px}
+	.jianxiu_img{display: block;margin:30px auto 0;}
+	.jianxiu_content{font-family:sans-serif;width:100%;box-sizing: border-box;margin:0px auto;padding:0 8px;}
+	.first_title,.second_title{text-indent:2em}
+	.red_color{color:red;}
+	.text_right{text-align: right}
+</style>
+</head>
+
+<body>
+	<div class="jianxiu">
+		<img src="img/jianxiu.jpg" width="202" class="jianxiu_img">
+		<div class="jianxiu_content">
+			<p>亲爱的Me金融客户们：</p>
+	    <p class="first_title">大家好！</p>
+	    <p class="second_title">很抱歉通知大家，因公司机房临时检修，暂时不能使用相关服务，Me金融及公司其他业务线的官网、APP及微信等暂时无法访问。</p>
+			<p>给您造成的不便，我们深表歉意！</p>
+			<p>目前，我们的技术部门正在有条不紊的检修中，做好随时恢复正常服务准备。</p>
+			<p>预计数小时内即可完成，届时请登录网站查看。</p>
+			<p class="red_color">我们保证，服务器完成检修后：</p>
+			<p class="red_color">1. 过往出借数据不会丢失</p>
+			<p class="red_color">2. 账户安全性不会受到影响</p>
+			<p class="red_color">3. 出借、提现等全部流程均可正常使用</p>
+			<p>客服热线：400-044-3888转6</p>
+			<p>运营热线：010-58105209</p>
+	    <p class="text_right">感谢您长期的信赖与支持！</p>                                                                             
+	    <p class="text_right" id="jianxiu_time">2016年8月10日</p>
+		</div>
+	</div>
+	<script>
+		var date = new Date();
+		var year = date.getFullYear();
+		var month = date.getMonth() + 1;
+		var date = date.getDate();
+		var currentTime = this.year + "年" + this.month + "月" + this.date + "日 " ;
+		console.log(currentTime)
+		document.getElementById("jianxiu_time").innerHTML = currentTime;
+	</script>
+</body>
+

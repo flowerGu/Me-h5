@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <meta charset="utf-8" /> 
+  <title>已投项目</title> 
+  <script>
+  </script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" /> 
+  <meta name="apple-mobile-web-app-capable" content="yes" /> 
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" /> 
+  <meta name="format-detection" content="telephone=no" /> 
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <link href="css/base.css" type="text/css" rel="stylesheet" /> 
+  <link href="css/style.css" type="text/css" rel="stylesheet" />
+  <link href="css/bidsecdetail.css" type="text/css" rel="stylesheet" />
+  <script src="js/jquery-1.9.0.min.js"></script>
+  <script src="js/dropload.min.js"></script>
+  <script type="text/javascript" src='js/config.js'></script>
+  <script type="text/javascript" src='js/mustache.js'></script>
+  <script type="text/javascript" src='js/functions.js'></script>
+  <style type="text/css">
+  		#bid2 p{text-align: center;font-size:1.4em;color:#959595}
+	    #tab{
+	    	height: 100%;
+	    	margin: 0 auto;
+	    	margin-bottom: 0px;
+	    	overflow: hidden;
+	    	display: inline-block;
+	    	text-align: center;
+	    	background: transparent;
+	    }
+	    #tab li {
+		    font-size: 1.5rem;
+		    width: auto;
+		    float: left;
+		    color: #fff;
+		    cursor: pointer;
+		    line-height: 20px;
+		    margin-left: 0;
+		    margin-right: 0;
+		    border: 1px solid #fff;
+		    height: 2rem;
+		    
+		}
+		#tab li{padding: 0 1rem;}
+		#tab li:nth-of-type(1){	border-radius: 5px 0 0 5px;}
+		#tab li:nth-of-type(3){border-radius: 0 5px 5px 0;border-left: 0px;}
+		#tab li.current{border: 1px solid #fff;background-color: #fff; color: #e6275d;}
+		.details_wrap li span{margin-right:6%;color:#666666}
+		li.btm i{display: inline-block;position: absolute;right: 2%;top: 8px;width: 14px;height: 20px;
+			vertical-align: middle;
+			margin-left: 20px;
+			background-position: -81px -160px;}
+</style>
+ </head> 
+ <body style="background-color:#eee"> 
+  <div class="header">
+	<ul id="tab"> 
+		<li class="current">详细信息</li> 
+		<li id="list_type"></li> 
+		<li>回款计划</li>
+	</ul>
+	<a href="javascript:history.back(-1);" class="back"></a> 
+	</div>
+  <div class="index_content"> 
+   <div id="outer"> 
+    <div id="content"> 
+     <ul class="box_main" style="display:block;" id="bid1"> 
+     	<script type="text/ng-template" id="detail">
+			<div class="details_box">
+				<div class="whitebg details_wrap separt">
+					<ul>
+						<li class="btm clearfix" onclick="window.location.href='bidsecdetails.html?id={{bid_id}}&status=3{{#}}&zz=1{{/}}'">
+							<label>{{bid_name}}</label>
+							<span>查看项目</span>
+							<i class="weui_cell_ft" style="top:-3px"></i>
+						</li>
+						<li class="btm clearfix" id="sendEmail">
+							<label>发送电子合同</label>
+							<i class="weui_cell_ft" style="top:-3px"></i>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="details_box">
+				<div class="whitebg details_wrap separt" style="padding: 1em 4%;color:#8e8e8e;">
+					<div><p style="font-size:2.3rem;display:inline-block;margin-right:.4rem;">{{invest}}</p><span style="font-size:.9rem;">万元</span></div>
+					<div style="margin:1rem 0;">预定时间 {{reserve}}
+						<span style="float:right;">
+							{{^transfer_expire}}
+							<img class="predict_pic" src="images/predict_pic.png" style="width:1.4rem;height:1.4rem;">
+							<span class="f55 expire" style="font-size:2rem;color: #8E8E8E;">{{expire}}</span><span class="predict_down">元</span>
+							{{/transfer_expire}}
+						</span></div>
+					<div style="overflow:hidden;">						
+						{{^transferType}}<span style="float:left;margin-right:3rem;">计息时间 {{interrest_date}} </span>{{/transferType}}
+						<span style="float:left;">完成时间 {{trade_end_date}}</span>
+					</div>
+				</div>
+			</div>
+		</script>
+     </ul> 
+	 <div style="display:none" class="box_main" >
+			<input type="hidden" id="hasnextpage" value="hasnextpage">
+			<input type="hidden" id="current" value="1">
+			<div class="" id="bid2">
+				<div class="tip-join">
+						<span class="num-join">{{num-join}}</span>人次加入
+					</div>
+				<script type="text/ng-template" id="record">
+					
+					<ul>
+						{{#bidRecordList}}
+						<li style="font-size:0.6rem;padding: 0.7em 4%;background:#fff;overflow:hidden;border-bottom: 1px solid #ddd;">
+							<p style="width:100%;float:left;margin-bottom:.5rem;"><span style="float:left;font-size: 1.5rem;">{{cus_name}}</span>{{#showTag}}<span style="float:right;">出借金额</span>{{/showTag}}</p>
+							<p style="width:100%;float:left;"><span style="float:left;">{{create_date}}</span><span style="float:right;">{{invest_amount}}元</span></p>
+						</li>
+						{{/bidRecordList}}
+					</ul>
+				</script>
+			</div>
+	 </div>
+	 <div style="display:none;" class="box_main" id="rtnbox">
+		<div class="details_box">
+			<script type="ng/template" id="rtn">
+				{{#list}}
+				<div class="whitebg details_wrap separt">
+					<ul>
+						<li class="btm clearfix"><label>回款期次</label><span>{{per_num}}</span></li>
+						<li class="btm clearfix"><label>计划回款总额</label><span>{{shou_amt}}元</span></li>
+						<li class="btm clearfix"><label>计划回款本/息</label><span>{{shou_pri}}元/{{shou_int}}元</span></li>
+						<li class="btm clearfix"><label>计划剩余本金</label><span>{{surplus_amt}}元</span></li>
+					</ul>
+				</div>
+				{{/list}}
+			</script>
+		</div>
+	</div>
+    </div> 
+   </div> 
+  </div> 
+  <script>
+	 		var obj_intro=JSON.parse(sessionStorage.getItem('obj_intro'));
+			$(function(){
+				var tokenid= getCookie('tokenid');
+				addlist(1,'true');
+	    		$.ajax({//项目介绍
+		    		url:BIDSECDETAILS_JSON_URL,
+		    		type:'post',
+		    		data:{version:app_data.version,tokenid:tokenid,bid_id:obj_intro.bid_id},
+		    		dataType:'json',
+		    		success:function(data){
+		    			if(data.code=='000'){
+		    				data.year_reat=parseFloat(data.year_reat*100).toFixed(2);
+							data.is_real_name=data.is_real_name == '1'?true:false;
+							data.is_tel = data.is_tel=='1'?true:false;
+							data.is_basic_auth = data.is_basic_auth=='1'?true:false;		    				
+		    				data.is_email = data.is_email=='1'?true:false;
+							// data.expire_profit_status = obj_intro.expire_profit_status;//true为放款前
+							$.extend(data,obj_intro);
+							console.log(data)
+							if(data.transferType && data.expire_profit_status){
+								data.transfer_expire = true;
+							}else{
+								data.transfer_expire = false;
+							}
+							//债权转让
+							if(obj_intro.transferType){
+								$('#list_type').text('转让记录');
+								data.bid_name=(obj_intro.bid_name + obj_intro.orderNumber).substr(0,18) + '...';//标的
+							}
+							else{
+								$('#list_type').text('参与记录');
+								data.bid_name=obj_intro.bid_name;
+							}
+							data.transfer_jd = obj_intro.bid_type === '';// 是否债转
+		    				var template=toTemplate('detail');
+		    				$('#bid1').append(Mustache.render(template, data));
+		    				$('#sendEmail').on('click',function(){
+		    			 		if(obj_intro.item5 == 5){
+		    						tip_window('该标的已流标，无合同','确定');
+		    					}else{
+		    						if(obj_intro.contract_status == 0){
+		    							tip_window('合同审核中','确定');
+				    				}else{
+				    					window.location.href="sendEmail.html?&id="+obj_intro.id+"&object=1";
+				    				}
+		    					}
+		    					
+		    				})
+		    			}
+		    		}
+	    		})
+				$.ajax({
+					url:BACKAMOUNT_JSON_URL,
+					type:'post',
+					data:{version:app_data.version,tokenid:tokenid,trade_id:obj_intro.id},
+					dataType:'json',
+					success:function(data){
+						if(data.list.length>0){
+							var template=toTemplate('rtn');
+							$('#rtnbox').append(Mustache.render(template,data));
+						}else{
+							$('#rtnbox').append('<p class="without">暂无回款记录</p>')
+						}
+					}
+				})
+				function addlist(current,hasnextpage){
+					if(hasnextpage=='true'){
+						$.ajax({
+							url:BIDRECORD_JSON_URL,
+							type:'post',
+							data:{version:app_data.version,current:$('#current').val().trim(),tokenid:tokenid,bid_id:obj_intro.bid_id},
+							dataType:'json',
+							success:function(data){
+								if(data.code=='000'){
+									$('.num-join').text(data.totalNum);
+									if(data.bidRecordList.length>0){
+										var template=toTemplate('record');
+										data.bidRecordList[0].showTag= (data.current == "1") ? true : false;;
+										$('#bid2').append(Mustache.render(template, data));
+									}
+								}
+								current++;
+								$('#hasnextpage').val(data.hasnextpage);
+								$('#current').val(current);
+							}
+						})
+					}
+					
+				}
+				
+				$('#prject_in').dropload({
+					domDown : {
+						domClass   : 'dropload-down',
+						domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+						domUpdate  : '<div class="dropload-update">↓释放加载</div>',
+						domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+					},
+					scrollArea : window,
+					loadDownFn : function(me){
+						var current =$('#page_in').val();
+						var status =1;
+						var hasnextpage =$('#hasnextpage_in').val();
+						setTimeout(function(){
+						if(hasnextpage=='true')
+							{
+								add_list(1,current);
+								status++;
+							}
+							else{
+							}
+							me.resetload();
+						},1000);
+					}
+					
+				});
+				var dropload = $('#bid2').dropload({
+					domDown : {
+							domClass   : 'dropload-down',
+							domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+							domUpdate  : '<div class="dropload-update">↓释放加载</div>',
+							domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+						},
+					scrollArea : window,
+					loadDownFn : function(me){
+						setTimeout(function(){
+							current=$('#current').val().trim();
+							hasnextpage=$('#hasnextpage').val();
+							if(hasnextpage=='true'){
+								addlist(current,hasnextpage);
+							}else{
+							}
+							me.resetload();
+						},1000);
+					}
+				});
+				window.onload = function()
+				{
+					var $li = $('#tab li');
+					var $ul = $('#content').find('.box_main');
+								
+					$li.click(function(){
+						var $this = $(this);
+						var $t = $this.index();
+						$li.removeClass();
+						$this.addClass('current');
+						$ul.css('display','none');
+						$ul.eq($t).css('display','block');
+					})
+					
+//					var status =1;
+//					var current =1;
+//					while(status<3){
+//						add_list(status,current)
+//						status++;
+//					};
+					
+				}
+			});
+		</script>   
+		<script src="./js/footercommon.js"></script>
+ </body>
+</html>

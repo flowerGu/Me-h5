@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>订单详细</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <link href="css/base.css" type="text/css" rel="stylesheet" />
+  <link href="css/project_details.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+  <script type="text/javascript" src="js/functions.js"></script>
+  <script type="text/javascript" src='./js/config.js'></script>
+  <script type="text/javascript" src='js/mustache.js'></script>
+  <script>
+    
+    var id = getQueryString("id");
+    var noSend = getQueryString('noSend'); //不让发送？
+    var over5 = getQueryString('over5')==='true';
+    var childFinanceNumber= getQueryString('childFinanceNumber');
+    var investorsId=getQueryString('investorsId');
+    var telephone=getCookie('tel_no');
+    var tokenid = getCookie('tokenid');
+
+    $(function() {
+      checkLogin();
+      var initPage = function() {
+        var data = {
+          id: id,
+          noSend: noSend === '0' ? 'true' : 'false'
+        }
+        
+        $('#tel-span').val(telephone);
+        $("#main").append(Mustache.render($('#tpl').html(), data));
+        $('.js-identity-auth').on('click', function() {
+          if(childFinanceNumber===null||childFinanceNumber==''){
+            tip_window('账单尚未生成，请明天再试！','确定'); 
+            return false;
+          }
+          $('.bg-sendcode').fadeIn();
+          $('.sendcode-wrap').fadeIn();
+          
+          //location.href='order_creditor_list.html?id='+id;
+          return false;
+        });
+      };
+
+      $('#closeDialog').on('click', function() {
+        $('.bg-sendcode').fadeOut();
+        $('.sendcode-wrap').fadeOut();
+      });
+      $('#confirm').on('click',function(){
+        var checkCode=$('#code-input').val().trim();
+        if(checkCode===''){
+          tip_window('请输入验证码','确定'); 
+          return false;
+        }
+        //验证 验证码
+        $('.loading').eq(0).removeClass('hide');
+        $.post(AUTH_VIEW_BILL,{
+          version :app_data.version,
+          logintel:$('#tel-span').val().trim(),
+          code:$('#code-input').val().trim(),
+          tokenid:tokenid
+        }).then(function(data){
+          
+        $('.loading').eq(0).fadeOut();
+          if(typeof data==='string'&&data.length>0){
+            data=JSON.parse(data);
+          }
+          if(data.code==='000'){
+            location.href='list_order_creditor_list.html?id='+id+'&investorsId='+investorsId+'&childFinanceNumber='+childFinanceNumber;
+          }
+          else{
+             tip_window(data.msg,'确定'); 
+          }
+        },function(data){
+          $('.loading').eq(0).fadeOut();
+          tip_window('网络错误，请重试','确定');
+        });
+      });
+      
+      countdown({
+        dom:$('#getCheckCode'),
+        preDoing:function(){
+          //获取验证码
+          var tel = $('#tel-span').val().trim();
+          var reg = /^1[3-8][0-9]{9}$/;
+          if(tel == '' || !reg.test(tel)){
+            tip_window('请输入正确的手机号','确定');
+            return false;
+          }
+          $.post(GET_CHECK_CODE_VIEW_BILL,{//CHEACKCODE_JSON_URL
+            version:app_data.version,
+            logintel:tel,
+            type:'500001',
+            tokenid:tokenid
+          }).then(function(data){
+            if(typeof data==='string'&&data.length>0){
+            data=JSON.parse(data);
+          }
+            if(data.code!=='000'){
+             tip_window(data.msg,'确定'); 
+            }
+          },function(){
+             tip_window('网路异常，请刷新重试','确定'); 
+          });
+        }
+      });
+
+      initPage();
+    });
+  </script>
+</head>
+
+<body>
+  <script type="html/text" id="tpl">
+    <ul class="menu">
+      <li>
+        <a class="js-identity-auth">
+          <img src="images/project_details/list.png" alt="">
+          <p>查看债权列表</p>
+        </a>
+      </li>
+      <li>
+        <a href="sendEmail.html?id={{id}}">
+          <img src="images/project_details/contract.png" alt="">
+          <p>发送电子合同</p>
+        </a>
+      </li>
+    </ul>
+  </script>
+  <div class="loading hide"></div>
+  <div class="header btm deleteHeader">
+    <span>出借详情</span>
+    <a href="javascript:history.back(-1);" class="back"></a>
+  </div>
+
+  <div id="main"></div>
+  <!--弹框-->
+  <div class="bg-sendcode"></div>
+  <div class="sendcode-wrap">
+    <img src="images/send.png" />
+    <p class="msgp">短信安全验证</p>
+    <div class="codewrap" style="margin-bottom:10px"><input type="text" id="tel-span" placeholder="请输入手机号"/></div>
+    <div class="codewrap">
+      <input type="text" placeholder="短信验证码" id="code-input" />
+      <input type="button" value="点击发送" class="sendcodebtn" id="getCheckCode">
+    </div>
+    <input type="button" value="取消" id="closeDialog" class="sendcancel">
+    <input type="button" value="确认" id="confirm" class="sendconfirm" >
+  </div>
+</body>
+
+</html>

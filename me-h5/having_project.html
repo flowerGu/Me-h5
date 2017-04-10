@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>已出借项目</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="format-detection" content="telephone=no" />
+		<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+		<link href="css/relate_card.css" type="text/css" rel="stylesheet" />
+		<link href="css/style.css" type="text/css" rel="stylesheet" />
+		<link href="css/base.css" type="text/css" rel="stylesheet" />
+		<style type="text/css">
+			body {
+				background-color: #f6f6f6;
+			}
+			
+			.tab {
+				width: 50%;
+				margin: 0 auto;
+				border: 1px solid #fff;
+				border-radius: 5px;
+			}
+			
+			.tab li.current {
+				background: #fff;
+				color: #ff4c4c;
+			}
+			
+			.tab li {
+				float: left;
+				text-align: center;
+				width: 50%;
+				color: #fff;
+				font-size: .9em;
+				padding: .2em 0;
+			}
+			.line-order-number{
+				color: #8e8e8e;
+				font-size: 16px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="header">
+			<ul class="tab clearfix">
+				<li class="current">进行中</li>
+				<li>已完成</li>
+			</ul>
+			<a href="javascript:history.back(-1);" class="back"></a>
+		</div>
+		<div class="index_content">
+			<div id="outer">
+				<div id="content">
+					<ul style="display:block;" id="prject_in">
+						<input type='hidden' id='page_in' value='1' />
+						<input type='hidden' id='hasnextpage_in' value='true' />
+					</ul>
+					<ul id="prject_complete">
+						<input type='hidden' id='page_complete' value='1' />
+						<input type='hidden' id='hasnextpage_complete' value='true' />
+					</ul>
+				</div>
+			</div>
+			<script type="text/html" id="no-data">
+				<div class="no_con">
+				<img class="global-no-data global-no-data-no-bottom" src="images/no-data.png" />
+				<p class="tip_p">说声抱歉，您暂无资产</p>
+				</div>
+				{{#type}}<a href="index.html" class="btn btn-long">立即出借</a>{{/type}}
+			</script>
+			<script type="text/html" id="data-list">
+				{{#list}}
+					<li>
+						{{#product_id_status}}
+							<div class="product2 whitebg clearfix" onclick="window.location.href='project_details.html?id={{id}}&over5={{over5}}&is_allow_applysign={{is_allow_applysign}}&investorsId={{investorsId}}&childFinanceNumber={{childFinanceNumber}}'">
+								<a class="pro_link clearfix">
+									<span style="font-size:1.6rem;color: #8e8e8e;">{{protuct_name}}</span> 
+						{{/product_id_status}}
+						{{#bid_id_status}}
+							<div class="product2 whitebg clearfix">
+								<a  data-json="{{having_info}}"
+									bid_id="{{bid_id}}"
+									class="pro_link clearfix">
+									<span style="font-size:1.6rem;color: #8e8e8e;">{{loan_title}}</span> 	
+									<em style="color:#ff4c4c;border:1px solid #ff4c4c;font-size:.6em;padding:0 .3em;border-radius:3px;">
+										
+											{{#item_status_s}}成功{{/item_status_s}}
+											{{#item_status_e}}流标{{/item_status_e}}
+										
+									</em> 
+						{{/bid_id_status}} 
+						{{#product_id_status}}
+									<span style="float:right;font-size:.8em;margin-left:.2em"></span> {{#online}}
+									<img src="images/up_arrow.png" style="float:right;width:1.6rem;height:1.6rem;" /> {{/online}} {{#downline}}
+									<img src="images/down_arrow.png" style="float:right;width:1.6rem;height:1.6rem;" /> {{/downline}} {{/product_id_status}}
+							</a>
+							{{#bid_id_status}}{{^transferType}}<div class="line-order-number"></p>{{/transferType}}{{/bid_id_status}}
+							{{#transferType}}<div class="line-order-number">{{borrowNum}}</div>{{/transferType}}
+							<ul class="clearfix mgt_ul">
+								<li style="text-align: left;color:#e60041">
+									<span class="f47" style="font-size:1.5rem;">
+											<img src="images/rate_pic.png" style="margin-right:0.8rem;width:1.5rem;height:1.4rem;" />
+											<b>{{rate_percent}}</b>
+											</span>
+								</li>
+
+								<li class="li_pos" style="text-align:right;line-height: 1.5rem;">
+									<p class="c34 pos">
+										<span class="f55" style="font-size:1.5rem;color:#8e8e8e;">
+												<img src="images/money_pic.png" style="margin-right:0.7rem;width:1.1rem;height:1.5rem;" />
+												<span class="invest"><b>{{ invest_money }}</b> </span>
+										</span>万</p>
+								</li>
+							</ul>
+							
+							<div class="clearfix">
+								<ul class="time_ul clearfix" style="float:left;width:100%;font-size:1.2rem;margin-bottom:1rem;">
+									<li>预定时间 <span class="reserve">{{reserve_date}}</span></li>
+									{{^transferType}}<li>计息时间 <span class="interrest">{{interrest_date}}</span></li>{{/transferType}}
+									<li>{{#item_status_e}}流标{{/item_status_e}}{{^item_status_e}}完成{{/item_status_e}}时间 <span class="end_date">{{trade_end_date}}</span></li>
+								</ul>
+								<p>
+									<span>
+											{{#item_status}}
+												{{^expire_profit_status}}
+													<em style="display: inline-block;width:20px;height:20px;line-height:20px;font-style:normal;font-size:12px;border-radius: 50%;background:#e60041;color:#fff;text-align:center;">预</em>
+													<span class="f55 expire" style="font-size:2.3rem;color:#8e8e8e">{{expire_profit}}</span><span class="predict_down">元</span>	
+												{{/expire_profit_status}}
+											{{/item_status}} 
+											{{^item_status}}
+													<em style="display: inline-block;width:20px;height:20px;line-height:20px;font-style:normal;font-size:12px;border-radius: 50%;background:#e60041;color:#fff;text-align:center;">实</em>
+													<span class="f55 expire" style="font-size:2.3rem;color:#8e8e8e">{{expire_profit}}</span><span class="predict_down">元</span>		
+											{{/item_status}}
+
+									</span>
+									<span style="color:#8e8e8e;float:right;font-size:1.6rem;">{{#item_status}}
+											<span style="font-size:2.3rem;">{{remaining_days}}</span><span class="predict_down">天</span> {{/item_status}} {{^item_status}}
+									<span style="font-size:1.6rem;">已完成</span> {{/item_status}}
+									</span>
+								</p>
+							</div>
+							</div>
+					</li>
+				{{/list}}
+
+			</script>
+		</div>
+		<script src="js/jquery-1.9.0.min.js"></script>
+		<script src="js/dropload.min.js"></script>
+		<script type="text/javascript" src='js/config.js'></script>
+		<script type="text/javascript" src='js/mustache.js'></script>
+		<script type="text/javascript" src='js/functions.js'></script>
+		<script src="js/having_project.js"></script>
+	</body>
+</html>

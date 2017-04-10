@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>我的邀请</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	    <meta name="apple-mobile-web-app-capable" content="yes" />
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	    <meta name="format-detection" content="telephone=no"/>
+	    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	    <link href="css/base.css" type="text/css" rel="stylesheet" />
+	    <link href="css/more.css" type="text/css" rel="stylesheet" />
+	    <style>
+	    	body{background-color:rgb(232,232,232);}
+	    	.invi_title{width: 100%;padding:.4em 5% 0;background-color: #fff;height: 40px;font-size: 1.4em;margin-bottom: 10px;}
+	    	.invi_ul{height: 30px;font-size:1.1em;}
+	    	.invi_ul li{ float: left;width: 25%; color:#8e8e8e;text-align: center;border-right: 1px solid #8e8e8e;}
+	    	.invi_ul li.line{border:none}
+	    </style>
+	    <script src="js/jquery-1.9.0.min.js"></script>
+		<script src="./js/dropload.min.js"></script>
+	    <script type="text/javascript" src="./js/functions.js"></script>
+		<script type="text/javascript" src="./js/config.js"></script>
+		<script type="text/javascript" src='./js/mustache.js'></script>
+		<script>
+		 	function addnext(){
+		 		var version ='1.0';
+		 		var current=$('#current').val();
+		 		var hasnextpage=$('#hasnextpage').val();
+		 		if(hasnextpage=='true')
+		 		{
+		 				current=parseInt(current);
+				 		var tokenid=getCookie("tokenid"); 
+					 	$.ajax({
+							url:JDMANGQUERYMYREFER_JSON_URL,
+							type:'post',
+							data:{version:app_data.version,tokenid:tokenid,current:current},
+							dataType:'json',
+							success:function(data){
+                                // $.each(data.list,function(i,item){
+                                  
+								// 	if(i == 0){
+								// 		data.list[i].status_first = true;
+								// 	}else {
+								// 		if(data.list[i].register_year !=data.list[i-1].register_year){
+								// 			data.list[i].status_then = true;
+								// 			console.log(i)
+								// 		}
+								// 	}
+									
+                                // })
+								processData(data);
+								
+								$.get('./templates/my_invited.tpl',{"time":new Date().getTime()},function(template){
+								    var result = Mustache.render(template, data);
+								   $(".table_wrap").append(result);
+								   current++;	
+									$('#current').val(current);
+									$('#hasnextpage').val(data.hasnextpage);
+								});
+							},
+							error:function(data){
+								tip_window(data.msg,'确定');
+							}
+						});
+		 		}
+		 		else
+		 		{
+		 		}
+		 		
+		 	}
+		
+			window.onload = function(){
+				addnext();
+			}
+			var last_date = null;
+			function processData(data){
+				for(var i=0;i<data.list.length;i++){
+					if(i>0 && data.list[i].register_year!= data.list[i-1].register_year){//相同的隐藏掉
+						data.list[i].dataTag = true;
+					}else if(!last_date && i==0){//刷新页面时第一条
+						data.list[i].dataTag = true;
+					}else if(last_date == data.list[0].register_year){//加载更多页时
+						data.list[i].dataTag = false;
+					}
+					if(data.list[i].is_binding == '1'){
+						data.list[i].is_binding = '已绑卡';
+						data.list[i].is_binding_color = true;
+					}else{
+						data.list[i].is_binding = '未绑卡';
+						data.list[i].is_binding_color = false;
+					}
+					if(isNaN(parseFloat(data.list[i].trade_status))==true){
+						data.list[i].trade_status_color = true;
+					}else{
+						data.list[i].trade_status_color = false;
+						data.list[i].trade_status=parseFloat(data.list[i].trade_status).toFixed(2);
+					}
+				}
+				last_date = data.list[data.list.length-1].register_year;
+				return data;
+			}
+		</script>  
+
+	</head>
+	<body>
+		<div class="header whitebg btm deleteHeader">
+			我的邀请
+			<a href="javascript:history.back(-1);" class="back"></a>
+		</div>
+		<input type='hidden' id='current' value='1' />
+    	<input type='hidden' id='hasnextpage' value='true' />
+    	<div class="invi_title">
+				<ul class="invi_ul">
+						<li>用户名</li>
+						<li>绑卡状态</li>
+						<li>出借状态</li>
+						<li class="line">注册时间</li>
+					
+				</ul>
+		</div>
+		<div class="table_wrap">
+			
+			
+		</div>
+	
+
+		<script>
+		// dropload
+		$('.table_wrap').dropload({
+			domDown : {
+		        domClass   : 'dropload-down',
+		        domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+		        domUpdate  : '<div class="dropload-update">↓释放加载</div>',
+		        domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+		    },
+		    scrollArea : window,
+		    loadDownFn : function(me){
+		       
+		        setTimeout(function(){
+	               addnext();
+	                me.resetload();
+           		 },1000);
+		    }
+		});
+		</script> 
+	</body>
+</html>

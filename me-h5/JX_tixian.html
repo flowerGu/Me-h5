@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"
+	/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no" />
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<title>江西银行提现</title>
+	<link rel="stylesheet" type="text/css" href="css/base.css" />
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" type="text/css" href="css/commonUpgrade.css" />
+	<link href="css/relate_card.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body style='position:relative;'>
+	<div class="header whitebg">
+		<span>提现</span>
+		<a href="javascript:history.back(-1);" class="back"></a>
+		<a href="withdraw_warn.html" class="m_exit widthdraw_warn">提现须知</a>
+	</div>
+	<div class="rela_tip clearfix" style="font-size:1.2em;">
+		<img src="images/broad.png" style="float:left;" />
+		<marquee style="float:right;" class="marq" direction="left" behavior="scroll" scrollamount="3" scrolldelay="0">交易密码将在充值、提现、出借等操作使用，请妥善保管</marquee>
+	</div>
+	<div id="main" class="tx-main">
+		<div class="tip-tx">
+			<label class='lab-input'>提现金额</label>
+			<span>本次最多转出<span id="tip-span"></span>元</span>
+		</div>
+		<div class="tx-input">
+			<span>￥</span>
+			<input type="text" name="invitation" id="invitation" class='input_invitation input_tixian' />
+		</div>
+		<div class="tip-tx clearfix">
+			<label>提现金额:
+							<span id='withdrawal_amount' style="margin-left:.2em">0.00</span>元
+						</label>
+			<span class="ft-span">(<span id='ti_low'>0.00</span>元起提)</span>
+		</div>
+		<div class="chong_wrap tip-tx clearfix">
+			<div class='tx-l'>
+				<span>手续费：</span>
+				<span id='ti_cost'>0.00</span>
+				<span>元</span>
+			</div>
+			<div class='tx-r'>
+				<span>实际到账：</span>
+				<span id='infact_ti'>0.00</span>
+				<span>元</span>
+			</div>
+		</div>
+		<div class="chong_wrap tip-tx clearfix">
+			<div class='tx-l'>
+				<span>提现通道：</span>
+				<span id='widthdraw_way'>--通道</span>
+			</div>
+		</div>
+		<button class="button blue fixed-btn" onclick="tixian()" style='height:52px;'>下一步</button>
+	</div>
+	<div class="bank_branch_code cnaps_show">
+		<ul>
+			<li class="u_form_single">
+				<label class="u_label_prompt">联行行号</label>
+				<input id="widthdraw_cnaps" type="text" placeholder="请输入开户支行联行行号（必填）" class="u_input_per" maxlength="12">
+			</li>
+		</ul>
+	</div>
+	<p class="code_search cnaps_show"><a href="javascript:;">联行行号查询</a></p>
+	<div id='myDate'></div>
+
+	<!--弹框-->
+	<div class="bg-sendcode"></div>
+	<div class="sendcode-wrap">
+		<img src="images/send.png" />
+		<p class="msgp">短信安全验证</p>
+		<p class="tipp">短信将发送至：<span id="tel-span"></span></p>
+		<div class="codewrap">
+			<input type="text" placeholder="短信验证码" id="code-input" />
+			<input type="button" value="发送验证码" class="sendcodebtn" id="getCheckCode">
+		</div>
+		<input type="button" value="取消" id="closeDialog" class="sendcancel">
+		<input type="button" value="确认" id="go_tixian" class="sendconfirm">
+	</div>
+
+	<script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+	<script type="text/javascript" src="js/config.js"></script>
+	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="js/widthDraw_jx.js"></script>
+</body>
+</html>

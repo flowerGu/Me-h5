@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8" />
+  <title>资金记录</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <link href="css/base.css" type="text/css" rel="stylesheet" />
+  <link href="css/relate_card.css" type="text/css" rel="stylesheet" />
+	</head>
+	<body>
+		  <div class="no_con">
+		  	<img class="global-no-data global-no-data-no-bottom" src="images/no-data.png" />
+		  	<p class="tip_p">说声抱歉：您暂无资金记录</p>
+		  </div>
+		  <div class="insure">
+		  	<a href="chongzhi.html">立刻存管充值</a>
+		  </div>
+	</body>
+</html>

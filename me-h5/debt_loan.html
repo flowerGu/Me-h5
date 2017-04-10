@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>还款计划</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<link href="css/commonUpgrade.css" type="text/css" rel="stylesheet" />
+	<link href="css/about_more.css" type="text/css" rel="stylesheet" />
+    <link href="css/debt_loan.css" rel="stylesheet"/>
+</head>
+<body id="content">
+    <script type="ng-template" id="debt" >
+        <ul class="loan-title">
+            <li>回访日期</li>
+            <li>回访形势</li>
+            <li>回访描述</li>
+            <li>回访结果</li>
+        </ul> 
+         {{#list}} 
+        <ul class="loan-content">
+            <li>{{reVisitDate}}</li>
+            <li>{{reVisitType}}</li>
+            <li>{{reVisitDesc}}</li>
+            <li>{{reVisitResult}}</li>
+        </ul>
+        {{/list}}
+    </script>
+    <script type="ng-template" id="loan"><!--还款计划-->
+        <ul class="loan-title">
+            <li>期数</li>
+            <li>还款日期</li>
+            <li>还款金额(元)</li>
+            <li>还款状态</li>
+        </ul>
+        {{#list}}  
+        <ul class="loan-content">
+            <li>{{perNum}}</li>
+            <li>{{payDate}}</li>
+            <li>{{doAmt}}</li>
+            <li>{{payState}}</li>
+        </ul>
+        {{/list}}  
+        
+    </script>
+    <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+    <script src="js/mustache.js"></script>
+    <script type="text/javascript" src="js/config.js"></script>
+	<script type="text/javascript" src="js/functions.js"></script>
+    <script src= "js/debt_loan.js"></script>
+</body>
+</html>

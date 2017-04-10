@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	    <meta name="apple-mobile-web-app-capable" content="yes" />
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	    <meta name="format-detection" content="telephone=no"/>
+	    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	    <title>客户详细</title>
+		<link rel="stylesheet" type="text/css" href="./css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="./css/base.css"/>
+		<style>
+			.separt ul li span{color:#8e8e8e}
+		</style>
+		<script type="text/javascript" src="./js/jquery-1.9.0.min.js"></script>
+		<script type="text/javascript" src="./js/functions.js"></script>
+		<script type="text/javascript" src="./js/config.js"></script>
+		<script type="text/javascript" src='./js/mustache.js'></script>
+		<script type="text/javascript">
+			 function getQueryString(name) { 
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+				var r = window.location.search.substr(1).match(reg); 
+				if (r != null) return unescape(r[2]); return null; 
+			}
+			var id = getQueryString("id");
+			var tokenid = getCookie("tokenid");
+			$.ajax({
+				url:JDCUSTOMERDETAIL_JSON_URL,
+				type:'post',
+				data:{id:id,version:app_data.version,tokenid:tokenid},
+				dataType:'json',
+				success:function(data){
+					data.invest_money1=parseFloat(data.invest_money)/10000;
+					if(data.head_url=='')
+						data.head_url='./images/manager_03.png';
+						if(data.contact_address!=''){
+							var contact_address_arr=data.contact_address.split('@');
+							data.contact_address=contact_address_arr;
+							data.detial_address=contact_address_arr[2];
+						}
+					
+					if(data.gender=='1'){
+						data.gendersex=true;
+					}
+					if(data.gender=='2'){
+						data.gendersexy=true;
+					}
+					if(data.birthday!=null){
+						data.birthday=data.birthday.substr(0,4)+'-'+data.birthday.substr(4,2)+'-'+data.birthday.substr(6,2);	
+					}
+					if(data.clientsource=='h5'){
+						data.clientsource='微信公众号'
+					}
+					if(data.orders.length!=null){										
+						$.each(data.orders,function(i,item){
+							item.years_income=parseFloat(item.years_income*100).toFixed(2);
+							if(item.temp1=='2'){
+								item.bid_status=true;
+							}else{
+								item.product_status=true;
+							}
+						})
+					}
+					$.get('./templates/customer_details.tpl',{"time":new Date().getTime()}, function(template){
+					    var result = Mustache.render(template, data);
+					   $(".detail_con").append(result);
+					});
+				},
+				error:function(data){
+
+				}
+			});
+		</script>
+	</head>
+	<body style="background-color: rgb(238,238,238);position:relative">
+		<div class="header whitebg deleteHeader" style="padding:10px 0">
+			客户详情 
+	    	<a href="javascript:history.back(-1);" class="back"></a> 
+	  	</div>
+		<div class="detail_con">
+			
+		</div>
+	</body>
+</html>

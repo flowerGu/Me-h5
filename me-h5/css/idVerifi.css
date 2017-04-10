@@ -1,0 +1,36 @@
+html {
+  height: 100%;
+}
+
+body {
+  position: relative;
+  background-color: #f6f6f6;
+}
+
+.main {
+  margin-top: 5px;
+  background-color: #FFF;
+}
+
+.btn-success {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 4rem;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 2rem;
+  background-color: #ff4c4c;
+}
+
+.info-div {
+  margin-top: 15px;
+}
+
+.form-group {
+  color: #DDDCDD;
+}
+.form-group >input{
+  color: #5F5F5F;
+}

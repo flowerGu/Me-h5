@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"
+	/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<meta name="format-detection" content="telephone=no" />
+
+	<META HTTP-EQUIV="pragma" CONTENT="no-cache">
+	<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+	<META HTTP-EQUIV="expires" CONTENT="0">
+
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<title>理财头条</title>
+	<link rel="stylesheet" type="text/css" href="./css/base.css" />
+	<link href="css/financial.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+	<div class="content">
+		<ul id='content_list' class="content_list">
+		</ul>
+	</div>
+	<script type="text/tpl" id="financial_list">
+			{{#list}}
+			<li>
+				<a href="financial_detial.html?id={{mainId}}">
+						<img src="{{content}}" class="financial_img">
+						<span class="title">{{title}}</span>
+						<span class="time">{{create_time}}</span>
+				</a>
+			</li>
+			{{/list}}
+	</script>
+	<script src="./js/jquery-1.9.0.min.js"></script>
+	<script type="text/javascript" src='./js/functions.js'></script>
+	<script type="text/javascript" src='./js/config.js'></script>
+	<script type="text/javascript" src='./js/mustache.js'></script>
+	<script type="text/javascript" src="js/dropload.min.js"></script>
+	<script type="text/javascript" src='./js/financial_list.js'></script>
+</body>
+</html>

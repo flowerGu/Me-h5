@@ -1,0 +1,333 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"
+	/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no" />
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<title>填写验证码</title>
+	<link rel="stylesheet" type="text/css" href="./css/style.css" />
+	<link rel="stylesheet" type="text/css" href="./css/base.css" />
+	<script type="text/javascript" src="./js/jquery-1.9.0.min.js"></script>
+	<script type="text/javascript" src='./js/config.js'></script>
+	<script type="text/javascript" src="./js/functions.js"></script>
+	
+	<script type="text/javascript">
+			var type=getQueryString('type');
+			$(function(){
+				cheackmobile();
+				var dd=$(document).height();
+				$('body').css("minHeight",dd);//设置body的高度
+			});	
+			function cheackmobile(){
+				var verifiCode = $("input[name=verifiCode]").val().trim();
+				var re = /^\d{6}$/;
+				var indent_re = /^\d+$/;
+				if(!indent_re.test(verifiCode)){
+					$('input[name=verifiCode]').val('');
+				}
+				if(!re.test(verifiCode)){
+						document.getElementById("submit").style.backgroundColor="#d3d3d3";
+						document.getElementById("submit").setAttribute("disabled", true);
+					}else{
+						document.getElementById("submit").removeAttribute("disabled");
+						document.getElementById("submit").style.backgroundColor="#ff4c4c";
+					}
+			}
+		</script>
+</head>
+<body>
+	<div class="header whitebg deleteHeader" style="height: 55px;">
+		填写验证码
+		<a href="javascript:history.back(-1);" class="back"></a>
+	</div>
+	<div id="main">
+		<div id="xiahuaxian">
+			<ul>
+				<li>身份验证</li>
+				<li class="li_xiahuaxian">填写验证码</li>
+				<li>重设密码</li>
+			</ul>
+		</div>
+		<div class="code-div">
+			<p style="margin-top:10px;" id="code_tip">点击发送短信向您发送验证码'</p>
+			<p style="margin-top:10px;" class="tel_num"></p>
+		</div>
+		<div class="customer" style="border: 1px solid rgb(220,220,220);padding-left:2%;">
+			<div class="slide_bg">
+				<span class="drag_text">请进行滑动验证</span>
+				<div class="slide_block"></div>
+			</div>
+			<div class="slide_isPass slide_isPass2">
+					<img src="./images/passLock_03.jpg" alt="" width=19 id="J_slideIsPass">
+			</div>
+		</div>
+		<div class="customer" style="border: 1px solid rgb(220,220,220);padding-left:2%;">
+			<input type="text" name="verifiCode" maxlength="6" style="width:55%;" placeholder="短信验证码" onkeyup="cheackmobile()" />
+			<input type="button" id="code-btn" value="免费获取" />
+		</div>
+		<button class="button blue but_pwd" id="submit" onclick="next()">下一步</button><br/><br/>
+	</div>
+	<div class="puzz_picture_box puzz_picture_box3">
+		<h3 class="puzz_title">滑动验证</h3>
+		<div class="question_container clearfix">
+			<div class="question_pic">
+				<img src="" alt="" id="J_slideQuestion" width=180>
+			</div>
+			<span class="change_puzz">换一题</span>
+		</div>
+		<p class="puzz_intro">按住左边滑块，拖动选择出正确的答案</p>
+		<div class="answer_puzz">
+			<img src="" alt="" id="J_slideAnswer" width=216>
+			<ul>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+		<div class="arrow_container">
+			<div class="puzz_arrow"></div>
+		</div>
+	</div>
+	<script src="./js/sendCodeDialog/sendCode.js"></script>
+	<script type="text/javascript">
+		// 显示滑动验证码
+		function showImageCode(){
+			$(".slide_block").attr("data-number", function () {
+				var number = "";
+				for (var i = 0; i < 10; i++) {
+					number += Math.floor(Math.random() * 10);
+				}
+				return number;
+			})
+			$.ajax({
+				url : GETSLIDEIMGAGE,
+				type:"GET",
+				dataType:"JSON",
+				data:{
+					check_code_key: $('.slide_block').attr("data-number"),
+					version: '1.0'
+					// logintel: $('#tel').val().trim()
+				},
+				success:function(data){
+					$("#J_slideQuestion").attr("src",GETSLIDEQUESTION+ '?check_code_key=' + $('.slide_block').attr("data-number"))
+					$("#J_slideAnswer").attr("src",GETSLIDEANSWER+ '?check_code_key=' + $('.slide_block').attr("data-number"))
+				}
+			})
+		}
+		showImageCode()
+		// 拖拽滑块实现图形验证码
+	function drag(){
+		var isSupportTouch = "ontouchend" in document ? true : false;       //检测浏览器是否支持touch事件
+		var startEvent = isSupportTouch ? "touchstart" : "mousedown";
+		var moveEvent = isSupportTouch ? "touchmove" : "mousemove";
+		var endEvent = isSupportTouch ? "touchend" : "mouseup";
+		var isMove=false;       
+		var isX;			    			//去除left值得坐标距离
+		var listX = [0,216];    //滑块移动范围
+		var isTrue = false;     //是否验证通过
+		var movedX;
+		var pointX = {
+		    "0": [0, 36],
+		    "1": [36, 72],
+		    "2": [72, 108],
+		    "3": [108, 144],
+		    "4": [144, 180],
+		    "5": [180, 216]
+		}
+    $(".slide_block").on(startEvent,function(event){
+        event.preventDefault();
+        if($(".slide_block").hasClass('isPassed')){return}
+        $(".puzz_picture_box").fadeIn()
+        isMove=true;
+        var pagex = isSupportTouch ? event.originalEvent.targetTouches[0].pageX : event.pageX;
+        isX=pagex-parseInt($(".slide_block").css("left"));
+        $(document).off(moveEvent).on(moveEvent,function(event){
+        	if($(".slide_block").hasClass('isPassed')){return}
+        	window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
+        	$(".drag_text").hide();
+	        if(isMove){
+	        		var nowX = isSupportTouch ? event.originalEvent.targetTouches[0].pageX : event.pageX;
+	            var x=nowX-isX;
+	            if(x > parseInt(listX[1])){$(".slide_block").css({left:parseInt(listX[1])}); return}
+	            if(x < parseInt(listX[0])){$(".slide_block").css({left:parseInt(listX[0])}); return}
+	            $(".slide_block").css({left:x});
+	            $(".puzz_arrow").css({left:x});
+	            for (var i in pointX) {
+								$(".answer_puzz").find("li").eq(i).removeClass("isMoved")
+								if (x > pointX[i][0] && x <= pointX[i][1]) {
+									$(".answer_puzz").find("li").eq(i).addClass("isMoved")
+							}
+						}
+	        }  
+		    }).off(endEvent).on(endEvent,function(event){
+		    	if($(".slide_block").hasClass('isPassed')){return}
+		       movedX = +$(".slide_block").css("left").replace("px","");
+		       	for (var i in pointX) {
+		       		if (movedX > pointX[i][0] && movedX <= pointX[i][1]){
+								$(".slide_block").attr("data-choosed", i);
+		       			$.ajax({
+		       				url:SLIDEIMGISTRUE,
+		       				data:{
+		       					check_code_key: $('.slide_block').attr("data-number"),
+										ans_posi: i
+		       				},
+		       				dataType:"JSON",
+		       				success:function(data){
+		       					if(data.code == "000"){
+		       						$(".slide_block").addClass('isPassed');
+											$("#J_slideIsPass").attr("src","./images/isPass_ok_03.jpg")
+		       						$(".puzz_picture_box").fadeOut();
+		       						$("#send_code").removeAttr("disabled")
+		       					}else{
+		       						showImageCode();
+		       						$(".slide_block,.puzz_arrow").animate({"left":"0px"});
+											$("#J_slideIsPass").attr("src","./images/isPass_no_03.jpg")
+		       						$(".answer_puzz").find("li").removeClass("isMoved")
+											 $(".slide_block").removeAttr("data-choosed");
+		       					}
+		       				}
+		       			})
+		       		}
+		       	}
+		    	 isMove=false;
+		  	})
+    })
+	}
+	drag();
+// 点击隐藏题目
+	$(document).click(function (e) {
+		if (!$(e.target).hasClass("puzz_picture_box") && !$(e.target).hasClass("slide_block") && !$(e.target).hasClass("change_puzz")) {
+			$(".puzz_picture_box").hide();
+		}
+	})
+	// 换一题
+	$(".change_puzz").click(function () {
+		showImageCode();
+	})
+		var find_pwd_tel='';
+		if(type=="d56b699830e77ba53855679cb1d252da"){
+			 find_pwd_tel = getCookie('find_pwd_tel');
+		}
+		if(type=="21e119daf697467b14b076f2d5819aec"){
+			 var forgettradeData = JSON.parse(localStorage.getItem("forgettradeData")); 
+			find_pwd_tel = forgettradeData.logintel;
+
+		}
+		if(find_pwd_tel==null){
+			find_pwd_tel='';
+		}
+		var sub_pwd_tel=find_pwd_tel;
+		$(function(){
+			var reg = /1(\d{2})\d{4}(\d{4})/g;
+			sub_pwd_tel=sub_pwd_tel.replace(reg,"1$1****$2");
+			$('#code_tip').text('点击发送短信向您'+sub_pwd_tel+'发送验证码');
+		})
+		var wait=60;
+		function time(o) {
+				if (wait == 0) {
+					document.getElementById("code-btn").style.backgroundColor="rgb(0,144,241)";
+					o.removeAttribute("disabled");			
+					o.value="重新发送";
+					wait = 60;
+				} else {
+					o.setAttribute("disabled", true);
+					o.value="重新发送(" + wait + ")";
+					wait--;
+					setTimeout(function() {
+						time(o)
+					},
+					1000)
+				}
+			}
+		$("#code-btn").on('click',function(){
+			if(!$(".slide_block").attr("data-choosed")){
+				tip_window('请进行滑动验证', '确定');
+				return;
+			}
+			var type_id;
+			var tokenid='';
+			if(type=="d56b699830e77ba53855679cb1d252da"){//找回登录密码
+				type_id="12";
+			}
+			if(type=="21e119daf697467b14b076f2d5819aec"){
+				tokenid=getCookie('tokenid');
+				type_id="13";
+			}
+			tools.sendCodeDialog({
+				ele:'#code-btn',
+				check_code_key: $('.slide_block').attr("data-number"),
+				ans_posi: $('.slide_block').attr("data-choosed"),
+				logintel:find_pwd_tel,
+				tipType:'#code_tip',
+				tipText:'我们已发送验证码到您的手机',
+				codeType:[12,'12_voice'],
+				slideInit:[showImageCode,"#J_slideIsPass",".slide_block"]
+			})
+				
+		})
+
+	</script>
+	<script type="text/javascript">
+			function next(){
+				var verifiCode = $("input[name=verifiCode]").val();
+				var logintel = $(".tel_num").text();
+				var url='';
+				if(type=="21e119daf697467b14b076f2d5819aec")//交易密码
+				{
+					url=FPT_VERIFICATIONCHECKCODE_JSON_URL
+					var tokenid=getCookie('tokenid');
+					var data={version:app_data.version,logintel:find_pwd_tel,checkcode:verifiCode,tokenid:tokenid};
+				}
+				if(type=="d56b699830e77ba53855679cb1d252da")
+				{
+					url=FP_VERIFICATIONCHECKCODE_JSON_URL;
+					var data={version:app_data.version,logintel:find_pwd_tel,checkcode:verifiCode};
+				}
+				if(verifiCode == ''){
+					tip_window('验证码不能为空！','确定！');
+					return false;
+				}else if(!$(".slide_block").attr("data-choosed")){
+					tip_window('请进行滑动验证', '确定');
+					return false;
+				}	else
+				{
+					$.ajax({
+					   url: url,
+					   type: "post",
+					   data: data,
+					   success: function(msg){
+						   if(msg.code=='000')
+						   {
+						   		setCookie("findpwd_msg_code", $("input[name=verifiCode]").val().trim());
+						   		if(type=="21e119daf697467b14b076f2d5819aec")//交易密码
+						   		{
+									var forgettradeData = JSON.parse(localStorage.getItem("forgettradeData")); 
+									forgettradeData.checkcode=verifiCode;
+									localStorage.setItem("forgettradeData", JSON.stringify(forgettradeData)); 
+									location.href="trade_pwd.html?type="+type;
+								}
+								if(type=="d56b699830e77ba53855679cb1d252da")
+								{
+									location.href="reset_pwd.html?tel="+logintel+"&type="+type;//tip_window('请输入正确的验证码','确定');
+								}
+						   }else
+						   {
+						   		tip_window(msg.msg,'取消')
+						   }
+					   }
+					});
+					
+				}
+				
+			}
+		</script>
+		
+</body>
+</html>

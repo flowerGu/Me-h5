@@ -1,0 +1,25 @@
+//
+
+.dropload-down{
+  height: 50/75rem;
+}
+.dropload-refresh,.dropload-update,.dropload-load,.dropload-noData{
+  height: 50/75rem;
+  line-height: 50/75rem;
+}
+
+[data-dpr="2"] .dropload-up,
+[data-dpr="2"] .dropload-down{
+  font-size: 24px;
+}
+
+[data-dpr="3"] .dropload-up,
+[data-dpr="3"] .dropload-down{
+  font-size: 36px;
+}
+
+.dropload-load .loading{
+  width: 15/75rem;
+  height: 15/75rem;
+}
+

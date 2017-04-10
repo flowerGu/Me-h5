@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>我的</title>
+  <script src="../js/inject/flexible.js" inline></script>
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <meta name="apple-itunes-app" content="app-id=1080260971">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/myWealth.css">
+</head>
+<body class="has-nav">
+  <div class="content"></div>
+  <script id="tpl" type="text/html">
+    <header>
+      <a href="my_setting.html" class="link-setting icon-setting">设置</a>
+      <label for="js_change_face" class="wrap-face">
+        <input id="js_change_face" type="file" name="faceimg" class="hide">
+        <img id="js_face" src="{{head_url}}" alt="头像" class="center-block user-face">
+      </label>
+      
+      <p class="js-user-name">{{phone_number}}</p>
+      <p>
+        <span class="user-auth"><i class="icon icon-user"></i>{{if realname_status}}已实名认证{{else}}未实名认证{{/if}}</span>
+        <span class="user-auth"><i class="icon icon-email"></i>{{if emailStatus}}已绑定邮箱{{else}}未绑定邮箱{{/if}}</span>
+      </p>
+      <div class="wrap-header-money">
+        <ul class="header-money">
+          <li>
+            <p>总资产(元)</p>
+            <p id="js_total_assets">{{total_assets}}</p>
+          </li>
+          <li>
+            <p>累计收益(元)</p>
+            <p id="js_earning">{{earning}}</p>
+          </li>
+          <li class="wrap-btn">
+            <p><span>昨日收益(元)</span></p>
+            <p >{{previous_earning}}</p>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <div class="container middle-content">
+        <p class="label-previous-earning">可用余额(元)</p>
+        <p class="fr">
+         <span class="previous-earning" id="js_balance">{{balance}}</span>
+         <span class="btn-small" id="js_refresh_data">刷新</span>
+        </p>
+        
+        
+    </div>
+    <ul class="list-menu">
+      <li>
+        <a href="having_project.html">
+          <i class="icon-middle icon-blue-user"></i>
+          <span>我的项目</span>
+          <i class="icon-middle icon-array-right"></i>
+        </a>
+      </li>
+      <li>
+        <a href="assets.html?ditch=jx">
+          <i class="icon-middle icon-file"></i>
+          <span>江西存管</span>
+          <i class="icon-middle icon-array-right"></i>
+        </a>
+      </li>
+      <li class="ditch-me hide">
+        <a href="assets.html?ditch=me">
+          <i class="icon-middle icon-me"></i>
+          <span>Me账户</span>
+          <i class="icon-middle icon-array-right"></i>
+        </a>
+      </li>
+      <li class="ditch-zj hide">
+        <a href="assets.html?ditch=zj">
+          <i class="icon-middle icon-zj"></i>
+          <span>中金托管</span>
+          <i class="icon-middle icon-array-right"></i>
+        </a>
+      </li>
+      <li>
+        <a href="record.html">
+          <i class="icon-middle icon-wallet"></i>
+          <span>资金记录</span>
+          <i class="icon-middle icon-array-right"></i>
+        </a>
+      </li>
+    </ul>
+    <ul class="list-menu">
+      <li>
+        <a href="red_package.html">
+          <i class="icon-middle icon-gift"></i>
+          <span>我的福利</span>
+          <i class="icon-middle icon-array-right"></i>
+        </a>
+      </li>
+      <li>
+        <a href="invited_register.html?num={{referral_code}}">
+          <i class="icon-middle icon-invite"></i>
+          <span>我的邀请链接/码</span>
+          <span class="invite-code">{{referral_code}}</span>
+          <i class="icon-middle icon-array-right"></i>
+        </a>
+      </li>
+      <li>
+        <a href="message.html">
+          <i class="icon icon-middle icon-page">6</i>
+          <span>消息中心</span>
+          <i class="icon-middle icon-array-right"></i>
+        </a>
+      </li>
+      <li>
+        <a href="learn_data.html?type=u">
+          <i class="icon icon-middle color-lightYellow
+">u</i>
+          <span>客户资料</span>
+          <i class="icon-middle icon-array-right"></i>
+        </a>
+      </li>
+    </ul>
+  </script>
+  <div class="modal-backdrop fade"></div>
+
+  <div id="dialog_jx_open" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content modal-jx-open">
+        <h2>Me金融全面开启银行存管时代</h2>
+        <button type="button" disabled class="btn btn-disable">江西银行存管开户</button>
+        <p>
+          <label>
+            <span class="custom-checkbox"></span>
+            <span>点击"江西银行存管开户"按钮，表示您同意</span>
+          </label>
+          <a href="popDeal.html">《Me金融用户授权协议》</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/jquery-1.9.0.min.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/functions.js"></script>
+  <script src="js/plugs/artTemplate/template.js"></script>
+  <script src="js/plugs/html5ImgCompress/html5ImgCompress.min.js"></script>
+  <script src="js/myWealth.js"></script>
+</body>
+</html>

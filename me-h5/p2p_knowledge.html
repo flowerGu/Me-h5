@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>网贷知识</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"
+	/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta http-equiv="Cache-Control" content="no-store" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="css/common.css" />
+	<link rel="stylesheet" href="css/more.css" />
+</head>
+<body>
+	<script type="text/tpl" id="learn-data-list">
+		{{#list}}
+		<div class="more_con border_tb whitebg mgt8">
+			<a href="financial_detial.html?id={{mainId}}" class="learn-data-list">
+			{{title}}
+			<i class="icon-array-right"></i>
+		</a>
+		</div>
+		{{/list}}
+	</script>
+	<script src="js/jquery-1.9.0.min.js"></script>
+	<script src="js/mustache.js"></script>
+	<script src="js/config.js"></script>
+	<script src="js/functions.js"></script>
+	<script src="js/p2p_knowledge.js"></script>
+</body>
+</html>

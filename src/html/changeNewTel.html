@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>更改注册手机号</title>
+    <script src="../js/inject/flexible.js" inline></script>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/changePhoneNum.css">
+</head>
+<body>
+<div class="loading"></div>
+<form class="formlast">
+    <ul class="telList">
+        <li class="u_form_single">
+            <label class="u_label_prompt">新手机号</label>
+            <input type="text" placeholder="请输入新绑定手机号" class="u_input_per" name="newTel" maxlength="11">
+        </li>
+        <li class="u_form_single">
+            <label class="u_label_prompt">验证码</label>
+            <input type="text" placeholder="手机验证码" class="u_input_per" name="msgCode">
+            <input type="button" value="发送验证码" class="u_form_send sendMsgCode">
+        </li>
+    </ul>
+    <a class="u_btn_form_default next" id="bindTel">绑定手机号</a>
+</form>
+
+<script src="js/jquery-1.9.0.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/functions.js"></script>
+<script src="js/changeTel.js"></script>
+</body>
+</html>

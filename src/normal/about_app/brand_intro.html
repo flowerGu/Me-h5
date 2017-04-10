@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<Meta charset="utf-8">
+		<title>品牌介绍</title>
+		<Meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <Meta naMe="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	    <Meta naMe="apple-mobile-web-app-capable" content="yes" />
+	    <Meta naMe="apple-mobile-web-app-status-bar-style" content="black" />
+	    <Meta naMe="format-detection" content="telephone=no"/>
+	    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+	    <link href="../css/base.css" type="text/css" rel="stylesheet" />
+	    <link href="../css/about_more.css" type="text/css" rel="stylesheet" />
+	    <script>
+	    </script>
+	</head>
+	<body class="brandIntro-page">
+  <ul>
+    <li onclick="showNext(event)">
+      <p>关于Me金融
+        <i class="weui_cell_ft"></i>
+      </p>
+      <div>Me金融是民信公司旗下子品牌，以打造专业的互联网综合金融服务平台为己任，致力于满足用户的个性化互联网金融服务需求。Me金融为用户提供高效服务，并致力于陪伴用户实现其自我价值提升。</div>
+    </li>
+    <li onclick="showNext(event)">
+      <p>Me金融使命
+        <i class="weui_cell_ft"></i>
+      </p>
+      <div >我们旨在创造一个更个性化、更舒适的互联网金融服务平台。</div>
+    </li>
+    <li onclick="showNext(event)">
+      <p>Me金融愿景
+        <i class="weui_cell_ft"></i>
+      </p>
+      <div >打造专业的个性化互联网金融服务平台，让生活变得更美好。</div>
+    </li>
+    <li onclick="showNext(event)">
+      <p>Me金融核心价值
+        <i class="weui_cell_ft"></i>
+      </p>
+      <div>
+        帮用户实现出借和自我价值的提升。让金融服务于生活，让生活变得更美好。
+      </div>
+    </li>
+  </ul>
+  <p>懂Money的少数派</p>
+		</div>
+  <script type="text/javascript" src="../js/jquery-1.9.0.min.js"></script>
+  <script type="text/javascript" src="../js/config.js"></script>
+  <script type="text/javascript" src="../js/functions.js"></script>
+  <script>
+   function showNext(event){//设置div显示隐藏
+      var childI = event.target.lastElementChild;
+      var nextDiv = event.target.nextElementSibling;
+      if(nextDiv.className.match('show')){
+        nextDiv.className = '';
+        childI.classList.remove('rotate');//箭头旋转
+      }else{
+        nextDiv.className = 'show';
+        childI.classList.add('rotate');//箭头旋转
+      }
+    }
+  </script>
+	</body>
+</html>

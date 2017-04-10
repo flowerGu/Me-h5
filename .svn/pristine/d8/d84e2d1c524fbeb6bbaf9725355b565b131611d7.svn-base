@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>经理邀请</title>
+        <meta name="description" content="专业服务，值得信赖。"/>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	    <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name ="keywords" content="理财经理">
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	    <meta name="format-detection" content="telephone=no"/>
+	    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	    <link href="css/base.css" type="text/css" rel="stylesheet" />
+	    <link href="css/wealth_manager_detail.css" type="text/css" rel="stylesheet" />
+	    <link href="css/activity_Center.css" type="text/css" rel="stylesheet" />
+	    <script type="text/javascript" src="js/jquery-1.7.0.min.js"></script>
+	    <script type="text/javascript" src="./js/functions.js"></script>
+        <script type="text/javascript" src="js/config.js"></script>
+	    <script>
+	     var cust_id=getQueryString('cust_id');
+            $(function(){
+            	var dd=$(document).height();
+ 				$('body').css("minHeight",dd);//设置body的高度
+                $('.share_a').click(function(){
+                    $('.zhezhao').css("display","block");
+                    $('.tip_share').css("display","block");
+                    $('.arrows').css("display","block");
+                })
+                $('.zhezhao,.tip_share,.arrows').click(function(){
+                    $('.zhezhao').css("display","none");
+                    $('.tip_share').css("display","none");
+                    $('.arrows').css("display","none");
+                })
+                pageload();
+            })
+            function pageload(){
+//              var tokenid=getCookie("tokenid");
+               
+//              if(tokenid!=null){
+                    $.ajax({
+                        type:"post",
+                        version:app_data.version,
+                        url:MANAGERDETAILS_JSON_URL,
+                        data:{cust_id:cust_id},
+                        dataType:"json",
+                        success:function(data){
+                            if(data.code=="000")
+                            {
+                                var tel=data.phoneNumber;
+                                tel=tel.substr(0,3)+'-'+tel.substr(3,4)+'-'+tel.substr(7);
+                                
+                                if(data.faceImageUrl!=null)
+                                {
+                                	$('.nic_pic').attr('src',host+data.faceImageUrl);
+                                	
+                                }
+                                else
+                                {
+                                	$('.nic_pic').attr('src','./images/manager_03.png');
+                                }
+                              
+                                $('.manager_name').text(data.custName);//用户名
+                                document.title = '民信（'+data.custName+'）为您服务';
+                                $('.manager_tel').text(tel);//手机号
+                                $('.manager_text').text(data.selfIntroduction);//自我介绍
+                                $('.satisfaction').text(data.cusDegree);//客户满意度
+                                $('.res_speed').text(data.serviceSpeed);//响应速度
+                                $('.service_num').text(data.serviceNumber);//服务人数
+                                $('.mana_detail').text(data.managerdes);//经理详情
+                            }
+                            else
+                            {
+                                tip_window(data.msg,'确定');
+                            }
+                        },
+                        error:function(data){
+                            tip_window('请求超时，请稍后重试','确定');
+                        }
+                    })
+//              }else{
+//                  tip_window('您还未登录','去登录','login.html');
+//              }
+            }
+            
+	    </script>
+	</head>
+	<body style="background-color:#eee;">
+			<div class="header whitebg deleteHeader">
+				 <a href="javascript:history.back(-1);" class="back"></a>
+			经理邀请
+			<a href="javascript:;" class="share_a">分享</a>
+		    </div>
+            <div class="intro_box btm bgc">
+                <div class="mana_intro  clearfix">
+                    <img class="nic_pic"src="./images/manager_03.png"/>
+                    <div class="ma_r">
+                        <p>财富规划师：<span class="manager_name"></span></p>
+                        <p>联系方式：<span class="manager_tel"></span></p>
+                    </div>
+                </div>
+            </div>
+            <ul class="mana_work clearfix whitebg">
+                    <li>
+                        <p class="p16 satisfaction"></p>
+                        <p class="p8">客户满意度</p>
+                    </li>
+                    <li>
+                        <p class="p16 res_speed"></p>
+                        <p class="p8">服务响应速度</p>
+                    </li>
+                    <li style="border-right:none">
+                        <p class="p16 service_num" style="color:#e3275c"></p>
+                        <p class="p8">服务过人数</p>
+                    </li>
+                </ul>
+            <div class="intro_box whitebg ">
+                <ul class="f12 c3a mana_detail">
+                    <li>1.具有扎实的金融学专业知识基础，熟知金融理财项目及业务拓展方法。</li>
+                    <li>2.有7年金融理财项目推广经验，并有3年营销团队管理工作经验，能独立组建并高效管理团队。</li>
+                    <li class="last">3.在业务内积累了丰富的高端客户资源和金融行业人脉。</li>
+                </ul>
+            </div>
+            <div style="margin:10px 0;padding:.2em 4%;"class="whitebg">
+            	<div class="product1 whitebg clearfix" style="margin:1em auto;border:1px solid #dcdcdc;padding:.2em 4%">
+					<h1><a href="javascript:;">月满赢</a><i></i></h1>
+					<ul><li style="text-align: left;">
+						<p><span class="f46 c35">10000</span>元</p>
+						<p>起借金额</p></li>
+						<li>
+							<p><span class="f46 c35">1</span>月</p>
+							<p>项目期限</p>
+						</li>
+						<li class="li_pos"style="text-align: center;">
+							<p class="c34 pos"><span class="f55">6.60</span>
+							<span class="f30">%</span></p><p>过往年化收益
+							</p>
+						</li>
+					</ul>
+				</div>
+            </div>
+			
+			<div class="intro_box whitebg border_tb" style="margin:0">
+				<div class="img_wrap">
+					<img src="images/manager_07.jpg">
+					<img src="images/manager_08.jpg">
+					<p style="text-align: center;color:#9d9d9d;font-size:1.6em;">
+					您的专属顾问，邀请您和我一起领工资啦！</p>
+				</div>
+			</div>
+			<div class="zhezhao"></div>
+			        <div class="arrows"><img src="images/arrow.png"/>
+			        </div>
+			        <p class="tip_share"> 请点击右上角发送给指定好友或群</p>
+	</body>
+</html>

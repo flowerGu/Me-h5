@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>标的</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no"/>
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+	<link href="../css/base.css"  rel="stylesheet"/>
+	<link href="../css/commonUpgrade.css" rel="stylesheet"/>
+	<link href="../css/bidsecdetail.css" rel="stylesheet"/>
+</head>
+	<body>
+		<div class="con-bid" style="">
+			<div class="bid-main" id="bidCommon" style="display: block;" >
+				<script type="type/ng-template" id="detail">
+					<div class="bid-part1 whitebg">
+						<ul>
+							<li class="btm">项目简介</li>
+							<li class="btm clearfix">
+								<span>协议年化利率</span>
+								<data>{{year_reat}}%</data>
+							</li>
+							<li class="btm clearfix">
+								<span>{{#transferType}}剩余{{/transferType}}{{^transferType}}项目{{/transferType}}期限</span>
+								<data>{{loan_times}}个月</data>
+							</li>
+							<li class="btm clearfix">
+								<span>起息日</span>
+								<data>{{interrest_date}}</data>
+							</li>
+							<li class="btm clearfix">
+								<span>退出日</span>
+								<data>{{trade_end_date}}</data>
+							</li>
+							<li class="clearfix" id="returnMoney">
+								<span>回款方式</span>
+								<data>{{pay_type}}{{#examineLoanTypeCd}}<i style="margin:3px 0 auto 5px;"class="u_arr_right"></i>{{/examineLoanTypeCd}}</data>
+							</li>
+							<li class="clearfix">
+								<span>项目评估<img class="assess" src="../../images/icon/icon-question.png"></span>
+								<data>良好</data>
+							</li>
+						</ul>
+					</div>
+					<div class="bid-part2 whitebg" >
+						<ul>
+							<li class="btm">借款信息(自然人)</li>
+							<li class="btm clearfix">
+								<span>姓名:{{real_name}}</span>
+								<data>性别:{{sex}}</data>
+							</li>
+							<li class="btm clearfix">
+								<span>年龄:{{age}}</span>
+								<data>婚姻状况：{{marital_status_cd}}</data>
+							</li>
+							<li class="btm clearfix">
+								<span>证件号码：{{id_number}}</span>
+								<data>单位地址：{{company_addr}}</data>
+							</li>
+							<li class="clearfix">
+								<span>从事职业：{{industy_categories}}</span>
+							</li>
+						</ul>
+					</div>
+					<div class="bid-part1 whitebg">
+						<ul>
+							<li class="btm">资产信息</li>
+							<li class="btm clearfix">
+								<span>收入</span>
+								<data>{{month_income}}</data>
+							</li>
+							<li class="btm clearfix">
+								<span>房产评估</span>
+								<data>
+									{{houseis_assess}}
+								</data>
+							</li>
+							<li class="clearfix">
+								<span>车产评估</span>
+								<data>
+									{{caris_assess}}
+								</data>
+							</li>
+						</ul>
+					</div>
+					<div class="bid-part1 whitebg">
+						<ul>
+							<li class="btm">审核信息</li>
+							<li class="btm clearfix">
+								<span>实名认证</span>
+								<data>{{is_real_name}}</data>
+							</li>
+							<li class="btm clearfix">
+								<span>邮箱认证</span>
+								<data>{{is_email}}</data>
+							</li>
+							<li class="btm clearfix">
+								<span>个人基本信息</span>
+								<data>{{is_basic_auth}}</data>
+							</li>
+							<li class="btm clearfix">
+								<span>手机验证</span>
+								<data>{{is_tel}}</data>
+							</li>
+							<li class="btm clearfix">
+								<span>银行卡信息</span>
+								<data>{{bankinfo}}</data>
+							</li>
+							<li class="btm clearfix">
+								<span>信用评估</span>
+								<data>{{creditreport}}</data>
+							</li>
+							<li class="clearfix">
+								<span>收入评估</span>
+								<data>{{incomereport}}</data>
+							</li>
+						</ul>
+					</div>
+					{{#bid_type_pledge}}
+					<div class="bid-part1 whitebg">
+						<ul>
+							<li class="btm">
+								{{^is_vip}}抵押物信息{{/is_vip}}
+								{{#is_vip}}风控信息{{/is_vip}}
+							</li>
+							<li class="btm clearfix">
+								<span>
+									{{^is_vip}}抵押物名称{{/is_vip}}
+									{{#is_vip}}房产位置{{/is_vip}}
+								</span>
+								<data>{{pawn}}</data>
+							</li>
+							<li class="btm clearfix">
+								<span>房产面积</span>
+								<data>{{housearea}}平米</data>
+							</li>
+							<li class="btm clearfix">
+								<span>评估价值</span>
+								<data>{{initialasset}}万</data>
+							</li>
+							<li class="btm clearfix">
+								<span>房产类型</span>
+								<data>{{propertynature}}</data>
+							</li>
+							<li class="clearfix">
+								<span>购买时间</span>
+								<data>{{housepurchasedate}}</data>
+							</li>
+						</ul>
+					</div>
+					<div class="bid-part1 whitebg">
+						<ul>
+							<li class="btm">证明资料</li>
+							<li class="btm clearfix">
+								<span>借款人身份证</span>
+								<data>{{is_idnumber}}</data>
+							</li>
+							<li class="btm clearfix">
+								<span>房屋产权证</span>
+								<data>{{Housepropertynumber}}</data>
+							</li>
+							<li class="btm clearfix">
+								<span>借款合同及抵押合同</span>
+								<data>{{is_loancontract}}</data>
+							</li>
+							<li class="btm clearfix">
+								<span>他项权证 </span>
+								<data>{{is_housingmaterial}}</data>
+							</li>
+							<li class="clearfix">
+								<span>其他资料</span>
+								<data>{{is_pledgeman}}</data>
+							</li>
+						</ul>
+					</div>
+					<div class="bid-part1 whitebg">
+						<a  class="clearfix certificate">
+							证明资料详细信息
+							<i class="u_arr_right"></i>
+						</a>
+					</div>
+					{{/bid_type_pledge}}
+					<div class="bid-part1 whitebg">
+						<ul>
+							<li class="btm">借款用途</li>
+							<li>{{bid_description}}</li>
+						</ul>
+					</div>
+					<div class="bid-part1 whitebg">
+						<ul>
+							<li class="btm">信用档案</li>
+							<li class="btm clearfix">
+								<span>申请借款</span>
+								<data>{{borrownum}}笔</data>
+							</li>
+							<li class="clearfix btm">
+								<span>还清笔数</span>
+								<data>{{givebacknum}}笔</data>
+							</li>
+							<li class="clearfix btm">
+								<span>借款总额</span>
+								<data>{{rentalmoney}}元</data>
+							</li>
+							<li class="clearfix">
+								<span>成功借款</span>
+								<data>{{succeedborrow}}笔</data>
+							</li>
+						</ul>
+					</div>
+					<div class="bid-part1 whitebg">
+						<ul>
+							<li class="btm">出借限制</li>
+							<li class="btm clearfix">
+								<span>起借金额</span>
+								<data>{{start_invest_money}}元</data>
+							</li>
+							<li class="clearfix">
+								<span>单笔最高可借</span>
+								<data>{{max_invest_money}}元</data>
+							</li>
+						</ul>
+					</div>
+					<div class="bid-part1 whitebg">
+						<a class="clearfix" data="debt" href="/me-h5/debt_loan.html?tokenid={{tokenid}}&type=loan&bidId={{bidId}}">
+							还款计划
+							<i class="u_arr_right"></i>
+						</a>
+					</div>
+					<div class="bid-part1 whitebg">
+						<a  class="clearfix" data="loan" href="/me-h5/debt_loan.html?tokenid={{tokenid}}&type=debt&bidId={{bidId}}">
+							贷后跟踪
+							<i class="u_arr_right"></i>
+						</a>
+					</div>
+				</script>
+			</div>
+		</div>
+		<script type="text/javascript" src="../js/jquery-1.9.0.min.js"></script>
+		<script type="text/javascript" src="../js/mustache.js"></script>
+		<script src="../js/config.js"></script>
+		<script src="../js/functions.js"></script>
+		<script src="../js/bidsecdetailIntro.js"></script>
+	</body>
+</html>

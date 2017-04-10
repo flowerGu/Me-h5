@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>设置交易密码</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	    <meta name="apple-mobile-web-app-capable" content="yes" />
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	    <meta name="format-detection" content="telephone=no"/>
+	    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	    <link href="css/base.css" type="text/css" rel="stylesheet" />
+	    <link href="css/modify_pwd.css" type="text/css" rel="stylesheet" />
+	    <script>
+	    		function init(){
+			        var height=$(window).height();
+					height=height<600?600:height;
+			        $("body").css("height",height);
+			    }
+	    </script>
+	</head>
+	<body onload="init()" id='main'>
+		<div class="header whitebg btm">
+			<a class="back" onclick="backFn()"></a>
+			<span id='tiptext'>设置交易密码</span>
+		</div>
+		<div class="rela_tip whitebg clearfix" style="font-size:1.2em;">
+			<img src="images/broad.png" style="float:left;" />
+			<marquee style="float:right;" class="marq" direction="left" behavior="scroll" scrollamount="3" scrolldelay="0">交易密码将在充值、提现、借款、出借等操作使用，请妥善保管</marquee>
+		</div>
+
+		<div class="modi_con">
+			<p id='tiptext2'>输入交易密码</p>
+			<form class="pwd" id='password'>
+				<input type="password"  class="pass" maxlength="1"readonly="readonly" autofocus='true' onkeyup="value=value.replace(/[^\d]/g,'');"/>
+				<input type="password" class="pass" maxlength="1"readonly="readonly" onkeyup="value=value.replace(/[^\d]/g,'');"/>
+				<input type="password" class="pass" maxlength="1"readonly="readonly" onkeyup="value=value.replace(/[^\d]/g,'');"/>
+				<input type="password" class="pass" maxlength="1"readonly="readonly" onkeyup="value=value.replace(/[^\d]/g,'');"/>
+				<input type="password" class="pass" maxlength="1"readonly="readonly" onkeyup="value=value.replace(/[^\d]/g,'');"/>
+				<input type="password" class="pass bdr" maxlength="1"readonly="readonly" onkeyup="value=value.replace(/[^\d]/g,'');"/>
+			</form>
+			<a href="FindTradePwd.html"id="forget" style="display: none">忘记交易密码</a>
+		</div>
+		<input id="btn_next_mondify"style="display: none" type="button"value="下&emsp;一&emsp;步"class="a_next btn_next">
+		<input id="btn_next"style="display: none"  type="button"value="下&emsp;一&emsp;步"class="a_next btn_next">
+		<input id="btn_next2" style="display:none" type="button"value="下&emsp;一&emsp;步"class="a_next ">
+
+		<div class="keybordWrap" style="display: block" >
+			<ul id="keyboard">
+				<li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">1</li>
+				<li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">2</li>
+				<li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">3</li>
+				<li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">4</li>
+				<li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">5</li>
+				<li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">6</li>
+				<li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">7</li>
+				<li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">8</li>
+				<li data-type='num' style="-moz-user-select:none;" onselectstart="return false;">9</li>
+				<li style="-moz-user-select:none;height:69px;" class="grayKey" onselectstart="return false;">&nbsp;</li>
+				<li data-type='num' style="-moz-user-select:none;height:69px;" onselectstart="return false;">0</li>
+				<li data-type='del' class="grayKey" style="-moz-user-select:none;height:69px;" onselectstart="return false;"><img src="images/del.png"/></li>
+			</ul>
+		</div>
+		<script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+		<script type="text/javascript" src="js/fastclick.js"></script>
+		<script type="text/javascript" src='./js/config.js'></script>
+		<script type="text/javascript" src='./js/functions.js'></script>
+		<script type="text/javascript" src='./js/md5.js'></script>
+		<script type="text/javascript" src="js/set_trade_pwd.js"></script>
+		<script type="text/javascript">
+
+		</script>
+	</body>
+</html>

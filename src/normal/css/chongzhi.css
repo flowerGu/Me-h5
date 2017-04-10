@@ -1,0 +1,73 @@
+html {
+  height: 100%;
+}
+
+body {
+  /*height: 500px;*/
+  min-height: 100%;
+  position: relative;
+}
+
+.container {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/**/
+.main {
+  border-top: 5px solid #E9E9E9;
+  padding-top: 1rem;
+  line-height: 2.6rem;
+  font-size: 16px;
+}
+.txt-account{
+  display: inline-block;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: #8E8E8E;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #E9E9E9;
+  padding: .2rem 1rem;
+  border-radius: .6rem;
+}
+.balance {
+  text-align: center;
+  color: #ff4c4c;
+  font-size: 12px;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.amount {
+  font-size: 26px;
+}
+
+/**/
+.btn-success {
+  width: 100%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border: none;
+  color: #FFFFFF;
+  font-size: 2rem;
+  background-color: #ff4c4c;
+  border-radius: .5rem;
+}
+
+/**/
+.min-money {
+  position: absolute;
+  top: 1.5rem;
+  right: 1rem;
+  color: #5f5f5f;
+}
+
+.btn-copy-text{
+  /*padding-left: 2rem;*/
+  color: #ff4c4c;
+}
+
+
+
+

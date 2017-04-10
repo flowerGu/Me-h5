@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <meta charset="utf-8" /> 
+  <title>订单列表</title> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" /> 
+  <meta name="apple-mobile-web-app-capable" content="yes" /> 
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" /> 
+  <meta name="format-detection" content="telephone=no" /> 
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <link href="css/base.css" type="text/css" rel="stylesheet" /> 
+  <link href="css/relate_card.css" type="text/css" rel="stylesheet" /> 
+  <link href="css/style.css" type="text/css" rel="stylesheet" />
+  <script src="js/jquery-1.9.0.min.js"></script>
+  <script src="./js/dropload.min.js"></script>
+  <script type="text/javascript" src='./js/config.js'></script>
+  <script type="text/javascript" src='./js/functions.js'></script>
+  <script type="text/javascript" src='./js/mustache.js'></script>
+ </head> 
+ <body> 
+  <div class="header whitebg deleteHeader">
+    上月业绩查询 
+   <a href="javascript:history.back(-1);" class="back"></a> 
+  </div> 
+  <div class="index_content"> 
+   <div id="outer"> 
+    <!--<ul id="tab"> 
+     <li class="current">进行中项目</li> 
+     <li>已完成项目</li> 
+    </ul>--> 
+    <div id="content"> 
+     <ul style="display:block;" id="prject_in">
+         <input type="hidden" value="1"  id="page_in"/>
+         <input type="hidden" value="true" id="hasnextpage_in"/>
+     </ul>
+    </div> 
+   </div> 
+  </div> 
+  <script>
+      function add_list(current,month,showdiv)
+      {
+        var tel='';
+
+      	
+            var viewtext = {
+             buttontext: "",
+             buttonurl: "",
+             message_text: ""
+           };
+          var tokenid=getCookie("tokenid");
+          $.ajax({
+              type: "post",
+              async:false,
+              url: JDPERFORMANCSEMONTH_JSON_URL,
+              data: {
+                  version:app_data.version,
+                  tokenid:tokenid,
+                  current:current,
+                  month:month
+              },
+              success: function(data){
+                  if(data.code=='000')//正常返回数据
+                  {
+                      if(data.list && data.list.length>0)//有数据的时候
+                      {
+                         $.each(data.list,function(i,item){
+//                         item.years_income = parseFloat(item.years_income*100).toFixed(2)+'%';
+							if (item.status == 2) {
+	                            item.wancheng = true;
+	                            item.wan_status = 2;
+	                        }
+	                        else {
+	                            item.wancheng = false;
+	                            item.wan_status = 1;
+	                        }
+							if(item.is_online_user=='0'){
+								item.is_online_user=true;
+							}else{
+								item.is_online_user=false;
+							}
+							if(item.remaining_days<100){
+								if(item.remaining_days && item.remaining_days.length<3){
+									item.remaining_days='0'+item.remaining_days;
+								}
+							}
+							if(item.temp1=='2'){
+								item.loan=true;
+							}
+							else{
+								item.pro=true;
+							}
+							if(item.status=='1'){
+								item.sta=true;
+								item.wan_status=1;
+							}else{
+								item.sta=true;
+								item.wan_status=2;
+							}
+							if(item.temp1=='2'){//jd
+								item.jd=true;
+								if(item.status='5'){//购买成功
+									item.bid_status1=true;
+								}else{//标的流标
+									item.bid_status5=true;
+								}
+							}
+                         });
+                           $.get('./templates/last_month_s.tpl',{"time":new Date().getTime()}, function(template){
+                               var result = Mustache.render(template, data);
+                               if(data.hasnextpage=='true')
+                               {
+                                   current++;
+	                               $('#page_in').val(current);
+                               }
+                               	$('#hasnextpage_in').val(data.hasnextpage);
+                                $(showdiv).append(result);
+                           });
+                      }
+                      else//没有数据的时候
+                      {
+                          
+                          	  data.sta=true;
+                              $.get('./templates/no_list.tpl',{"time":new Date().getTime()}, function(template){
+                                 $.ajax({
+                                     url: GETDETAIL_JSON_URL,
+                                     type: "post",
+                                     async:false,
+                                     data: {
+                                       version:app_data.version,
+                                       tokenid:getCookie('tokenid')
+                                     },
+                                     success: function(data){
+                                       if(data.code=="000")
+                                       {
+                                          tel=data.referral_code;
+                                          viewtext = {
+                                           buttontext: "立即邀请",
+                                           buttonurl: "invited_register.html?num="+tel,
+                                           message_text: "说声抱歉：您暂无业绩"
+                                         };
+                                       }
+                                     }
+                                });
+                                 var result = Mustache.render(template, viewtext);
+                                  $(showdiv).append(result);
+                              });
+                      }
+                  }
+                  else//不正常返回数据
+                  {
+                    tip_window(data.msg,'确定');
+                  }
+              },
+              error:function(data){
+                return "error";
+              }
+          });
+      }
+      $(function(){
+
+        var fromO=getQueryString("fromO");
+        var d = new Date();
+		if(d.getMonth()<9){
+			month='0'+(d.getMonth()+1);
+		}else{
+			month=d.getMonth()+1;
+		}
+		var str = d.getFullYear()+"-"+pad((month),2);
+        if (fromO && fromO != "") {
+//      	if(fromO==str){
+//      		fromO='本月';
+//      	}
+          $(".header.whitebg").html(fromO + '业绩查询<a href="javascript:history.back(-1);" class="back"></a>' );
+        };
+        window.onload = function()
+        {
+          var $li = $('#tab li');
+          var $ul = $('#content').children('ul');
+
+          $li.click(function(){
+            var $this = $(this);
+            var $t = $this.index();
+            $li.removeClass();
+            $this.addClass('current');
+            $ul.css('display','none');
+            $ul.eq($t).css('display','block');
+          })
+            var month=getQueryString("month");
+            add_list(1,month,"#prject_in");
+        }
+      });
+    </script>
+      <script>
+        var domDown = {
+                  domClass   : 'dropload-down',
+                  domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+                  domUpdate  : '<div class="dropload-update">↓释放加载</div>',
+                  domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+              };
+         $('#prject_in').dropload({
+             domDown : domDown,
+             scrollArea : window,
+             loadDownFn : function(me){
+                 setTimeout(function(){
+                   var current =$('#page_in').val();
+                   var hasnextpage =$('#hasnextpage_in').val();
+                   if(hasnextpage=='true')
+                   {
+                     var month=getQueryString("month");
+                    add_list(current,month,"#prject_in");
+                   }
+                   else
+                   {
+                   }
+                    me.resetload();
+
+               },1000);
+             }
+
+         });
+      </script>
+ </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Me优势</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	    <meta name="apple-mobile-web-app-capable" content="yes" />
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	    <meta name="format-detection" content="telephone=no"/>
+	    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	    <link href="css/base.css" type="text/css" rel="stylesheet" />
+	    <link href="css/about_more.css" type="text/css" rel="stylesheet" />
+	    <script type="text/javascript" src='./js/config.js'></script>
+	    <style>
+	    	body{background-color:#eee;}
+	    	img{width:100%;vertical-align:top;}
+	    	.header{padding:15px 4% 10px;border-bottom:1px solid #dbdbdb;}
+	    	.mgt2{margin-bottom:15px;}
+	    </style>
+	   <script>
+	   </script>
+	</head>
+	<body>
+		<div class="header whitebg mgt2 deleteHeader">
+			Me优势
+			<a href="javascript:history.back(-1);" class="back"></a>
+		</div>
+		<img src="images/images/safe_01.jpg" />
+		<img src="images/images/safe_02.jpg" />
+		<img src="images/images/safe_03.jpg" />
+		<img src="images/images/safe_04.png" class="mgt2"/>
+		<p class="p_hotline">客服热线:<a href="tel:4000443888;">4000443888转6</a> (09:00 ~18:00)</p>
+	</body>
+</html>

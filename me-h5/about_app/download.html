@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>扫码下载</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	    <meta name="apple-mobile-web-app-capable" content="yes" />
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	    <meta name="format-detection" content="telephone=no"/>
+	    <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
+	    <link href="../css/base.css" type="text/css" rel="stylesheet" />
+	    <link href="../css/activity_Center.css" type="text/css" rel="stylesheet" />
+	    <script type="text/javascript" src="../js/jquery-1.7.0.min.js"></script>
+	    <script type="text/javascript">
+	    	$(function(){
+  				var dd=$(document).height();
+ 				$('body').css("minHeight",dd);//设置body的高度
+                $('.share_a').click(function(){
+                    $('.zhezhao').css("display","block");
+                    $('.tip_share').css("display","block");
+                    $('.arrows').css("display","block");
+                })
+                $('.zhezhao,.tip_share,.arrows').click(function(){
+                    $('.zhezhao').css("display","none");
+                    $('.tip_share').css("display","none");
+                    $('.arrows').css("display","none");
+                })
+		})
+	    </script>
+	    <style>
+	   		body{background-color:#fff;}
+	    	img{vertical-align: top;width:100%}
+	    </style>
+	</head>
+	<body>
+		<img src="../images/m_download/download_01.jpg" />
+		<img src="../images/m_download/download_03.jpg" />
+		 <img src="../images/m_download/download_04.jpg" />
+		<img src="../images/m_download/download_05.jpg" /> 
+		<img src="../images/m_download/download_06.jpg" />
+		<img src="../images/m_download/download_07.jpg" />
+		<img src="../images/m_download/download_08.jpg" />
+		<img src="../images/m_download/download_09.jpg" />
+		<img src="../images/m_download/download_10.jpg" />
+		<img src="../images/m_download/download_11.jpg" />
+		<img src="../images/m_download/download_12.jpg" />
+		<img src="../images/m_download/download_13.jpg" />
+		<img src="../images/m_download/download_14.jpg" />
+		<img src="../images/m_download/download_15.jpg" />
+		<img src="../images/m_download/download_17.jpg" />
+		<img src="../images/m_download/download_18.jpg" />
+		<img src="../images/m_download/download_19.jpg" />
+		<img src="../images/m_download/download_20.jpg" />
+		<div class="zhezhao"></div>
+        <div class="arrows"><img src="../images/arrow.png"/>
+        </div>
+        <p class="tip_share"> 请点击右上角发送给指定好友或群</p>
+	</body>
+</html>

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>账单详情</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <link href="css/base.css" type="text/css" rel="stylesheet" />
+  <link href="css/order_creditor_list.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+  <script type="text/javascript" src="js/functions.js"></script>
+  <script type="text/javascript" src='js/config.js'></script>
+  <script type="text/javascript" src='js/mustache.js'></script>
+  <script>
+    // checkLogin();
+    var
+      investorsId = getQueryString('investorsId'), //订单综合端id
+      isFirst = getQueryString('first') === '1',
+      tokenid = getQueryString('tokenid'),
+      cusId = getQueryString('cusId');
+
+    //'sendEmail.html?id='+id+'&noSend='+noSend
+    $(function() {
+
+      if (!isWeiXin()) {
+        $('.header').remove()
+      }
+      var initPage = function() {
+        var url = isFirst ? FIRST_BILL_DETAIL_URL : BILL_DETAIL_URL;
+        $.post(url, {
+          investorsId: investorsId,
+          cusId:cusId,
+          tokenid:tokenid
+        }).then(function(data) {
+          if (typeof data === 'string' && data.length > 0) {
+            data = JSON.parse(data);
+          }
+          if (data.code !== '000') {
+            $('.loading').fadeOut();
+            tip_window(data.msg, '确定');
+            return false;
+          }
+
+          //
+          if (isFirst) {
+            var firstTpl = document.getElementById('firstTpl').innerHTML;
+            $("#first").append(Mustache.render(firstTpl, data.list));
+          } else {
+            var noFirstTpl = document.getElementById('noFirstTpl').innerHTML;
+            $("#noFirst").append(Mustache.render(noFirstTpl, data.list));
+          }
+          //fix table左右2边的高度问题
+          $('table.fix-left').each(function(index,item){
+            var content=$(item).siblings('.wrap-creditor-rights').children('table').children('tbody').children('tr');
+            var lines=$(item).children('tbody').children('tr');
+            lines.each(function(index,line){
+              content.eq(index).height($(line).height());
+            });
+          });
+
+          $('.fix-left').find('>thead tr').height($('.table-creditor-rights').find('thead').height());
+          $('.loading').fadeOut();
+
+        }, function(data) {
+          $('.loading').fadeOut();
+          tip_window('网络错误，请重试', '确定');
+        });
+      };
+      initPage();
+
+    });
+  </script>
+</head>
+
+<body>
+  <!--首期-->
+  <script type="text/ng-template" id="firstTpl">
+    {{#lendAllInfos}}
+    <div class="simple-info clearfix">
+      <p class="address">
+        <span>用户地址：</span>
+        <span>{{contactAddress}}</span>
+      </p>
+      <p>
+        <span class="realName">{{newDebtTransfer}}</span>
+        <span>女士/先生&nbsp;&nbsp;亲启</span>
+      </p>
+      <div class="important-info">
+        <p>
+          <span>合同编号：</span>
+          <span>{{contractId}}</span>
+        </p>
+        <p>
+          <span>资金出借及回收方式：</span><span>{{financeProduct}}</span>
+        </p>
+      </div>
+    </div>
+    {{/lendAllInfos}}
+    <p class="summary">在债权受让人接受该批债权转让并按时支付对价的情况下，预期出借的获益情况如下：</p>
+    <p class="text-right">货币单位：人民币</p>
+    <div class="wrap-long">
+      <table class="table table-bordered table-bg" style="width:1000px;">
+        <thead>
+          <tr>
+            <th>出借编号</th>
+            <th>资金出借及回收方式</th>
+            <th>初始出借日期</th>
+            <th>初始出借金额</th>
+            <th>下一个报告日</th>
+            <th>下一个报告期借款人应还款额</th>
+            <th>账户管理费</th>
+            <th>预计下一个报告日您的资产总额</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#lendAllInfos}}
+          <tr>
+            <td>{{financeNumber}}</td>
+            <td>{{financeProduct}}</td>
+            <td>{{expectedLendDate}}</td>
+            <td>{{loanAmount}}</td>
+            <td>{{nextStatementDate}}</td>
+            <td>{{nextDebtAmount}}</td>
+            <td>{{serviceAmount}}</td>
+            <td>{{nextDebtAllAmount}}</td>
+          </tr>
+          {{/lendAllInfos}}
+        </tbody>
+      </table>
+    </div>
+
+    <h2>债权列表</h2>
+    <ul class="list-rights">
+      {{#lendAllInfos}}
+      <li>
+        <span>债权转让人 （原债权人）：</span>
+        <span>{{oldDebtTransfer}}</span>
+      </li>
+      <li>
+        <span>身份证（护照）号码：</span>
+        <span>{{oldIdNumber}}</span>
+      </li>
+      <li>
+        <span>债权受让人（新债权人）：</span>
+        <span>{{newDebtTransfer}}</span>
+      </li>
+      <li>
+        <span>身份证（护照）号码：</span>
+        <span>{{newIdNumber}}</span>
+      </li>
+      {{/lendAllInfos}}
+    </ul>
+    <div class="wrap-col-2">
+      <table class="fix-left fl table table-bordered">
+        <thead>
+          <tr>
+            <th>债务人姓名</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#debtAllInfos}}
+          <tr>
+            <td>
+              {{debtName}}
+            </td>
+          </tr>
+          {{/debtAllInfos}}
+          <tr>
+            <td>合计</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="wrap-creditor-rights fl">
+        <table class="table table-bordered table-creditor-rights">
+          <thead>
+            <tr>
+              <th colspan="5">转让债权基本信息</th>
+              <th colspan="4">转让债权收益信息</th>
+            </tr>
+            <tr>
+              <th>债务人身份证号</th>
+              <th>债权价值（元）</th>
+              <th>需支付对价（元）</th>
+              <th>债务人个人情况</th>
+              <th>债务人借款用途</th>
+              <th>还款起始日期</th>
+              <th>还款期限（月）</th>
+              <th>剩余还款月数</th>
+              <th>协议年化收益率(年)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#debtAllInfos}}
+            <tr>
+              <td>{{debtIdNumber}}</td>
+              <td>{{debtNowAmount}}</td>
+              <td>{{debtTransferAmount}}</td>
+              <td>{{debtIdentityType}}</td>
+              <td>{{debtUse}}</td>
+              <td>{{debtDueDay}}</td>
+              <td>{{debtAllRepayMonth}}</td>
+              <td>{{debtSurplusRepayMonth}}</td>
+              <td>{{debtVearlyRate}}</td>
+            </tr>
+            {{/debtAllInfos}}
+            <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>{{debtSumAmount}}</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </script>
+
+  <script type="text/ng-template" id="noFirstTpl">
+    {{#lendAllInfos}}
+    <div class="simple-info clearfix">
+      <p class="address">
+        <span>用户地址：</span>
+        <span>{{contactAddress}}</span>
+      </p>
+      <p>
+        <span class="realName">{{newDebtTransfer}}</span>
+        <span>女士/先生&nbsp;&nbsp;亲启</span>
+      </p>
+      <div class="important-info">
+        <p>
+          <span>合同编号：</span>
+          <span>{{contractId}}</span>
+        </p>
+        <p>
+          <span>资金出借及回收方式：</span><span>{{productName}}</span>
+        </p>
+      </div>
+    </div>
+    {{/lendAllInfos}}
+
+    <p class="summary">您目前的出借款项实际回收情况及出借收益如下</p>
+
+    {{#lendAllInfos}}
+    <div class="wrap-long">
+
+      <table class="table table-bordered table-bg" style="width:1200px;">
+        <thead>
+          <tr>
+            <th colspan="2">出借编号：{{financeNumber}}</th>
+            <th colspan="2">货币单位：人民币（元）</th>
+            <th colspan="2"> 出借日期：{{expectedLendDate}}</th>
+            <th colspan="2">出借期数：{{lendPeriods}}</th>
+          </tr>
+          <tr>
+            <th>报告日</th>
+            <th>本次借款人应还款金额</th>
+            <th>本次借款人实际还款金额(或还款风险金代偿金额)</th>
+            <th>账户管理费率</th>
+            <th>账户管理费</th>
+            <th>报告日您选择受让的债权金额</th>
+            <th>报告日您选择回收的金额</th>
+            <th>报告日资产总额</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{nowStatementDate}}</td>
+            <td>{{nowDebtAmount}}</td>
+            <td>{{nowRealDebtAmount}}</td>
+            <td>{{serviceManaRate}}</td>
+            <td>{{serviceAmount}}</td>
+            <td>{{StatementDateDebtTran}}</td>
+            <td>{{StatementDateDebtRepay}}</td>
+            <td>{{DebtAllAmount}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>债权列表</h2>
+    <ul class="list-rights">
+      <li>
+        <span>债权转让人 （原债权人）：</span>
+        <span>{{oldDebtTransfer}}</span>
+      </li>
+      <li>
+        <span>身份证（护照）号码：</span>
+        <span>{{oldIdNumber}}</span>
+      </li>
+      <li>
+        <span>债权受让人（新债权人）：</span>
+        <span>{{newDebtTransfer}}</span>
+      </li>
+      <li>
+        <span>身份证（护照）号码：</span>
+        <span>{{newIdNumber}}</span>
+      </li>
+    </ul>
+    {{/lendAllInfos}}
+
+    <div class="wrap-col-2">
+      <table class="fix-left fl table table-bordered">
+        <thead>
+          <tr>
+            <th>债务人姓名</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#newDebtAllInfos}}
+          <tr>
+            <td>
+              {{debtName}}
+            </td>
+          </tr>
+          {{/newDebtAllInfos}}
+           <tr>
+            <td>合计</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="wrap-creditor-rights fl">
+        <table class="table table-bordered table-creditor-rights">
+          <thead>
+            <tr>
+              <th colspan="5">转让债权基本信息</th>
+              <th colspan="4">转让债权收益信息</th>
+            </tr>
+            <tr>
+              <th>债务人身份证号</th>
+              <th>债权价值（元）</th>
+              <th>需支付对价（元）</th>
+              <th>债务人个人情况</th>
+              <th>债务人借款用途</th>
+              <th>还款起始日期</th>
+              <th>还款期限（月）</th>
+              <th>剩余还款月数</th>
+              <th>协议年化收益率(年)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#newDebtAllInfos}}
+            <tr>
+              <td>{{debtIdNumber}}</td>
+              <td>{{debtNowAmount}}</td>
+              <td>{{debtTransferAmount}}</td>
+              <td>{{debtIdentityType}}</td>
+              <td>{{debtUse}}</td>
+              <td>{{debtDueDay}}</td>
+              <td>{{debtAllRepayMonth}}</td>
+              <td>{{debtSurplusRepayMonth}}</td>
+              <td>{{debtVearlyRate}}</td>
+            </tr>
+            {{/newDebtAllInfos}}
+            <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>{{debtSumAmount}}</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <h2>既有债权列表</h2>
+    <p class="summary">通过中融民信资本管理有限公司信用评估与筛选，推荐您通过受让他人既有的个人间借贷合同的方式，目前已经出借资金给如下借款人，详见《既有债权列表》。</p>
+
+    <div class="wrap-col-2">
+      <table class="fix-left fl table table-bordered">
+        <thead>
+          <tr>
+            <th>债务人</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#oldDebtAllInfos}}
+          <tr>
+            <td>
+              {{debtName}}
+            </td>
+          </tr>
+          {{/oldDebtAllInfos}}
+           <tr>
+            <td>合计</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="wrap-creditor-rights fl">
+        <table class="table table-bordered table-creditor-rights">
+          <thead>
+            <tr>
+              <th colspan="5">转让债权基本信息</th>
+              <th colspan="4">转让债权收益信息</th>
+            </tr>
+            <tr>
+              <th>债务人身份证号</th>
+              <th>债权价值（元）</th>
+              <th>需支付对价（元）</th>
+              <th>债务人个人情况</th>
+              <th>债务人借款用途</th>
+              <th>还款起始日期</th>
+              <th>还款期限（月）</th>
+              <th>剩余还款月数</th>
+              <th>协议年化收益率(年)</th>
+              <!--<th>合计</th>-->
+            </tr>
+          </thead>
+          <tbody>
+            {{#oldDebtAllInfos}}
+            <tr>
+              <td>{{debtIdNumber}}</td>
+              <td>{{debtNowAmount}}</td>
+              <td>{{debtTransferAmount}}</td>
+              <td>{{debtIdentityType}}</td>
+              <td>{{debtUse}}</td>
+              <td>{{debtDueDay}}</td>
+              <td>{{debtAllRepayMonth}}</td>
+              <td>{{debtSurplusRepayMonth}}</td>
+              <td>{{debtVearlyRate}}</td>
+            </tr>
+            {{/oldDebtAllInfos}}
+              <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>{{debtSumAmount}}</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </script>
+
+  <div class="header btm">
+    <span>账单详情</span>
+    <a href="javascript:history.back(-1);" class="back"></a>
+  </div>
+
+  <div class="container" id="noFirst"></div>
+  <div class="container" id="first"></div>
+
+</body>
+</html>

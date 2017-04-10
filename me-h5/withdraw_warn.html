@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>提现须知</title>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="css/base.css" />
+    <style>
+        body {
+            font-size: 12px;
+            color: #959595;
+            padding: 3%;
+            line-height: 20px;
+        }
+        
+        p {
+            margin: 10px 0;
+        }
+
+    </style>
+</head>
+<body>
+    <script type="text/javascript" src='./js/jquery-1.7.0.min.js'></script>
+    <script type="text/javascript" src="./js/config.js"></script>
+    <script type="text/javascript" src='./js/functions.js'></script>
+</body>
+<script>
+    $.ajax({
+        url: WITHDRWA_NOTICE_URL,
+        data: {
+            tokenid:getQueryString('tokenid') || getCookie('tokenid')
+        },
+        success: function (data) {
+            var tpl = '';
+            for (var i in data) {
+                if (i.indexOf("info") !== -1) {
+                    tpl += '<p>' + data[i] + '</p>'
+                }
+            };
+            $("body").prepend(tpl);
+        }
+    })
+
+</script>
+</html>

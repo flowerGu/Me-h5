@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+  <script src="../js/inject/flexible.js" inline></script>
+  <title>支付</title>
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="stylesheet" href="css/base.css" type="text/css" />
+  <link href="css/newBase.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="common_payment.css">
+</head>
+<body>
+  <div class="header deleteHeader">
+    <span>绑卡</span>
+    <a href="javascript:history.back(-1);" class="back"></a>
+  </div>
+  <div class="caution clearfix">
+    <img src="images/broad.png" />
+    <marquee class="marq" direction="left" behavior="scroll" scrollamount="3" scrolldelay="0">交易密码将在充值、提现、借款、出借等操作使用，请妥善保管</marquee>
+  </div>
+
+  <form id="form" name="form">
+    <ul class="has-border">
+      <li>
+        <label for="">身份证号</label>
+        <input type="text" name="id_num" class="form-control" placeholder="请输入身份证号" autofocus>
+      </li>
+      <li>
+        <label for="">姓名</label>
+        <input type="text" name="account_name" class="form-control" placeholder="请输入姓名">
+      </li>
+    </ul>
+    <ul class="has-border">
+      <li>
+        <label for="">银行卡号</label>
+        <input type="text" name="card_no" class="form-control" placeholder="请输入银行卡号">
+      </li>
+      <li>
+        <label for="">银行预留手机号</label>
+        <input type="text" name="rese_mobile" class="form-control" placeholder="请输入手机号">
+      </li>
+    </ul>
+
+    <div class="container">
+      <span>交易密码</span>
+      <div id="openKeyboard" class="trad-pwd-val">
+        <input type="password" readonly class="custom-pwd">
+        <input type="password" readonly class="custom-pwd">
+        <input type="password" readonly class="custom-pwd">
+        <input type="password" readonly class="custom-pwd">
+        <input type="password" readonly class="custom-pwd">
+        <input type="password" readonly class="custom-pwd">
+      </div>
+    </div>
+    <div class="other-area">
+      <a href="FindTradePwd.html" class="link-forget">忘记交易密码</a>
+    </div>
+    <div id="keyboardDiv" class="wrap-keyboard"></div>
+    <input type="submit" class="fixed-bottom" value="确认支付">
+
+  </form>
+</body>
+</html>

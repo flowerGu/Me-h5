@@ -1,0 +1,146 @@
+body {
+  background-color: #f6f6f6;
+  position: relative;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  /*height: 500px;*/
+  min-height: 100%;
+}
+i.weui_cell_ft{
+	position: absolute;
+	right:2%;
+  top:50%;
+  margin-top:-10px;
+	display: inline-block;
+	width: 14px;
+	height: 20px;
+
+}
+i.weui_cell_ft:after{top:7px;}
+.right-text.has-icon{
+
+}
+.mt{
+  margin-top: 10px;
+}
+.query-info{
+  margin-top:10px;
+  background-color: #FFFFFF;
+  font-size: 16px;
+}
+.query-info label{
+  color: #5F5F5F;
+}
+/*提示*/
+
+.caution {
+  padding: 1em 17px;
+  line-height: 2rem;
+  letter-spacing: .1em;
+  color: #8e8e8e;
+  font-size: 1.4em;
+  background-color: #fff;
+}
+
+.caution>span {
+  display: inline-block;
+  line-height: 2.5rem;
+}
+
+.caution img {
+  float: left;
+  /*vertical-align: top;
+  margin-right: 1em;*/
+}
+
+.caution>.marq {
+  float: right;
+  width: -webkit-calc(100% - 20px);
+  width: -moz-calc(100% - 20px);
+  width: calc(100% - 20px);
+}
+/**/
+.info-div {
+  color: #8e8e8e;
+  font-size: 1.4rem;
+  margin-top: 1.5rem;
+  padding-left: 1.7rem;
+}
+/**/
+.form-control {
+  text-align: right;
+  margin-right: 1.7rem;
+  margin-top: -.5rem;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  font-size: 1.6rem;
+  float: right;
+   color: #8e8e8e;
+}
+
+.right-text {
+  float: right;
+  line-height: 24px;
+  padding-right: 1.7rem;
+  color: #8e8e8e;
+}
+a.form-group{
+  display: block;
+}
+.form-group label {
+  width: 8rem;
+}
+
+form {
+  background-color: #FFFFFF;
+  margin-top: .5rem;
+  font-size: 1.6rem;
+}
+
+.info-bottom {
+  position: absolute;
+  color: #8E8E8E;
+  width: 95%;
+  min-height: 2.4rem;
+  font-size: 1.4rem;
+  text-align: center;
+  bottom: 7rem;
+
+  background-size: 18.5px 14.5px;
+  padding-top: .5rem;
+  padding-left: 2.5rem;
+}
+.info-bottom.nologo {
+  font-size: 12px;
+  text-align: left;
+  background-image: none;
+  padding-left: 15px;
+}
+.info-bottom >a{
+  color: #ff4c4c;
+}
+
+.btn-success {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 4rem;
+  border: none;
+  color: #FFFFFF;
+  font-size: 2rem;
+  background-color: #ff4c4c;
+}
+.input-check-code {
+  float: none;
+  text-align: left;
+   width: 110px;
+}
+.checkboxWrap{display:inline-block;width:12px;height:12px;border-radius:3px;border:1px solid rgb(155,155,155);vertical-align:middle}
+.checkboxWrap input{opacity: 0;filter:alpha(opacity=0)}
+.checked{background:url("../images/common/checked.png") no-repeat center center;background-size:100%}
+.info-bottom.nologo{line-height:22px;}

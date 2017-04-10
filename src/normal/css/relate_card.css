@@ -1,0 +1,184 @@
+*{box-sizing:border-box}
+body{height:100%;font-size: 100%}
+
+.header{padding:10px 4% 10px}
+.rela_tip{padding:15px 4%;background-color:#fff;color:#818181;font-size:1.3em;letter-spacing: 0.08em;margin-bottom:.8em;}
+.rela_cont{padding-left:4%;border-top:1px solid #dddddd;border-bottom:1px solid #dddddd;}
+.rela_box{position:relative;width:100%;padding-top:15px;padding-bottom:15px;}
+.rela_box label{position:absolute;left:0;top:13px;font-size:1.5em;display:inline-block;width:120px;color:#181818;}
+.rela_box input{width:100%;padding-left:110px;font-size:1.5em;border:none;color:#858585}
+.pdr{padding-right:4%;}
+.marq{width:calc(100% - 20px);width:-webkit-calc(100% - 20px);width:-moz-calc(100% - 20px)}
+.pdr label{top:10px;}
+.lab-input{top:.9em;font-weight:normal;font-size:1.6em;}
+.rela_box a{position:absolute;right:4%;top:9px;display:inline-block;vertical-align:middle;text-align:right;/*padding:15px 0;*/font-size:1.7em;color:#747474;}
+.rela_box a i{display:inline-block;width:14px;height:20px;vertical-align:middle;background:url(../images/ico.png) no-repeat center center;margin-left:20px;background-position:-81px -160px;}
+.rela_box input.card_num{text-align:left;padding-left:90px;}
+.bank_logo{display:block;width:25px;height:25px;position:absolute;right:4%;top:11px;}
+.pdtb2{padding-top:20px;padding-bottom:20px;}
+.insure{
+  width: 80%;
+  margin: 10px auto;
+ }
+.insure a {
+	display: block;
+	height: 36px;
+	line-height: 36px;
+	font-size: 1.7em;
+	color: #fff;
+	text-align: center;
+	background-color:#ff4c4c;	border-radius:5px;
+	border-bottom:#ff4c4c 2px solid;
+	}
+.insure a.dis{background-color:rgb(211,211,211);border-bottom:2px solid rgb(190,190,190)}
+.f24{padding:15px 10%;color:#797979;font-size:1.6em;text-align: center}
+#myDate,.fixed-btn{position:fixed;left:0;width:100%;}
+.fixed-btn{position:fixed;bottom:0;border-radius:0}
+#myDate{text-align: center;bottom:60px;color:#616161}
+.no_con{padding:0 4%}
+.no_tip{display:block;margin:50px auto 20px;}
+.tip_p{
+  margin-bottom:10px;
+  color:#8e8e8e;
+  font-size:14px;
+  text-align: center;
+}
+
+/*弹框验证码*/
+.bg-sendcode {
+  background-color: #666;
+  position: fixed;
+  z-index: 9998;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  display: none;
+}
+
+.sendcode-wrap {
+  position: fixed;
+  width: 85%;
+  left: 7.5%;
+  top: 22%;
+  z-index: 9999;
+  background: #fff;
+  border-radius: 15px;
+  display: none;
+  text-align: center;
+  padding: .5em 5% 1.3em;
+}
+
+.sendcode-wrap img {
+  margin: 1em auto;
+}
+
+.sendcode-wrap p {
+  color: #5f5f5f;
+}
+
+.msgp {
+  font-size: 1.5em;
+  margin-bottom: 1.4em;
+}
+
+.sendcode-wrap .tipp {
+  font-size: 1.3em;
+  text-align: left;
+  margin-bottom: 1em;
+}
+
+.codewrap {
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 10px;
+  border: 1px solid #dbdbdb
+}
+
+.codewrap input[type='text'] {
+  float: left;
+  width: 45%;
+  height: 100%;
+  font-size: 1.4em;
+  padding-left: .5em;
+  background: transparent
+}
+
+.codewrap input[type='button'] {
+  float: right;
+}
+
+.sendcodebtn {
+  background-color: #fe3652;
+  color: #fff;
+  padding: .4em 1em;
+  margin-top: .5em;
+  margin-right: .5em;
+  border-radius: 5px;
+}
+
+.sendcode-wrap>input[type="button"] {
+  width: 35%;
+  padding: .6em 1.1em;
+  border-radius: 8px;
+  margin-top: .98em;
+}
+
+.sendcancel {
+  background-color: #dcdcdc;
+  margin-right: 4%;
+  color: #5e5e5e
+}
+
+.sendconfirm {
+  background-color: #fe3652;
+  color: #fff;
+}
+
+.f-14{
+  font-size: 14px;
+}
+/*江西大额提现==新增*/
+.bank_branch_code{
+  padding: 0;
+  margin: 0;
+  background:#fff;
+  padding:0px 4%;
+  margin-top:.8em;
+  color:#5f5f5f;
+  display: none;
+}
+.bank_branch_code .u_form_single{
+  position: relative;
+  height: 4rem;
+  line-height: 4rem;
+  background: #fff;
+  font-size: 14px;
+}
+.bank_branch_code input.u_input_per{
+  width: 100%;
+  padding-left: 80px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  line-height: 3rem;
+  background: transparent;
+}
+.code_search{
+  text-align: right;
+  padding-top:12px;
+  padding-right:18px;
+  font-size: 12px;
+}
+.code_search a{
+  color:#ff4c4c
+}
+.widthdraw_warn{
+  font-size:13px;
+  top:13px;
+}

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"
+	/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no" />
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<title>客户列表</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" type="text/css" href="css/base.css" />
+	<link rel="stylesheet" href="css/customlist.css"/>
+	<script src="js/jquery-1.9.0.min.js"></script>
+	<script src="js/dropload.min.js"></script>
+	<script type="text/javascript" src='js/mustache.js'></script>
+	<script type="text/javascript" src="js/classie.js"></script>
+	<script src="js/config.js"></script>
+	<script src="js/functions.js"></script>
+	<script src="js/customerlist.js"></script>
+	<script type="text/javascript">
+			$(function(){
+						test_tokenid();
+			})
+		</script>
+</head>
+<body style="background-color: rgb(238,238,238);">
+	<div class="header whitebg deleteHeader" style="padding:10px 0">
+		客户列表
+		<a href="javascript:history.back(-1);" class="back"></a>
+	</div>
+	<div class="header" style="background:#fff;padding:10px 0;">
+		<div id='search_btn' style="width:90%;margin:0 auto;background:rgb(233,233,233);color:#9f9f9f;text-align:center;border-radius: 20px;font-size: .7em;padding: .5em 1em .5em 1em;"><img src="images/search_pic.png" style="width:1.2rem;height:1.2rem;vertical-align: middle;margin-right:.4rem;" />搜索</div>
+	</div>
+	<div class="bg-sendcode" style="display: none;z-index: 9990;"></div>
+	<div id="menu_right" style="width:25rem;height:100%;position: fixed;background:#fff;top: 0;right:-340px;z-index: 9991;transition: all 0.3s ease;">
+		<form>
+			<h2 style="width:100%;text-align:center;font-size:1.5rem;color:#5f5f5f;padding:10px 0;border-bottom:1px solid #ddd">客户筛选</h2>
+			<div style="width:100%;padding:1rem 2.1rem;margin-bottom:0;">
+				<h3>金额区间（元）</h3>
+				<ul style="margin:1rem 0 1rem 0;">
+					<li style="float:left;"><input placeholder="1" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+							onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+							type="tel" name="minInvestMoneyTotal" style="text-align:center;background:#E9E9E9;width:8.5rem;margin-right:3.8rem;height:2.2rem;line-height:2.2rem;padding:0 1rem;border-radius:6px;"
+						/></li>
+					<li style="float:left;"><input placeholder="1000万" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+							onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+							type="tel" name="maxInvestMoneyTotal" style="text-align:center;background:#E9E9E9;width:8.5rem;height:2.2rem;line-height:2.2rem;padding:0 1rem;border-radius:6px;"
+						/></li>
+				</ul>
+				<h3>到期天数（天）</h3>
+				<ul style="overflow: hidden;margin: .7rem 0 .7rem 0;font-size: 1.3rem;border-bottom: 1px solid #ddd;padding-bottom: 2rem;">
+					<li style="float:left;"><input placeholder="0" type="tel" name="min_remaining_time" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+							onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+							style="text-align:center;background:#E9E9E9;width:8.5rem;margin-right:3.8rem;height:2.2rem;line-height:2.2rem;padding:0 1rem;border-radius:6px;"
+						/></li>
+					<li style="float:left;"><input placeholder="3655" type="tel" name="max_remaining_time" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^0-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+							onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+							style="text-align:center;background:#E9E9E9;width:8.5rem;height:2.2rem;line-height:2.2rem;padding:0 1rem;border-radius:6px;"
+						/></li>
+				</ul>
+				<h3><span style="margin-right:7rem;">姓名</span><span>电话</span></h3>
+				<ul style="margin:1rem 0 1rem 0;" id="tel-name">
+					<li style="float:left;"><input type="text" name="name" /></li>
+					<li style="float:left;"><input type="tel" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+							onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+							id="phone_number" name="phone_number" maxlength="11" /></li>
+				</ul>
+				<h3>性别</h3>
+				<ul style="" id="sel-sex" class="sex-ul">
+					<li data-type="1">男</li>
+					<li data-type="2">女</li>
+					<li data-type="3">全部</li>
+				</ul>
+				<h3>排序</h3>
+				<ul class="order-ul" id="order-ul">
+					<li remain_day_sort="asc" class="normalli">到期天数</li>
+					<li invest_money_sort="asc">金额</li>
+				</ul>
+			</div>
+			<ul style="position:absolute;width:100%;bottom:0;" class="operate">
+				<li id="reset">重置</li>
+				<li id="confirm" onclick="search(1,'true','btn')">确定</li>
+			</ul>
+		</form>
+	</div>
+	<div id="main">
+		<div id='data_list'>
+			<style type="text/css">
+				.small {
+					width: 20px;
+				}
+				.cbp-spmenu-open {
+					right: 0 !important;
+				}
+			</style>
+			<div class="customer_list" id="customer_list">
+					<table id='list_data' cellpadding="0" cellspacing="0">
+					</table>
+
+				<div class="text-center" style="font-size:1.3em;color:rgb(146,146,146);margin-top:5px"><span id="cusNumCount"></span>位客户</div>
+			</div>
+		</div>
+	</div>
+	<input type='hidden' id='current' value='1' />
+	<input type='hidden' id='hasnextpage' value='true' />
+	<script>
+
+
+				document.getElementById('search_btn').onclick = function() {
+
+					$('.bg-sendcode').show();
+					classie.toggle( this, 'active' );
+					classie.toggle( document.getElementById('menu_right'), 'cbp-spmenu-open' );
+					//disableOther( 'showRight' );
+				};
+
+				$('.bg-sendcode').off('click').on('click',function(){
+						classie.toggle( this, 'active' );
+					classie.toggle( document.getElementById('menu_right'), 'cbp-spmenu-open' );
+					$('.bg-sendcode').hide()
+				})
+        $('#confirm').on('click',function(){//确定按钮隐藏搜索框
+          $('.bg-sendcode').hide();
+          $('#menu_right').removeClass('cbp-spmenu-open');
+        })
+
+
+		// dropload
+		$('.customer_list').dropload({
+			   domDown : {
+			        domClass   : 'dropload-down',
+			        domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',
+			        domUpdate  : '<div class="dropload-update">↓释放加载</div>',
+			        domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+			    },
+			    scrollArea : window,
+			    loadDownFn : function(me){
+					var	current=parseInt($('#current').val());
+					var	hasnextpage=$('#hasnextpage').val();
+
+					setTimeout(function(){
+		                search(current,hasnextpage);
+
+		                me.resetload();
+	           		 },1000);
+			    }
+			});
+		</script>
+	<script src="./js/footercommon.js"></script>
+</body>
+</html>

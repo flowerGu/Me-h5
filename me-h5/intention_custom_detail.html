@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	    <meta name="apple-mobile-web-app-capable" content="yes" />
+	    <meta name="apple-mobile-web-app-status-bar-style" content="white" />
+	    <meta name="format-detection" content="telephone=no"/>
+	    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	    <title>意向客户详情</title>
+	    <link href="css/base.css" type="text/css" rel="stylesheet" />
+	    <link href="css/intention_custom.css" type="text/css" rel="stylesheet" />
+        <script src="./js/zepto.min.js"></script>
+  		<script src="./js/dropload.min.js"></script>
+  		<script type="text/javascript" src="js/config.js"></script>
+	    <script type="text/javascript" src="./js/functions.js"></script>
+		<script type="text/javascript" src='./js/mustache.js'></script>
+	    <script type="text/javascript">
+	    $(function(){
+	    	if(!test_tokenid())
+    		{
+    			return false;
+    		}
+	    	var id=getQueryString('id');
+	    	var tokenid=getCookie('tokenid');
+	    	$.ajax({
+			   type: "post",
+			   url: SHOWINTENTCUST_JSON_URL,
+			   data: {
+			   	version:app_data.version,
+			   	tokenid:tokenid,
+			   	id:id
+			   },
+			   success: function(data){
+			   	if(data.code=='000')
+			   	{
+			   		if(data.custsex=='1')
+			   		{
+			   			data.boy=true;
+			   		}
+			   		if(data.custsex=='2')
+			   		{
+			   			data.girl=true;
+			   		}
+			   		if(data.idtypecd=='1'){
+			   			data.idtypecd1=true;
+			   		}
+			   		if(data.idtypecd=='2'){
+			   			data.idtypecd2=true;
+			   		}
+			   		if(data.level==null)
+			   		{
+			   			data.level_type=true;
+			   		}
+			   		if(data.custId != '')
+			   		{
+						$.get('./templates/intention_custom_detail.tpl',{"time":new Date().getTime()}, function(template){
+						    var result = Mustache.render(template, data);
+						    $('body').append(result);
+						});
+					}
+			   		else
+			   		{
+			   			 $('body').append("<div style='padding-top:30px;margin:0 auto; width:200px;font-size: 20px;'>您暂时没有意向客户！</div>");
+			   		}
+	   				
+			   	}
+			   	else
+			   	{
+			   		$('body').append("<div style='padding-top:30px;margin:0 auto; width:200px;font-size: 20px;'>您暂时没有意向客户！</div>");
+			   		$('.m_exit').text(''); 	
+			   	}
+			   
+			   },
+			   error:function(data){
+			   		tip_window(' 网络超时','确定');
+			   }
+			});
+			
+	    	
+	    })
+		function edit()
+			{
+				var id=getQueryString('id');
+				window.location.href='intention_custom_new.html?id='+id
+			}
+	    </script>
+	</head>
+	<body>
+		<div class="header whitebg mgt2">
+			意向客户详情
+			<a href="javascript:history.back(-1);" class="back"></a><br />
+			<a href="javascript:;" onclick='edit()' class="m_exit">修改</a>
+		</div>
+		
+	</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8" />
+  <title>业绩查询</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <link href="css/base.css" type="text/css" rel="stylesheet" />
+  <link href="css/relate_card.css" type="text/css" rel="stylesheet" />
+  <link href="css/style.css" type="text/css" rel="stylesheet" />
+  <style>
+  	.wealth_list a span.my_wealth_yuan{right:5%;}
+  </style>
+  <script src="js/jquery-1.9.0.min.js"></script>
+  <script type="text/javascript" src='./js/config.js'></script>
+  <script type="text/javascript" src='./js/functions.js'></script>
+  <script type="text/javascript">
+	function search_month()
+	{
+		var d = new Date();
+		if(d.getMonth()<9){
+			var month='0'+(d.getMonth()+1);
+		}else{
+			var month=d.getMonth()+1;
+		}
+		var str = d.getFullYear()+"-"+pad((month),2);
+	  	var last_month='last_month_s.html?month='+str+'&fromO='+str;
+	  	location.href=last_month;
+	}
+
+
+  </script>
+ </head>
+ <body>
+  <div class="header whitebg deleteHeader">
+    业绩查询
+   <a href="javascript:history.back(-1);" class="back"></a>
+  </div>
+  <div class="main" >
+   		<div class='yeji_s' onclick='search_month()'>
+   			<p class="s1Wrap"><span class='s1'></span></p>
+   			<p class="randTip">本月业绩排名</p>
+   			<ul class="clearfix">
+   				<li><p>本月新增邀请</p>
+   					<p><span class='s2'></span></p>
+   				</li>
+   				<span class="vLine">|</span>
+   				<li>
+   					<p>本月新增出借</p>
+   					<p><span class='s3'></span></p>
+   				</li>
+   			</ul>
+
+
+   		</div>
+   		<div class="wealth_list">
+   			<div  class="wealth_list first">
+				<a href="javascript:;" onclick='search_month()'><label>本月业绩查询</label>
+				 <span class="my_wealth" id="new_inv"></span>
+				 <span class='my_wealth_yuan weui_cell_ft'></span>
+				<i class=""></i></a>
+			</div>
+			<div class="first">
+				<a href="history_search.html"><label>历史业绩查询</label>
+					<span class='my_wealth_yuan weui_cell_ft'></span>
+				<i class=""></i></a>
+			</div>
+			<div class="first">
+				<a href="top100.html"><label>业绩TOP100</label>
+					<span class='my_wealth_yuan weui_cell_ft'></span>
+				<i class=""></i></a>
+			</div>
+			<div class="first">
+				<a href="top200.html">
+					<label>本月业绩TOP200</label>
+					<span class='my_wealth_yuan weui_cell_ft'></span>
+					<i class=""></i>
+				</a>
+			</div>
+
+		</div>
+  </div>
+  <script>
+			$(function(){
+					var tokenid=getCookie("tokenid");
+					$.ajax({
+					   type: "post",
+					   url: SALESPERFORMANCE_JSON_URL,
+					   data: {
+					   	version:app_data.version,
+					   	tokenid:tokenid
+					   },
+					   success: function(data){
+					   	 if(data.code=='000'){
+                 $('.s1').html(data.rankings)//业绩本月排名
+                 $('.s2').html(data.newnumber+'人')//新增邀请
+                 $('.s3').html(data.newmoney+'万')//新增投资额
+                 $('.my_wealth').html(data.lastmoney)//上月业绩查询
+                 $('#new_inv').text(data.newmoney+'万');//本月新增
+					   	}else{
+					   		$('.s1').html('null')
+                $('.s2').html('null')
+                $('.s3').html('null')
+                $('.my_wealth').html('null')
+					   	}
+					   },
+					   error:function(data){
+					   }
+					});
+			});
+		</script>
+ </body>
+</html>

@@ -1,0 +1,47 @@
+.red_bg{background-color:#ff4c4c;padding:1em 0;}
+.red_bg li{float:left;width:50%;text-align:center;font-size:1em;}
+.red_bg li p{height:2em;line-height:2em;}
+.red_bg li p.cff{color:#fff;font-size:2.2em;}
+.red_bg li p.cff2{color:#fff;font-size:1.7em;line-height:2.6em;height:2.6em;}
+.fco{color:#191919;font-weight: bold;}
+.fco2{color:#181818}
+.gray{color:#666666}
+.pink{color:#e7013f;font-weight: bold;}
+.pdlr{padding:0 4%;}
+.firstPdlr{margin-top:20px;}
+.pdlr>div{padding:0 4%;border:1px solid #e4e4e4}
+.ord_bg{background-color:#fdeeea}
+.pdlr>div.advant{padding:.8em 4%;font-weight:bold;}
+.advant label{float:left;}
+.advant span{float:right}
+.date_ul{color:#292929;font-size:1.6em;}
+.date_ul li{padding:.6em .5em;border-bottom:1px solid #e5e5e5}
+.date_ul li.last{border:none}
+.date_ul li label{float:left}
+.date_ul li span{float:right}
+.about_intro p{line-height:1.4em;letter-spacing: .05em;}
+.c9a{color:#292929;font-weight: bold;padding:.4em 0;}
+.mg0{margin:0;}
+.toLook{background:url(../images/list.png) no-repeat left center;position:relative;font-size:.9em;}
+.toLook label{margin-left:25px;}
+.toLook a{float:right;color:#666666;margin-right:20px;}
+i{
+	display: inline-block;
+	position: absolute;
+	right: 2%;
+	top: 10px;
+	width: 14px;
+	height: 20px;
+	vertical-align: middle;
+	background: url(../images/ico.png) no-repeat center center;
+	margin-left: 20px;
+	background-position: -81px -160px;
+	
+}
+b{
+	font-weight: normal;
+}
+/*不是微信 隐藏头部*/
+.app > .header{
+	display: none;
+}

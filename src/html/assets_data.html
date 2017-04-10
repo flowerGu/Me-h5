@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"
+	/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no" />
+	<title>我的资产</title>
+	<link rel="stylesheet" type="text/css" href="./css/base.css" />
+	<link rel="stylesheet" type="text/css" href="./css/style.css" />
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<script type="text/javascript" src="./js/jquery-1.9.0.min.js"></script>
+	<script type="text/javascript" src="./js/functions.js"></script>
+	<script type="text/javascript" src='./js/mustache.js'></script>
+</head>
+<body>
+	<div class="header whitebg deleteHeader" style="padding-bottom:10px">
+		<span>我的资产</span>
+		<a href="javascript:history.back(-1);" class="back"></a>
+		<a href="general_ans.html" class="fr"><img src="images/nav/icon_question.png" alt=""></a>
+	</div>
+<script type="text/ng-template" id="tpl">
+<li class="clearfix"><span>账户资产</span><span>￥{{total_assets}}</span></li>
+<li class="clearfix"><span>账户余额</span><span>￥{{balance}}</span></li>
+<li class="clearfix"><span>待收收益</span><span>￥{{duein_total}}</span></li>
+<li class="clearfix"><span>已获收益</span><span>￥{{profit_amount}}</span></li>
+<li class="clearfix"><span>已出借金额</span><span>￥{{invest_money}}</span></li>
+<li class="clearfix"><span>待收本金</span><span>￥{{duein_amount}}</span></li>
+<li class="clearfix"><span>冻结金额</span><span>￥{{frozen_amount}}</span></li>
+<p style="color:#8e8e8e;font-size:1.2rem;text-align:left;padding-top:.5rem;">待收收益：按到期正常还款情况下用户持有的所有出借服务的待收收益总额，仅供参考</p>
+</script>
+	<div class="assets_data">
+		<div class="assetx_list">
+			<ul id="content"></ul>
+		</div>
+	</div>
+<script type="text/javascript">
+	var data=null;
+	var tokenid=getCookie("tokenid");
+	var showJd = getQueryString('jd') ==='1';//金盾
+	var showZj = getQueryString('zj') ==='1'//中金
+	var showZh = getQueryString('zh') ==='1'//账户
+	if(showJd){
+		data = JSON.parse(window.localStorage.getItem('jd-assets'));
+	}
+	if(showZj){
+		data = JSON.parse(window.localStorage.getItem('zj-assets'));
+	}
+	if(showZh){
+		data=JSON.parse(window.localStorage.getItem('zh-assets'));
+	}
+	if(data===null){//新账户
+		data={
+			total_assets:0,
+			balance:0,
+			duein_total:0,
+			profit_amount:0,
+			invest_money:0,
+			duein_amount:0,
+			frozen_amount:0
+		};
+	}
+	$("#content").append( Mustache.render($('#tpl').html(), data));
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>标的</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no"/>
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<link href="css/base.css"  rel="stylesheet"/>
+	<link href="css/commonUpgrade.css" rel="stylesheet"/>
+	<link href="css/bidsecdetail.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<div class="header whitebg" style="border:none">
+		    <a onclick="goBack()" class="back"></a>
+		  <ul class="tab clearfix">
+		  	<li class="current">项目介绍</li>
+		  	<li class="recordsLi">参与记录</li>
+		  </ul>
+		</div>
+		<div class="con-bid" style="margin-bottom:60px">
+			<div class="bid-main" id="bid1" style="display: block;" >
+			</div>
+			<div class="bid-main" id="bid2">
+				<div class="tip-join">
+					<span class="num-join">{{countNum}}</span>人次加入
+				</div>
+				<script type="text/ng-template" id="record">
+					<ul>
+						{{#bidRecordList}}
+						<li>
+							<table>
+								<tr>
+									<td width="50%" class="big-td">{{cus_name}}</td>
+									<td>{{#showLabel}}{{#zz}}承接{{/zz}}{{^zz}}出借{{/zz}}金额{{/showLabel}}</td>
+								</tr>
+								<tr>
+									<td width="50%">{{create_date}}</td>
+									<td>{{invest_amount}}元</td>
+								</tr>
+							</table>
+						</li>
+						{{/bidRecordList}}
+					</ul>
+				</script>
+			</div>
+			<input type="hidden" id="hasnextpage" value="hasnextpage">
+			<input type="hidden" id="current" value="1">
+		</div>
+		<a href="javascript:;" id='buynow'></a>
+		<script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+		<script type="text/javascript" src="./js/swiper-3.3.1.jquery.min.js"></script>
+		<script type="text/javascript" src="js/mustache.js"></script>
+		<script src="js/config.js"></script>
+		<script src="js/functions.js"></script>
+		<script src="js/dropload.min.js"></script>
+		<script src="js/bidsecdetails.js"></script>
+		<script src="js/bidsecdetailIntro.js"></script>
+
+	</body>
+</html>

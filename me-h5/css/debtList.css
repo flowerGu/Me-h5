@@ -1,0 +1,10 @@
+body{background-color:#f6f6f6;}
+.debt_wrap{padding:.5em 4%;}
+.debt_con{padding:0 2%;border:1px solid #ddd;font-size:1.5em;margin-bottom:.8em;}
+.useFor{color:#181818;}
+.debt_con li{padding:.6em 1%;}
+.debt_con li 
+.debt_con li p:nth-of-type(1){float:left;width:54%;}
+.debt_con li p:nth-of-type(2){float:right;width:46%;}
+.debt_con li label{color:#666666;float:left;}
+.debt_con li span{color:#000000;float:right;}

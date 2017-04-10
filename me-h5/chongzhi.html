@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no" />
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<title>充值</title>
+	<link rel="stylesheet" type="text/css" href="css/base.css" />
+	<link rel="stylesheet" type="text/css" href="css/chongzhi.css" />
+	<style>
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+			-webkit-appearance: none !important;
+			margin: 0;
+		}
+		.next_yb.disable {
+			background-color: #ccc;
+			color: #fff;
+			font-size: 20px;
+		}
+	</style>
+	<script type="text/javascript" src='./js/jquery-1.9.0.min.js'></script>
+	<script type="text/javascript" src='./js/config.js'></script>
+	<script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript">
+		checkLogin();
+		initbodyH();
+		var tokenid = getCookie("tokenid");
+		var getData = function() {
+			//获取电子卡号
+			$.post(QUERY_DEPOSITORY, {
+				version: app_data.version,
+				tokenid: tokenid
+			}).then(function(data) {
+				tools.loading(0);
+				if (data.code === '000') {
+					$('#jxyhCardNo').text(data.temp2 || '您尚未开户');
+					$('#amount').text(data.balance||'0.00');
+				} else {
+					tip_window(data.msg, '确定');
+				}
+			}, function(data) {
+				tools.loading(0);
+				tip_window(data.msg, '确定');
+			});
+		};
+		var isBandData = JSON.parse(localStorage.getItem("isBandData"));
+		var userDetail= JSON.parse(localStorage.getItem("user_detail"));
+		$(function() {
+			if (!userDetail.temp4) { 
+				tip_windows_conform('您还没有开通银行存管。', '取消','去开户','',userDetail.realname_status === '0' ? 'idVerifi.html?jd=1' : 'openAnAccount.html');
+				return;
+			}
+			if (!userDetail.temp8) { 
+				tip_window('对不起，您还未绑定银行卡，请先绑卡。', '去绑卡','addNewCard.html');
+				return;
+			}
+			getData();
+			//同步余额
+			$('#syncMoney').on('click', function() {
+				$('#syncMoney').val('同步余额中');
+				$.post(SYNC_BALANCE_URL, { //
+					version: app_data.version,
+					tokenid: tokenid,
+					jd_balance: '0.00'
+				}).then(function(data) {
+					$('#syncMoney').val('同步余额');
+					tip_window(data.msg, '确定');
+					if (data.code === '000') {
+						$('#amount').text(data.jd_balance);
+					}
+
+				}, function(data) {
+					$('#syncMoney').val('同步余额');
+					tip_window('同步失败，请重试', '确定');
+				});
+
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<div class="header whitebg deleteHeader">
+		充值
+		<a href="javascript:goBack();" class="back"></a>
+	</div>
+	<div class="caution clearfix">
+		<img src="images/broad.png" />
+		<marquee class="marq" direction="left" behavior="scroll" scrollamount="3" scrolldelay="0">交易密码将在充值、提现、出借等操作使用，请妥善保管</marquee>
+	</div>
+	<div class="container main">
+		<p>目前由于使用江西银行存管安全考虑，无法在微信端进行充值操作，您可以使用网银转账、支付宝转账等到江西银行电子账号</p>
+		<div id="copyTxt" data-clipboard-target="#jxyhCardNo">
+			<!--<input type="hidden" id="jxyhCardNo" value="我是复制的银行卡号">-->
+			<p id="jxyhCardNo" class="txt-account fl">您尚未开户</p>
+			<span class="btn-copy-text">长按账号复制</span>
+		</div>
+		<p>之后同步余额</p>
+		<p class="balance">
+			<span id="amount" class="amount">0.00</span>
+			<span>元</span>
+		</p>
+		<input type="button" id="syncMoney" class="btn btn-success" value="同步余额">
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+ <head> 
+  <meta charset="utf-8" /> 
+  <title>客户列表</title> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" /> 
+  <meta name="apple-mobile-web-app-capable" content="yes" /> 
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" /> 
+  <meta name="format-detection" content="telephone=no" /> 
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <link href="css/base.css" type="text/css" rel="stylesheet" />
+  <link href="css/relate_card.css" type="text/css" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet" />
+  <script src="./js/zepto.min.js"></script>
+  <script src="./js/dropload.min.js"></script>
+  <script type="text/javascript" src='./js/config.js'></script>
+  <script type="text/javascript" src='./js/functions.js'></script>
+  	<script type="text/javascript">
+  		$(function(){
+  			var  tel=getCookie('tel_no');
+	        var  buttonurl= "invited_register.html?num="+tel;
+	        $('#investurl').attr('href',buttonurl);
+	        
+	        var $li = $('#tab li');//切换
+			var $ul = $('#content').children('ul');
+						
+			$li.click(function(){
+				var $this = $(this);
+				var $t = $this.index();
+				$li.removeClass();
+				$this.addClass('current');
+				$ul.css('display','none');
+				$ul.eq($t).css('display','block');
+			})
+
+  		})
+  		
+  	</script>
+	</head>
+	<body>
+		 <div class="header whitebg btm deleteHeader">
+		    已投项目 
+		   <a href="javascript:history.back(-1);" class="back"></a> 
+		  </div>
+		  <ul id="tab"> 
+		     <li class="current">进行中项目</li> 
+		     <li>已完成项目</li> 
+		    </ul> 
+		  <div class="no_con">
+		  	<img class="no_tip"src="images/without_03.png" />
+		  	<p class="tip_p">说声抱歉：您暂时无出借</p>
+		  </div>
+		  <div class="insure">
+		  	<a href="javascript:;" id='investurl'>立即邀请</a>
+		  </div>
+	</body>
+</html>

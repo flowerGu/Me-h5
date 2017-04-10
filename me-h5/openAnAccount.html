@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <title>江西银行存管账户</title>
+  <link rel="stylesheet" type="text/css" href="css/base.css" />
+  <link rel="stylesheet" type="text/css" href="css/openAnAccount.css" />
+  <style>
+    .supportBank{font-size:14px;top:13px;}
+  </style>
+  <script src="./js/jquery-1.9.0.min.js"></script>
+  <script type="text/javascript" src='js/config.js'></script>
+  <script type="text/javascript" src='js/functions.js'></script>
+  <script type="text/javascript" src='js/mustache.js'></script>
+  <script src="js/openAnAccount.js"></script>
+</head>
+
+<body>
+  <div class="header whitebg btm">
+    江西银行存管账户
+    <a href="javascript:history.back(-1)" class="back"></a>
+    <a href="supportBank.html" class="m_exit supportBank">支持银行</a>
+  </div>
+  <div class="caution clearfix">
+    <img src="images/broad.png">
+    <marquee class="marq" direction="left" behavior="scroll" scrollamount="3" scrolldelay="0">交易密码将在充值、提现、借款、出借等操作使用，请妥善保管</marquee>
+  </div>
+  <div class="main">
+    <form name="form" id="form" novalidate>
+      <div class="form-group">
+        <label for="name">姓名</label>
+        <input type="text" class="form-control" id="name" maxlength="10" name="name" readonly>
+      </div>
+      <div class="form-group">
+        <label for="id_number">身份证</label>
+        <input type="text" class="form-control" id="id_number" maxlength="18" name="id_number" readonly>
+      </div>
+      <div class="form-group">
+        <label for="telephone">手机号</label>
+        <input type="tel" class="form-control" maxlength="11" id="telephone" readonly>
+      </div>
+      <div class="form-group">
+        <label for="bank_id">银行卡号</label>
+        <input type="text" class="form-control" maxlength="26" minlength="19" id="bank_id" name="bank_id" placeholder="请输入本人储蓄银行卡号">
+      </div>
+      <input id="J_open" type="button" class="btn btn-success" value="立即开通" style="background-color:rgb(159, 159, 159)">
+    </form>
+    <div class="info-div">
+      <span>开通江西银行存管，为出借增加更多安全保障</span>
+    </div>
+    <div class="info-bottom nologo">
+      <span class="checkboxWrap ">
+        <input type="checkbox" id="isCheck" />
+      </span>
+      我已阅读并同意
+      <a href="custom-capacity-readme.html">《P2P智能存管协议》</a><span>、</span>
+      <a href="jxbank.html">《江西银行网络交易资金账户服务三方协议》</a>、
+      <a href="user-authorization.html">《用户授权协议》</a>
+    </div>
+
+  </div>
+
+</body>
+
+</html>
